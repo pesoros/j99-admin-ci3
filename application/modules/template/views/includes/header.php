@@ -1,12 +1,12 @@
 <?php if($this->uri->segment(2) !=='User'){?>
 <a href="<?php echo base_url('dashboard/home') ?>" class="logo"> 
     <span class="logo-lg">
-        <img src="<?php echo base_url((!empty($setting->logo)?$setting->logo:'assets/img/icons/mini-logo.png')) ?>" alt="">
+        <img src="<?php echo base_url().'assets/img/j99logo.png' ?>" style="height:35px" alt="">
     </span>
 </a>
 <?php }else{ ?>
  <span class="logo-lg">
-        <img src="<?php echo base_url((!empty($setting->logo)?$setting->logo:'assets/img/icons/mini-logo.png')) ?>" alt="">
+        <img src="<?php echo base_url().'assets/img/j99logo.png' ?>" style="height:35px" alt="">
     </span>
 <?php } ?>
 <!-- Header Navbar -->

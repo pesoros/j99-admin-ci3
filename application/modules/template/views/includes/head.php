@@ -5,7 +5,7 @@
 <title><?php echo (!empty($setting->title)?$setting->title:null) ?> - <?php echo (!empty($title)?$title:null) ?></title>
 
 <!-- Favicon and touch icons -->
-<link rel="shortcut icon" href="<?php echo base_url((!empty($setting->favicon)?$setting->favicon:'assets/img/icons/favicon.png')) ?>" type="image/x-icon">
+<link rel="shortcut icon" href="<?php echo base_url().'assets/img/busic.png' ?>" type="image/x-icon">
 
 
 <!-- Start Global Mandatory Style -->
