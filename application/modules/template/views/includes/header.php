@@ -19,13 +19,13 @@
         <ul class="nav navbar-nav">
             <!-- fitness period notice start-->
              <?php if($this->permission->method('fitness','read')->access()): ?>
-             <li class="dropdown messages-menu">
+             <!-- <li class="dropdown messages-menu">
                  <a href="<?php echo base_url("fitness/fitness_controller/create_fit_period") ?>">
                     <i class="fa fa-cogs"></i>
                     <span class="label label-success"><?php echo (!empty($fitness->expire)?$fitness->expire:0) ?></span>
                 </a>
               
-            </li> 
+            </li>  -->
             <?php endif; ?>
             <!-- fitness period notice end -->
         <!-- Ticket Notice Start-->
