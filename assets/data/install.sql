@@ -381,7 +381,7 @@ CREATE TABLE IF NOT EXISTS `setting` (
 DELETE FROM `setting`;
 /*!40000 ALTER TABLE `setting` DISABLE KEYS */;
 INSERT INTO `setting` (`id`, `title`, `address`, `email`, `phone`, `logo`, `favicon`, `language`, `site_align`, `footer_text`) VALUES
-  (2, 'Fleet Ticketing System', '98 Green Road, Farmgate, Dhaka-1215.', 'bdtask@gmail.com', '0123456789', 'assets/img/icons/logo.png', 'assets/img/icons/m.png', 'english', 'LTR', '2017©Copyright');
+  (2, 'Fleet Ticketing System', '98 Green Road, Farmgate, Dhaka-1215.', 'admin@pesoros.com', '0123456789', 'assets/img/icons/logo.png', 'assets/img/icons/m.png', 'english', 'LTR', '2017©Copyright');
 /*!40000 ALTER TABLE `setting` ENABLE KEYS */;
 
  
@@ -489,7 +489,7 @@ DELETE FROM `agent_info`;
 /*!40000 ALTER TABLE `agent_info` DISABLE KEYS */;
 INSERT INTO `agent_info` (`agent_id`, `agent_first_name`, `agent_second_name`, `agent_company_name`, `agent_document_id`, `agent_pic_document`, `agent_picture`, `agent_phone`, `agent_mobile`, `agent_email`, `agent_address_line_1`, `agent_address_line_2`, `agent_address_city`, `agent_address_zip_code`, `agent_country`, `status`) VALUES
 	(2, 'Hello ', 'World', '', '', NULL, NULL, '0123456789', '', '', '', '', '', '', '', NULL),
-	(3, '   Hello ', '   World', '   bdtask', '   Ew4324', './application/modules/agent/assets/images/2017-10-18/d.jpg', './application/modules/agent/assets/images/2017-10-18/d1.jpg', '   0123456789', '   0123456789', 'hello@world.com', '                                                                                                            112, test street,                         ', '                                                                                                            112, test street,                         ', '   Dhaka', '   1205', 'Algeria', NULL);
+	(3, '   Hello ', '   World', '   pesoros', '   Ew4324', './application/modules/agent/assets/images/2017-10-18/d.jpg', './application/modules/agent/assets/images/2017-10-18/d1.jpg', '   0123456789', '   0123456789', 'hello@world.com', '                                                                                                            112, test street,                         ', '                                                                                                            112, test street,                         ', '   Dhaka', '   1205', 'Algeria', NULL);
 /*!40000 ALTER TABLE `agent_info` ENABLE KEYS */;
 
 -- Dumping structure for table db_fleet_ticket.employee_history

@@ -55,7 +55,7 @@
                 <strong>
                     <?php echo (!empty($setting->footer_text)?$setting->footer_text:null) ?>
                 </strong>
-                    <a href="https://www.bdtask.com/" target="_blank">
+                    <a href="https://www.pesoros.com/" target="_blank">
                     <?php echo (!empty($setting->title)?$setting->title:null) ?></a>
             </footer>
 

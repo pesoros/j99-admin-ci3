@@ -138,7 +138,7 @@ class Api extends CI_Controller {
                          'view_profile' => display('view_profile'),
                          'no'           => display('no'),
                          'home'          => display('home'),
-                         'developed_by_bdtask' => display('developed_by_bdtask'),
+                         'developed_by_pesoros' => 'develop by pesoros',
                           'pass_username_cant_be_empty'          => display('pass_username_cant_be_empty'),
                           'login_again'          => display('login_again'),
                         'settings'   => $settings,

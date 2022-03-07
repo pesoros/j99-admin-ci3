@@ -64,33 +64,6 @@ class Payphone extends MX_Controller {
     public function return_url(){
 echo "hello world";
     }
-
-//     public function paidpayphone()
-//     {
-
-//         $post_data = array(
-//             "Amount" => 10,
-//             "AmountWithoutTax" => 100,
-//             "AmountWithTax" => 100,
-//             "Tax" => 100,
-//             "Currency" => 'USD',
-//             "clientTransactionId" => "1212",
-//             "responseURL" => "http://softest8.bdtask.com/bus_demo_v5/website/Payphone/return_url",
-//             "Service" => 1,
-//             'Tip' => 2,
-//         );
-
-//         $clause = (object) array(
-//             'url' => "https://pay.payphonetodoesposible.com/api/button/Prepare",
-//             'postdata' => $post_data
-//         );
-
-//         $droplet = $this->curl_post_request($clause);
-//         $result = json_decode($droplet);
-//         echo '<pre>';
-//  print_r($result);
-
-//     }
     
     public function paidpayphone()
     {
@@ -102,7 +75,7 @@ echo "hello world";
             "tax"=> 100,
             "currency" => 'USD',
             "clientTransactionId" => "1454545212",
-            "responseUrl" => urlencode("http://softest8.bdtask.com/bus_demo_v5/website/Payphone/return_url")
+            "responseUrl" => urlencode("http://pesoros.com")
         );
         
 

@@ -300,7 +300,7 @@ public function pass_logout()
     {
 $setting_detail = $this->db->select('*')->from('email_config')->get()->row();
        
-        $subject ='Bus 365 password recovery';
+        $subject ='juragan 99 password recovery';
         if($type =='admin_user'){
         $message = base_url().'/website/website/recovery_password_confirmation/'.$ptoken;
          }else{
