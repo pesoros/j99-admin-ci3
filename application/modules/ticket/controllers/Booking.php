@@ -1072,6 +1072,7 @@ $setting_detail = $this->db->select('*')->from('email_config')->get()->row();
        $downtime=$this->db->select('*')->from('booking_downtime')->get()->result();
        
         $cancele = $this->db->select('*')->from('tkt_booking')->where('payment_status',2)->get()->result();
+        return false;
 
         if ($cancele) {
             foreach ($cancele as $can) { }
