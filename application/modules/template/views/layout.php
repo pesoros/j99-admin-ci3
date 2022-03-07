@@ -3,6 +3,17 @@
 <html lang="en">
     <head>
         <?php $this->load->view('includes/head') ?>
+
+        <style>
+            .bgrs {
+                background: url(<?php echo base_url('/assets/img/backgroundweb.jpg') ?>);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+            .opac {
+                background: rgb(255 255 255 / 50%);
+            }
+        </style>
     </head>
 
     <body class="hold-transition sidebar-mini">
@@ -24,9 +35,9 @@
             </aside>
 
             <!-- Content Wrapper. Contains page content -->
-            <div class="content-wrapper">
+            <div class="content-wrapper bgrs">
                 <!-- Content Header (Page header) -->
-                <section class="content-header">
+                <section class="content-header opac">
                     <div class="header-icon"><i class="pe-7s-home"></i></div>
                     <div class="header-title">
                         <h1><?php echo (!empty($this->uri->segment(1))?ucfirst($this->uri->segment(1)):null) ?> / <?php echo (!empty($this->uri->segment(2))?ucwords(str_replace(array("_","controller"), " ", $this->uri->segment(2))):null) ?></h1>

@@ -19,7 +19,7 @@ class Auth_model extends CI_Model {
 			")
 			->from('user')
 			->where('email', $data['email'])
-			// ->where('password', md5($data['password']))
+			->where('password', md5($data['password']))
 			->get();
 	}
 

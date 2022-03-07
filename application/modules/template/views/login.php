@@ -88,7 +88,7 @@
                             </div>
                        <?php echo form_close() ?>
                         <div class="text-right">
-           <a  href="" data-toggle="modal" data-target="#for_gott_password" style="color:#0B2161"><?php echo display('forgot_password')?> ??</a>
+           <!-- <a  href="" data-toggle="modal" data-target="#for_gott_password" style="color:#0B2161"><?php echo display('forgot_password')?> ??</a> -->
              </div>
                     </div>
                     
