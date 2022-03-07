@@ -177,10 +177,10 @@
             </ul>
         </li>
 
-        <li class="treeview <?php echo (($this->uri->segment(2)=="language")?"active":null) ?>">
+        <!-- <li class="treeview <?php echo (($this->uri->segment(2)=="language")?"active":null) ?>">
             <a href="<?php echo base_url('dashboard/language') ?>"><i class="ti-flag-alt"></i> <span><?php echo display('language')?></span> 
             </a>
-        </li>
+        </li> -->
 
         <li class="treeview <?php echo (($this->uri->segment(2)=="backup_restore")?"active":null) ?>">
             <a href="<?php echo base_url('dashboard/backup_restore/index') ?>"><i class="fa fa-database"></i> <span><?php echo display('backup_and_restore') ?></span> 
@@ -197,7 +197,7 @@
 
 
         <?php if($this->session->userdata('isLogIn')): ?>
-        <li class="treeview <?php echo (($this->uri->segment(2)=="message")?"active":null) ?>">
+        <!-- <li class="treeview <?php echo (($this->uri->segment(2)=="message")?"active":null) ?>">
             <a href="#">
                 <i class="ti-comments"></i><span><?php echo display('message')?></span>
                 <span class="pull-right-container">
@@ -209,7 +209,7 @@
                 <li><a href="<?php echo base_url('dashboard/message/index') ?>"><?php echo display('inbox')?></a></li>
                 <li><a href="<?php echo base_url('dashboard/message/sent') ?>"><?php echo display('sent')?></a></li> 
             </ul>
-        </li>       
+        </li>        -->
         <?php endif; ?>
        <?php } ?>
   
