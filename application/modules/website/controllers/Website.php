@@ -12,6 +12,8 @@ class Website extends MX_Controller {
 			'website_model'
 		));
 
+		redirect(base_url('dashboard/home'));
+
 		// unset transection token data
         $this->session->unset_userdata('_tran_token');
 
