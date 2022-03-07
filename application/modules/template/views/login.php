@@ -23,6 +23,13 @@
         <link href="<?php echo base_url('assets/css/custom.min.css') ?>" rel="stylesheet" type="text/css"/>
         <!-- Theme style rtl -->
         <!-- <link href="<?php echo base_url('assets/css/custom-rtl.min.css') ?>" rel="stylesheet" type="text/css"/> -->
+        <style>
+            body {
+                background: url(<?php echo base_url('/assets/img/backgroundweb.jpg') ?>);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+        </style>
     </head>
     <body>
         <div class="se-pre-con"></div>
