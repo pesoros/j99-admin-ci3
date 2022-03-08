@@ -33,9 +33,7 @@ class Fleet_type extends MX_Controller {
 		$facilities = $this->input->post('fleet_facilities');
 		if (!empty($facilities)) {
 			$facilities = implode(',' , $facilities);
-		} else {
-			$facilities = [];
-		}
+		} 
 		#-------------------------------#
 		$data['fleet_type'] = (Object) $postData = [
 			'id' 	         => $this->input->post('id'), 
