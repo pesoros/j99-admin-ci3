@@ -24,7 +24,7 @@ public function create_shedule($data = [])
 	} 
 	public function shedule_list(){
 		return $this->db->select("*")
-					->from("shedule ")
+					->from("shedule")
 					->get()
 					->result();
 	}
