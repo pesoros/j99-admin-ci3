@@ -17,7 +17,7 @@ public function create_shedule($data = [])
 
 	public function findById_shedule($id = null)
 	{
-		return $this->db->select("*")->from("shedule ")
+		return $this->db->select("*")->from("shedule")
 		->where('shedule_id', $id)
 		->get()
 		->row();
