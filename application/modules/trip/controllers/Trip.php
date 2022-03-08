@@ -33,16 +33,16 @@ class Trip extends MX_Controller {
 		$this->form_validation->set_rules('status',display('status') ,'required');
 		$shels = $this->input->post('shedule');
 		$shd = explode("-", $shels);
-		// echo json_encode($shd);
-		// return;
 		$strt = $shd[0];
-		$ends = $shd[1];
+		// $ends = $shd[1];
 		//$test = $this->db->select('*')->from('trip_route')->where('start_point',6)->where('end_point',3)->get()->row();
 		$routes = $this->db->select('*')->from('trip_route')->where('name',$this->input->post('route'))->get()->row();
 		$types = $this->db->select('*')->from('fleet_type')->where('type',$this->input->post('types'))->get()->row();
 		$shedule = $this->db->select('*')->from('shedule')->where('start',$strt)->get()->row();
 		$weekend = $this->input->post("weekend");
-		$weekday = implode(',' , $weekend);
+		if (!empty($weekday)) {
+			$weekday = implode(',' , $weekend);
+		}
 
 		#-------------------------------#
 		$data['tripe'] = (Object) $postData = [
