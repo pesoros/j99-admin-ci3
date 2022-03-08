@@ -36,7 +36,7 @@ class Trip extends MX_Controller {
 		// echo json_encode($shd);
 		// return;
 		$strt = $shd[0];
-		// $ends = $shd[1];
+		$ends = $shd[1];
 		//$test = $this->db->select('*')->from('trip_route')->where('start_point',6)->where('end_point',3)->get()->row();
 		$routes = $this->db->select('*')->from('trip_route')->where('name',$this->input->post('route'))->get()->row();
 		$types = $this->db->select('*')->from('fleet_type')->where('type',$this->input->post('types'))->get()->row();
