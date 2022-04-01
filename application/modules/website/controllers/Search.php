@@ -960,7 +960,7 @@ class Search extends MX_Controller
             $day2 = strtotime($day2);
             $diffHours = round(($day2 - $day1) / 3600);
 
-            $sql = "DELETE FROM tkt_booking WHERE $diffHours > $dntime AND payment_status=1";
+            // $sql = "DELETE FROM tkt_booking WHERE $diffHours > $dntime AND payment_status=1";
 
             if ($this->db->query($sql) === true) {
                 return true;

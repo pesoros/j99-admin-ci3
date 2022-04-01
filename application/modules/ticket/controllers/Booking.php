@@ -1056,7 +1056,7 @@ $setting_detail = $this->db->select('*')->from('email_config')->get()->row();
             $day2 = $date = date('Y-m-d H:i:s', time());
             $day2 = strtotime($day2);
             $diffHours = round(($day2 - $day1) / 3600)+0.001;
-            $sql = "DELETE FROM tkt_booking WHERE $diffHours > $dntime AND payment_status=1";
+            // $sql = "DELETE FROM tkt_booking WHERE $diffHours > $dntime AND payment_status=1";
 
             if ($this->db->query($sql) === TRUE) {
                 return true;
@@ -1082,7 +1082,7 @@ $setting_detail = $this->db->select('*')->from('email_config')->get()->row();
             $day2 = $date = date('Y-m-d H:i:s', time());
             $day2 = strtotime($day2);
             $diffHours = round(($day2 - $day1) / 3600)+0.001;
-            $sql = "DELETE FROM tkt_booking WHERE $diffHours > $dntime AND payment_status=2";
+            // $sql = "DELETE FROM tkt_booking WHERE $diffHours > $dntime AND payment_status=2";
             if ($this->db->query($sql) === TRUE) {
                 return true;
             } else {

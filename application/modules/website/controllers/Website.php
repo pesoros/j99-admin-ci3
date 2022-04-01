@@ -81,7 +81,7 @@ public function autocancel(){
             $day2 = strtotime($day2);
             $diffHours = round(($day2 - $day1) / 3600)+0.001;;
 
-            $sql = "DELETE FROM tkt_booking WHERE $diffHours > $dntime AND payment_status=1";
+            // $sql = "DELETE FROM tkt_booking WHERE $diffHours > $dntime AND payment_status=1";
 
             if ($this->db->query($sql) === TRUE) {
                 return true;
