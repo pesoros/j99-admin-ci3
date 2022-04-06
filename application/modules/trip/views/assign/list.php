@@ -4,7 +4,7 @@
             <div class="panel-heading">
                 <div class="panel-title">
                     <h4> 
-                        <a href="<?php echo base_url('trip/assign/form') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> <?php echo display('close_trip') ?></a>  
+                        <a href="<?php echo base_url('trip/assign/form') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> Add</a>  
                     </h4>
                 </div>
             </div>
@@ -36,14 +36,17 @@
                                 <td><?php echo (($assign->status==1)?display('active'):display('inactive')); ?></td>
                                 <td width="150">
 
-                                <?php if($this->permission->method('trip','read')->access()): ?>
+                                <!-- <?php if($this->permission->method('trip','read')->access()): ?>
                                     <a href="<?php echo base_url("trip/assign/view/$assign->id_no") ?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="left" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                <?php endif; ?>
+                                <?php endif; ?> -->
                                 
                                 <?php if($this->permission->method('trip','update')->access()): ?>
                                     <a href="<?php echo base_url("trip/assign/form/$assign->id") ?>" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="left" title="Update"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                 <?php endif; ?>
 
+                                <?php if($this->permission->method('trip','update')->access()): ?>
+                                    <a href="<?php echo base_url("trip/assign/point/$assign->id") ?>" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="left" title="Point Price"><i class="fa fa-money" aria-hidden="true"></i></a>
+                                <?php endif; ?>
 
                                 <?php if($this->permission->method('trip','update')->access()): ?>
                                     <?php if(empty($assign->closed_by_id)): ?>

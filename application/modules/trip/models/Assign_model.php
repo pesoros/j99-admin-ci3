@@ -119,7 +119,7 @@ class Assign_model extends CI_Model {
 	{
 		$data = $this->db->select("*")
 			->from("fleet_registration")
-			->where('is_assign',0)
+			// ->where('is_assign',0)
 			->where('status',1)
 			->get()
 			->result();
@@ -158,7 +158,7 @@ class Assign_model extends CI_Model {
     $data = $this->db->select("id, CONCAT_WS(' ',first_name, second_name) AS name")
 			->from("employee_history")
 			->where('position','Driver')
-			->where('is_assign',0)
+			// ->where('is_assign',0)
 			->get()
 			->result();
 
@@ -196,7 +196,7 @@ class Assign_model extends CI_Model {
 		 $data = $this->db->select("id, CONCAT_WS(' ',first_name, second_name) AS name")
 			->from("employee_history")
 			->where('position','Assistant')
-			->where('is_assign',0)
+			// ->where('is_assign',0)
 			->get()
 			->result();
 
@@ -299,4 +299,57 @@ public function create_shedule($data = [])
 			return false; 
 		}
 	}
+
+	public function resto_dropdown()
+	{
+		$data = $this->db->select("*")
+			->from("resto")
+			->where('status', 1) 
+			->get()
+			->result();
+
+		$list[''] = display('select_option');
+		if (!empty($data)) {
+			foreach($data as $value)
+				$list[$value->id] = $value->resto_name;
+			return $list;
+		} else {
+			return false; 
+		}
+	}
+
+	public function getTripPoint($tripAssignId){
+		return $this->db->select("*")
+					->from("trip_point ")
+					->where("trip_assign_id",$tripAssignId)
+					->get()
+					->result();
+	}
+
+	public function getTripRoute($tripAssignId){
+		return $this->db->select("trpr.stoppage_points")
+					->from('trip_assign ta')
+					->join('trip tr','ta.trip = tr.trip_id')
+					->join('trip_route trpr','tr.route = trpr.id')
+					->where("ta.id",$tripAssignId)
+					->get()
+					->row();
+	}
+
+	public function pointSave($data)
+	{
+		return $this->db->insert('trip_point', $data);
+	}
+
+	public function deletePoint($id = null)
+	{
+		$this->db->where('id',$id)
+			->delete('trip_point');
+
+		if ($this->db->affected_rows()) {
+			return true;
+		} else {
+			return false;
+		}
+	} 
 }

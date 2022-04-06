@@ -39,6 +39,13 @@
                            <input type="text" name="assign_date" class="form-control datetimepicker" value="" placeholder="<?php echo display('date')?>">
                         </div>
                     </div> 
+
+                    <div class="form-group row">
+                        <label for="resto_id" class="col-sm-3 col-form-label">Resto</label>
+                        <div class="col-sm-9">
+                            <?php echo form_dropdown('resto_id', $resto, (!empty($assign->resto_id)?$assign->resto_id:null), ' class="form-control"') ?> 
+                        </div>
+                    </div> 
                   
                     <div class="form-group row">
                         <label for="driver_id" class="col-sm-3 col-form-label"><?php echo display('driver_name') ?> *</label>

@@ -26,21 +26,6 @@
                                 <?php echo display('vehicle_type_id') ?>
                             </th>
                             <th>
-                                <?php echo display('price') ?>
-                            </th>
-                             <th>
-                                <?php echo 'Children Price' ?>
-                            </th>
-                             <th>
-                                <?php echo 'Special Price' ?>
-                            </th>
-                            <th>
-                                <?php echo display('group_price_per_person') ?>
-                            </th>
-                            <th>
-                                <?php echo display('group_size') ?>
-                            </th>
-                            <th>
                                 <?php echo display('action') ?>
                             </th>
 
@@ -55,25 +40,10 @@
                                             <?php echo $sl; ?>
                                         </td>
                                         <td>
-                                            <?php echo $query->name; ?>
+                                            <?php echo $query->trip_title; ?>
                                         </td>
                                         <td>
-                                            <?php echo $query->type; ?>
-                                        </td>
-                                        <td><?php echo $currency; ?>
-                                            <?php echo $query->price; ?>
-                                        </td>
-                                         <td><?php echo $currency; ?>
-                                            <?php echo $query->children_price; ?>
-                                        </td>
-                                         <td><?php echo $currency; ?>
-                                            <?php echo $query->special_price; ?>
-                                        </td>
-                                        <td><?php echo $currency; ?>
-                                            <?php echo $query->group_price_per_person; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $query->group_size; ?>
+                                            <?php echo $query->class; ?>
                                         </td>
                                        
                                         <td class="center">

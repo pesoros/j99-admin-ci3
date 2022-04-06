@@ -5,13 +5,23 @@ class Price_model extends CI_Model {
  
     public function price_view()
 	{
-		return $this->db->select('pri_price.*, trip_route.name, fleet_type.type')	
-			->from('pri_price')
-            ->join('trip_route', 'trip_route.id = pri_price.route_id', 'left')
-            ->join('fleet_type', 'fleet_type.id = pri_price.vehicle_type_id', 'left')
-			->order_by('price_id', 'desc')
-			->get()
-			->result();
+		return $this->db->select("
+                a.*,b.reg_no,c.*,
+                CONCAT_WS(' ', d.first_name, d.second_name) AS driver_name,
+                CASE WHEN a.closed_by_id THEN 'bg-success' ELSE NULL END AS isClosed,
+                e.name AS trip_route_name,
+                ftp.type AS class
+            ")
+            ->from("trip_assign a")
+            ->join('trip c','a.trip = c.trip_id','left')
+            ->join('fleet_registration b','a.fleet_registration_id = b.id','left')
+            ->join('fleet_type ftp','b.fleet_type_id = ftp.id','left')
+            ->join('employee_history d','a.driver_id = d.id','left')
+            ->join('trip_route e','c.route = e.id','left')
+            ->order_by('a.id','desc')
+            ->limit($limit, $start)
+            ->get()
+            ->result();
 	}
 	public function price_create($data = array())
 	{

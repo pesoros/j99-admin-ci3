@@ -81,6 +81,7 @@ class Assign extends MX_Controller {
 			'assistant_2'        => $this->input->post('assistant_2'), 
 			'assistant_3'        => $this->input->post('assistant_3'), 
 			'status'             => $this->input->post('status'),
+			'resto_id'             => $this->input->post('resto_id'),
 			'assign_time'        => date('Y-m-d H:i:s', strtotime((!empty($assigndate)?$assigndate:date('Y-m-d H:i:s')))),
 			'trip'               => $this->input->post('trip'),
 			'date'               => 'NULl',
@@ -169,6 +170,7 @@ class Assign extends MX_Controller {
 			$data['route_dropdown'] = $this->route_model->dropdown();
 			$data['trip'] = $this->assign_model->trip_dropdown();
 			$data['shedule'] = $this->assign_model->shedule_dropdown();
+			$data['resto'] = $this->assign_model->resto_dropdown();
 			$data['module'] = "trip";
 			$data['page']   = "assign/form";   
 			echo Modules::run('template/layout', $data); 
@@ -200,8 +202,52 @@ class Assign extends MX_Controller {
 		}
 		redirect('trip/assign/index');
 	}
-	 
 
+	public function point($id = null)
+	{
+		$tripRoute = $this->assign_model->getTripRoute($id);
+		$tripRoute = explode(',' , $tripRoute->stoppage_points);
+		$trArr = [];
+		foreach ($tripRoute as $key => $value) {
+			$trArr[$value] = $value;
+		}
+		$data['tripPoint'] = $this->assign_model->getTripPoint($id);
+		$data['tripRoute'] = $trArr;
+		$data['id'] = $id;
+		$data['module'] = "trip";
+		$data['page']   = "assign/point";   
+		echo Modules::run('template/layout', $data);  
+	}
+	 
+	public function pointsave(Type $var = null)
+	{
+		$data['assign'] = (Object) $postData = [
+			'trip_assign_id'          => $this->input->post('trip_assign_id'), 
+			'dep_point'          => $this->input->post('from'), 
+			'arr_point'        => $this->input->post('to'), 
+			'dep_time'        => $this->input->post('timefrom'), 
+			'arr_time'        => $this->input->post('timeto'), 
+			'price'        => $this->input->post('price'), 
+		]; 
+
+		$save = $this->assign_model->pointSave($postData);
+
+		redirect("trip/assign/point/".$this->input->post('trip_assign_id')); 
+	}
+
+	public function pointdelete($id,$back) 
+	{ 
+        $this->permission->method('trip','delete')->redirect();
+
+		if ($this->assign_model->deletePoint($id)) {
+			#set success message
+			$this->session->set_flashdata('message',display('delete_successfully'));
+		} else {
+			#set exception message
+			$this->session->set_flashdata('exception',display('please_try_again'));
+		}
+		redirect("trip/assign/point/".$back); 
+	}
 
     /*
     |----------------------------------------------
