@@ -22,6 +22,17 @@
             <a href="<?php echo base_url('dashboard/home') ?>"><i class="ti-home"></i> <span><?php echo display('dashboard')?></span> 
             </a>
         </li>
+        <li class="treeview <?php echo (($this->uri->segment(2)=="paket")?"active":null) ?>">
+            <a href="#">
+                <i class="fa fa-archive"></i><span>Paket</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo base_url('paket/paket_controller/create_paket') ?>">List Paket</a></li>
+            </ul>
+        </li>
       
 <?php if($this->uri->segment(2) !=='User'){?>
   
@@ -159,6 +170,7 @@
                 <li><a href="<?php echo base_url('dashboard/module/index') ?>"><?php echo display('module_list')?></a></li> 
             </ul>
         </li> -->
+        
         <li class="treeview <?php echo (($this->uri->segment(2)=="role")?"active":null) ?>">
             <a href="#">
 
