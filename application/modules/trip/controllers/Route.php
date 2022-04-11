@@ -37,7 +37,7 @@ class Route extends MX_Controller
         $start = $this->db->select('*')->from('trip_location')->where('id', $this->input->post('start_point'))->get()->row();
 
         $end = $this->db->select('*')->from('trip_location')->where('id', $this->input->post('end_point'))->get()->row();
-        $array1 = array($start->name, $end->name);
+        $array1 = array(isset($start->name) ? $start->name : '', isset($end->name) ? $end->name : '');
         $array2 = $this->input->post('routeList');
         $array3 = array_diff($array2, $array1);
         $output = implode(',', $array3);
