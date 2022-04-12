@@ -99,7 +99,7 @@ class Route extends MX_Controller
                 } else {
                     $this->session->set_flashdata('exception', display('please_try_again'));
                 }
-                redirect("trip/route/form/" . $postData['id']);
+                redirect("trip/route/form");
             }
 
         } else {
