@@ -45,6 +45,18 @@
                 <li><a href="<?php echo base_url('manifest/manifest_controller/create_manifest') ?>">List Manifest</a></li>
             </ul>
         </li>
+
+        <li class="treeview <?php echo (($this->uri->segment(2)=="resto")?"active":null) ?>">
+            <a href="#">
+                <i class="fa fa-cutlery"></i><span>Resto</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo base_url('resto/resto_controller/create_resto') ?>">List Resto</a></li>
+            </ul>
+        </li>
       
 <?php if($this->uri->segment(2) !=='User'){?>
   

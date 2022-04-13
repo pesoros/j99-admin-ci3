@@ -12,9 +12,10 @@ class Location_model extends CI_Model {
 
 	public function read()
 	{
-		return $this->db->select("*")
-			->from($this->table)
-			->order_by('name','asc')
+		return $this->db->select("tl.*, city.name as kota")
+			->from($this->table.' AS tl')
+			->join('wil_city AS city', 'tl.city = city.id','left')
+			->order_by('tl.name','asc')
 			->get()
 			->result();
 	} 
@@ -52,6 +53,24 @@ class Location_model extends CI_Model {
 		$data = $this->db->select("*")
 			->from($this->table)
 			->where('status', 1) 
+			->order_by('name', 'asc')
+			->get()
+			->result();
+
+		$list[''] = display('select_option');
+		if (!empty($data)) {
+			foreach($data as $value)
+				$list[$value->id] = $value->name;
+			return $list;
+		} else {
+			return false; 
+		}
+	}
+
+	public function cityDropdown()
+	{
+		$data = $this->db->select("*")
+			->from('wil_city')
 			->order_by('name', 'asc')
 			->get()
 			->result();

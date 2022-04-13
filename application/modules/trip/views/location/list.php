@@ -18,9 +18,9 @@
                                 <th><?php echo display('image') ?></th>
                                 <th><?php echo display('location_name') ?></th>
                                 <th><?php echo display('description') ?></th>
+                                <th>Kota </th>
                                 <th><?php echo display('status') ?></th>
                                 <th><?php echo display('action') ?></th> 
-                                <th><?php echo display('google_map') ?></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,6 +32,7 @@
                                 <td><img src="<?php echo base_url(!empty($location->image)?$location->image:'assets/img/icons/default.jpg'); ?>" alt="Image" height="64" ></td>
                                 <td><?php echo $location->name; ?></td>
                                 <td><?php echo $location->description; ?></td>
+                                <td><?php echo $location->kota; ?></td>
                                 <td><?php echo (($location->status==1)?display('active'):display('inactive')); ?></td>
                                 <td>
 
@@ -43,7 +44,6 @@
                                     <a href="<?php echo base_url("trip/location/delete/$location->id") ?>" onclick="return confirm('<?php echo display("are_you_sure") ?>')" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="right" title="Delete "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
                                 <?php endif; ?>
                                 </td>
-                                <td width="125"><?php echo $location->google_map; ?></td>
                             </tr>
                             <?php } ?> 
                         </tbody>

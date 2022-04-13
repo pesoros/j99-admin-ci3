@@ -43,6 +43,7 @@ class Location extends MX_Controller {
 		$data['location'] = (Object) $postData = [
 			'id' 	 => $this->input->post('id'), 
 			'name' 	 => $this->input->post('name'), 
+			'city' 	 => $this->input->post('city'), 
 			'description' => $this->input->post('description'), 
 			'google_map'  => $this->input->post('google_map'), 
 			'image'   	  => (!empty($image)?$image:$this->input->post('old_image')),
@@ -80,6 +81,7 @@ class Location extends MX_Controller {
 				$data['title'] = display('update');
 				$data['location']   = $this->location_model->findById($id);
 			}
+			$data['city_dropdown']   = $this->location_model->cityDropdown();
 			$data['module'] = "trip";
 			$data['page']   = "location/form";   
 			echo Modules::run('template/layout', $data); 

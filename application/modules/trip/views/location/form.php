@@ -24,6 +24,13 @@
                     </div> 
 
                     <div class="form-group row">
+                        <label for="name" class="col-sm-3 col-form-label">Kota</label>
+                        <div class="col-sm-9">
+                            <?php echo form_dropdown('city', $city_dropdown, (!empty($location->city)?$location->city:null), ' class="form-control"') ?> 
+                        </div>
+                    </div> 
+
+                    <div class="form-group row">
                         <label for="description" class="col-sm-3 col-form-label"><?php echo display('description') ?></label>
                         <div class="col-sm-9">
                             <textarea name="description" placeholder="<?php echo display('description') ?>" class="form-control" id="description"><?php echo $location->description ?></textarea>
