@@ -73,7 +73,9 @@
                                             <?php if($this->permission->method('price', 'delete')->access()): ?>
                                             <a href="<?php echo base_url("manifest/manifest_controller/manifest_delete/$value->id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Delete
                                             </a> 
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_close/$value->id") ?>" class="btn btn-xs btn-warning" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Close
+                                            <?php if ($value->status == 1) { ?>
+                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_close/$value->id") ?>" class="btn btn-xs btn-warning" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Close
+                                            <?php } ?>
                                             </a> 
                                             <?php endif; ?>
                                         </td>
