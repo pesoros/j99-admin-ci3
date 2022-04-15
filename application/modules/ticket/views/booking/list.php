@@ -17,11 +17,10 @@
                                 <th><?php echo display('sl_no') ?></th>
                                 <th><?php echo display('booking_date') ?></th>
                                 <th><?php echo display('booking_id') ?></th>
-                                <th><?php echo display('name') ?></th>
-                                <th><?php echo display('route_name') ?></th>
+                                <th><?php echo display('email') ?></th>
+                                <!-- <th><?php echo display('route_name') ?></th> -->
                                 <th><?php echo display('total_seat') ?></th>
                                 <th><?php echo display('price') ?></th>
-                                <th><?php echo display('seat_numbers') ?></th>
                                 <th><?php echo display('payment_type') ?></th>
                                 <th><?php echo display('payment_status') ?></th>
                                
@@ -39,21 +38,21 @@
                             <tr class="<?php echo (!empty($booking->tkt_refund_id) ? "bg-danger" : null ) ?>">
                                 <td><?php echo $sl++; ?></td>
                                 <td><?php echo $booking->booking_date; ?></td>
-                                <td><?php echo $booking->id_no; ?></td>
-                                <td><?php $result=$this->db->select('firstname,lastname')->from('tkt_passenger')->where('id_no',$booking->tkt_passenger_id_no)->get()->result();
+                                <td><?php echo $booking->booking_code; ?></td>
+                                <!-- <td><?php $result=$this->db->select('firstname,lastname')->from('tkt_passenger')->where('id_no',$booking->tkt_passenger_id_no)->get()->result();
                                  foreach ($result as $name) {
                                     echo $name->firstname.' '.$name->lastname;
                                  }
-                                 ?></td>
-                                <td><?php echo $booking->route_name; ?></td>
+                                 ?></td> -->
+                                 <td><?php echo $booking->booker ?></td>
+                                <!-- <td><?php echo $booking->route_name; ?></td> -->
                                 <td><?php echo $booking->total_seat; ?></td>
                                 <td><?php echo $currency; ?><?php echo $booking->price; ?></td>
-                                <td><?php echo $booking->seat_numbers; ?></td>
                                 <td><?php  echo $booking->booking_type; ?></td>
                                 <td ><?php 
                                 if($booking->payment_status == 1 OR $booking->payment_status == 2){
                                     if($this->session->userdata('isAdmin')==1){
-                                    echo '<a type="button" class="test btn btn-primary btn-xs" onclick="modal_load('."'".$booking->id_no."'".')" data-toggle="modal">Unpaid</a>';
+                                    echo '<a type="button" class="test btn btn-primary btn-xs" onclick="modal_load('."'".$booking->booking_code."'".')" data-toggle="modal">Unpaid</a>';
                                     }else{
                                         echo '';
                                     }
@@ -63,12 +62,12 @@
                                 </td>
                                 <td>
                                 <?php if($this->permission->method('ticket','read')->access()): ?>
-                                    <a href="<?php echo base_url("ticket/booking/view/$booking->id_no") ?>" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="left" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    <a href="<?php echo base_url("ticket/booking/view/$booking->booking_code") ?>" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="left" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                 <?php endif; ?>
 
                                 <?php if($this->permission->method('ticket','update')->access() && empty($booking->tkt_refund_id)): ?>
-                                    <a href="<?php echo base_url("ticket/refund/form?bid=$booking->id_no&pid=$booking->tkt_passenger_id_no") ?>" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="left" title="Refund"><i class="fa fa-undo" aria-hidden="true"></i></a>
-                                    <input type="hidden" id="bookingid" value="<?php echo $booking->id_no; ?>">
+                                    <a href="<?php echo base_url("ticket/refund/form?bid=$booking->booking_code&pid=$booking->tkt_passenger_id_no") ?>" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="left" title="Refund"><i class="fa fa-undo" aria-hidden="true"></i></a>
+                                    <input type="hidden" id="bookingid" value="<?php echo $booking->booking_code; ?>">
                                 <?php endif; ?>
 
                                 <?php if($this->permission->method('ticket','delete')->access()): ?>

@@ -15,16 +15,9 @@
                         <thead>
                             <tr>
                                 <th><?php echo display('sl_no') ?></th>
-                                <th><?php echo display('passenger_id') ?></th>
-                                <th><?php echo display('image') ?></th>
+                                <th>Kode Booking</th>
+                                <th>Kode Tiket</th>
                                 <th><?php echo display('name') ?></th>
-                                <th><?php echo display('email') ?></th>
-                                <th><?php echo display('address_line_1') ?></th>
-                                <th><?php echo display('address_line_2') ?></th>
-                                <th><?php echo display('city') ?></th>
-                                <th><?php echo display('zip_code') ?></th>
-                                <th><?php echo display('country') ?></th>
-                                <th><?php echo display('status') ?></th>
                                 <th><?php echo display('action') ?></th> 
                             </tr>
                         </thead>
@@ -34,16 +27,9 @@
                             <?php foreach ($passengers as $passenger) { ?>
                             <tr>
                                 <td><?php echo $sl++; ?></td>
-                                <td><?php echo $passenger->id_no; ?></td>
-                                <td><img src="<?php echo base_url(!empty($passenger->image)?$passenger->image:'assets/img/icons/default.jpg'); ?>" alt="Image" height="64" ></td>
+                                <td><?php echo $passenger->booking_code; ?></td>
+                                <td><?php echo $passenger->ticket_number; ?></td>
                                 <td><?php echo $passenger->name; ?></td>
-                                <td><?php echo $passenger->email; ?></td>
-                                <td><?php echo $passenger->address_line_1; ?></td>
-                                <td><?php echo $passenger->address_line_2; ?></td>
-                                <td><?php echo $passenger->city; ?></td>
-                                <td><?php echo $passenger->zip_code; ?></td>
-                                <td><?php echo (!empty($passenger->country)?$this->country_model->country($passenger->country):null); ?></td>
-                                <td><?php echo (($passenger->status==1)?display('active'):display('inactive')); ?></td>
                                 <td>
 
                                 <?php if($this->permission->method('ticket','read')->access()): ?>

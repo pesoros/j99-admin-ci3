@@ -13,10 +13,13 @@ class Passenger_model extends CI_Model {
 	public function read($limit = null, $start = null)
 	{
 		return $this->db->select("
-				t.*,
-				CONCAT_WS(' ', t.firstname, t.middle_name, t.lastname) AS name
-			")->from("tkt_passenger AS t")
-			->order_by('t.id', 'desc')
+				tp.*
+				,tb.booking_code
+				,tbh.payment_status
+			")->from("tkt_passenger_pcs AS tp")
+			->join("tkt_booking AS tb", "tp.booking_id = tb.id_no", "left") 
+			->join("tkt_booking_head AS tbh", "tb.booking_code = tbh.booking_code", "left") 
+			->order_by('tp.id', 'desc')
     		->limit($limit, $start)
 			->get()
 			->result();
