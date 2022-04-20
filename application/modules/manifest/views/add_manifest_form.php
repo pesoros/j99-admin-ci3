@@ -24,9 +24,9 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="vehicle_type_id" class="col-sm-3 col-form-label">Trip *</label>
+                            <label for="vehicle_type_id" class="col-sm-3 col-form-label">Trip Assign *</label>
                             <div class="col-sm-9">
-                                <?php echo form_dropdown('trip_id', $trip_list,null, 'class="form-control" id="trip_id"') ?>
+                                <?php echo form_dropdown('trip_assign', $trip_list,null, 'class="form-control" id="trip_assign"') ?>
                             </div>
                         </div>
                         <div class="tripfield"></div>
@@ -42,25 +42,25 @@
         </div>
     </div>
     <script>
-        $('#trip_id').on('select2:select', function (e) {
-            var data = e.params.data;
-            $('.tripfield').append(
-                '<div class="form-group row" id="fl-'+data.id+'"><label for="status" class="col-sm-3 col-form-label"></label>' +
-                '<div class="col-sm-7 ">' +
-                '<input class="form-control" type="text"id="tripText" name="tripText[]" value="'+ data.text +'" readonly>' +
-                '<input class="form-control" type="hidden"id="tripId" name="tripId[]" value="'+ data.id +'" readonly></div>' +
-                '<div class="col-sm-1 "><button class="btn btn-danger w-md m-b-5 btn_remove" id="'+data.id+'" type="button">Delete</button></div>' +
-                '</div>'
-            );
+        // $('#trip_assign').on('select2:select', function (e) {
+        //     var data = e.params.data;
+        //     $('.tripfield').append(
+        //         '<div class="form-group row" id="fl-'+data.id+'"><label for="status" class="col-sm-3 col-form-label"></label>' +
+        //         '<div class="col-sm-7 ">' +
+        //         '<input class="form-control" type="text"id="tripText" name="tripText[]" value="'+ data.text +'" readonly>' +
+        //         '<input class="form-control" type="hidden"id="tripId" name="tripId[]" value="'+ data.id +'" readonly></div>' +
+        //         '<div class="col-sm-1 "><button class="btn btn-danger w-md m-b-5 btn_remove" id="'+data.id+'" type="button">Delete</button></div>' +
+        //         '</div>'
+        //     );
 
-            $(document).on('click', '.btn_remove', function () {
-                var button_id = $(this).attr("id");
-                $('#fl-' + button_id + '').remove();
-            });
-        });
-        function deletethis(button_id) {
-            $('#fl-' + button_id + '').remove();
-        }
+        //     $(document).on('click', '.btn_remove', function () {
+        //         var button_id = $(this).attr("id");
+        //         $('#fl-' + button_id + '').remove();
+        //     });
+        // });
+        // function deletethis(button_id) {
+        //     $('#fl-' + button_id + '').remove();
+        // }
 
 function Checkprice() {
      var gp = document.getElementById("group_price_per_person").value;

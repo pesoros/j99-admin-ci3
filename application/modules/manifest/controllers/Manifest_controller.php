@@ -18,7 +18,7 @@ class Manifest_controller extends MX_Controller {
         #-------------------------------#
         $this->form_validation->set_rules('emailassign',display('emailassign ')  ,'required');
         $this->form_validation->set_rules('dateassign',display('dateassign ')  ,'required');
-        $this->form_validation->set_rules('trip_id',display('trip_id ')  ,'required');
+        $this->form_validation->set_rules('trip_assign',display('trip_assign ')  ,'required');
        
         #-------------------------------#
         if ($this->form_validation->run()) {
@@ -26,7 +26,7 @@ class Manifest_controller extends MX_Controller {
                 'status'  => 1,
                 'email_assign'  => $this->input->post('emailassign',true),
                 'trip_date'  => $this->input->post('dateassign',true),
-                'trip_id_no'  => $this->input->post('trip_id',true),
+                'trip_assign'  => $this->input->post('trip_assign',true),
             ];   
 
             if ($this->manifest_model->manifest_create($postData)) { 
@@ -38,7 +38,7 @@ class Manifest_controller extends MX_Controller {
         } else {
             $data['title'] = "manifest";
             $data['module']= "manifest";
-            $data['trip_list'] = $this->manifest_model->tripDropdown();
+            $data['trip_list'] = $this->manifest_model->tripAssignDropdown();
             $data['manifest']    = $this->manifest_model->manifest_view();
             $data['page']  = "manifest_form";   
             echo Modules::run('template/layout', $data); 
@@ -60,17 +60,11 @@ class Manifest_controller extends MX_Controller {
                 'status'  => 1,
                 'email_assign'  => $this->input->post('emailassign',true),
                 'trip_date'  => $this->input->post('dateassign',true),
+                'trip_assign'  => $this->input->post('trip_assign',true),
             ];   
 
             $savaData = $this->manifest_model->manifest_create($postData);
             if ($savaData) { 
-                foreach ($tripId as $key => $value) {
-						$typeArr = [];
-						$typeArr['manifest_id'] = $savaData;
-						$typeArr['trip_id_no'] = $value;
-						$typeArr['status'] = 1;
-						$this->manifest_model->manifestInside($typeArr);
-					}
                 $this->session->set_flashdata('message', display('successfully_saved'));
             } else {
                 $this->session->set_flashdata('exception',  display('please_try_again'));
@@ -80,7 +74,7 @@ class Manifest_controller extends MX_Controller {
         } else {
             $data['title']     = 'manifest add';
             $data['data']      =[];
-            $data['trip_list'] = $this->manifest_model->tripDropdown();
+            $data['trip_list'] = $this->manifest_model->tripAssignDropdown();
             $data['module']    = "manifest";    
             $data['page']      = "add_manifest_form";   
             echo Modules::run('template/layout', $data);  
@@ -125,16 +119,9 @@ class Manifest_controller extends MX_Controller {
             $postData = [
                 'email_assign'  => $this->input->post('emailassign',true),
                 'trip_date'  => $this->input->post('dateassign',true),
+                'trip_assign'  => $this->input->post('trip_assign',true),
             ];   
             if ($this->manifest_model->update_manifest($id,$postData)) { 
-                $this->manifest_model->delete_manifest_trip($id);
-                foreach ($tripId as $key => $value) {
-                        $typeArr = [];
-                        $typeArr['manifest_id'] = $id;
-                        $typeArr['trip_id_no'] = $value;
-                        $typeArr['status'] = 1;
-                        $this->manifest_model->manifestInside($typeArr);
-                    }
                 $this->session->set_flashdata('message', display('successfully_updated'));
             } else {
                 $this->session->set_flashdata('exception',  display('please_try_again'));
@@ -145,7 +132,7 @@ class Manifest_controller extends MX_Controller {
             $data['title']     = display('update');
             $data['data']      =$this->manifest_model->manifest_updateForm($id);
             $data['manifest_trip']      =$this->manifest_model->manifest_trip($id);
-            $data['trip_list'] = $this->manifest_model->tripDropdown();
+            $data['trip_list'] = $this->manifest_model->tripAssignDropdown();
             $data['module']    = "manifest";    
             $data['page']      = "update_manifest_form";   
             echo Modules::run('template/layout', $data);  

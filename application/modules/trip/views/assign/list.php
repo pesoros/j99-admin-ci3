@@ -15,6 +15,7 @@
                         <thead>
                             <tr>
                                 <th><?php echo display('sl_no') ?></th>
+                                <th>Assign Number</th>
                                 <th><?php echo display('trip_name') ?></th>
                                 <th><?php echo display('reg_no') ?></th>
                                 <th><?php echo display('route_name') ?></th>
@@ -29,6 +30,7 @@
                             <?php foreach ($assigns as $assign) { ?>
                             <tr class="<?php echo (!empty($assign->isClosed)?$assign->isClosed:null) ?>">
                                 <td><?php echo $sl++; ?></td>
+                                <td><?php echo $assign->id; ?></td>
                                 <td><?php echo $assign->trip_title; ?></td>
                                 <td><?php echo $assign->reg_no; ?></td>
                                 <td><?php echo $assign->trip_route_name; ?></td>

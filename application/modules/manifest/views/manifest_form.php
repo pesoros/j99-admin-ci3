@@ -24,7 +24,10 @@
                                 email assign
                             </th>
                             <th>
-                                trip
+                                trip assign
+                            </th>
+                            <th>
+                                trip title
                             </th>
                             <th>
                                 date
@@ -48,6 +51,9 @@
                                         </td>
                                         <td>
                                             <?php echo $value->email_assign; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $value->trip_assign; ?>
                                         </td>
                                         <td>
                                             <?php echo $value->trip_title; ?>
