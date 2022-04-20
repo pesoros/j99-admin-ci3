@@ -29,14 +29,26 @@
                         <?php echo form_dropdown('to', $tripRoute,null, 'class="form-control startend" id="to"') ?>
                     </div>
                 </div>
-                <div class="form-group row">
+                <?php if ($type) { ?>
+                    <?php foreach ($type as $key => $value) {?>
+                        <div class="form-group row">
+                            <label for="[rice]" class="col-sm-3 col-form-label"><?php echo $value->typeName ?> Price</label>
+                            <div class="col-sm-9">
+                                <input name="price[<?php echo $value->type ?>]" class="form-control" type="number"
+                                    placeholder="0" id="distance"
+                                    value="">
+                            </div>
+                        </div>
+                    <?php } ?>
+                <?php } ?>
+                <!-- <div class="form-group row">
 					<label for="end_point" class="col-sm-3 col-form-label">Price</label>
 					<div class="col-sm-9">
                         <input name="price" class="form-control" type="number"
 							placeholder="0" id="distance"
 							value="">
                     </div>
-                </div>
+                </div> -->
                 <div class="form-group text-right">
 					<button type="submit" class="btn btn-success w-md m-b-5"><?php echo display('save') ?></button>
 				</div>
@@ -48,19 +60,17 @@
                                 <!-- <th><?php echo display('sl_no') ?></th> -->
                                 <th>Departure</th>
                                 <th>Arrive</th>
-                                <th>Price</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($tripPoint)) ?>
+                            <?php if (!empty($tripPoint)) ?>ba
                             <?php $sl = 1; ?>
                             <?php foreach ($tripPoint as $value) { ?>
                             <tr class="<?php echo (!empty($value->isClosed)?$value->isClosed:null) ?>">
                                 <!-- <td><?php echo $sl++; ?></td> -->
                                 <td><?php echo $value->dep_point; ?></td>
                                 <td><?php echo $value->arr_point; ?></td>
-                                <td><?php echo $value->price; ?></td>
                                 <td width="150">
                                 <?php if($this->permission->method('trip','update')->access()): ?>
                                     <a href="<?php echo base_url("trip/assign/pointdelete/$value->id/$value->trip_assign_id") ?>" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="left" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>

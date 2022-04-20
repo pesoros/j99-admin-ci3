@@ -1,8 +1,9 @@
 <div class="form-group text-right">
     <?php if($this->permission->method('price', 'create')->access()): ?>
-    <button type="button" class="btn btn-primary btn-md" data-target="#add0" data-toggle="modal">
+    <!-- <button type="button" class="btn btn-primary btn-md" data-target="#add0" data-toggle="modal">
         Assign
-    </button>
+    </button> -->
+    <a href="<?php echo base_url('manifest/manifest_controller/addmanifest') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> <?php echo display('add') ?></a>  
     <?php endif; ?> 
 </div>
 
@@ -65,9 +66,9 @@
                                         </td>
                                        
                                         <td class="center">
-                                            <!-- <?php if($this->permission->method('price', 'update')->access()): ?>
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_update/$value->id") ?>" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a> 
-                                            <?php endif; ?> -->
+                                            <?php if($this->permission->method('price', 'update')->access()): ?>
+                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_update/$value->id") ?>" class="btn btn-xs btn-success">Edit</a> 
+                                            <?php endif; ?>
 
 
                                             <?php if($this->permission->method('price', 'delete')->access()): ?>

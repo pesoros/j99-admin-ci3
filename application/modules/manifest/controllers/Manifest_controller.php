@@ -22,7 +22,6 @@ class Manifest_controller extends MX_Controller {
        
         #-------------------------------#
         if ($this->form_validation->run()) {
-            $packet_number = $this->codeGenerate('PK',10);
             $postData = [
                 'status'  => 1,
                 'email_assign'  => $this->input->post('emailassign',true),
@@ -44,6 +43,48 @@ class Manifest_controller extends MX_Controller {
             $data['page']  = "manifest_form";   
             echo Modules::run('template/layout', $data); 
         }
+    }
+
+    public function addmanifest(Type $var = null)
+    {
+        $this->permission->method('price','update')->redirect();
+        #-------------------------------#
+         $this->form_validation->set_rules('emailassign',display('emailassign ')  ,'required');
+         $this->form_validation->set_rules('dateassign',display('dateassign ')  ,'required');
+        $tripId = $this->input->post('tripId') != null ? $this->input->post('tripId') : [];
+        
+        #-------------------------------#
+        if ($this->form_validation->run() === true) {
+            
+            $postData = [
+                'status'  => 1,
+                'email_assign'  => $this->input->post('emailassign',true),
+                'trip_date'  => $this->input->post('dateassign',true),
+            ];   
+
+            $savaData = $this->manifest_model->manifest_create($postData);
+            if ($savaData) { 
+                foreach ($tripId as $key => $value) {
+						$typeArr = [];
+						$typeArr['manifest_id'] = $savaData;
+						$typeArr['trip_id_no'] = $value;
+						$typeArr['status'] = 1;
+						$this->manifest_model->manifestInside($typeArr);
+					}
+                $this->session->set_flashdata('message', display('successfully_saved'));
+            } else {
+                $this->session->set_flashdata('exception',  display('please_try_again'));
+            }
+            redirect("manifest/manifest_controller/create_manifest");
+
+        } else {
+            $data['title']     = 'manifest add';
+            $data['data']      =[];
+            $data['trip_list'] = $this->manifest_model->tripDropdown();
+            $data['module']    = "manifest";    
+            $data['page']      = "add_manifest_form";   
+            echo Modules::run('template/layout', $data);  
+        }   
     }
 
     public function manifest_delete($id=null){
@@ -74,55 +115,39 @@ class Manifest_controller extends MX_Controller {
     { 
         $this->permission->method('price','update')->redirect();
         #-------------------------------#
-         $this->form_validation->set_rules('id',display('id'));
-         $this->form_validation->set_rules('pengirim',display('pengirim ')  ,'required');
-        $this->form_validation->set_rules('nopengirim',display('nopengirim ')  ,'required');
-        $this->form_validation->set_rules('penerima',display('penerima ')  ,'required');
-        $this->form_validation->set_rules('nopenerima',display('nopenerima ')  ,'required');
-        $this->form_validation->set_rules('berat',display('berat ')  ,'required');
-        $this->form_validation->set_rules('panjang',display('panjang ')  ,'required');
-        $this->form_validation->set_rules('lebar',display('lebar ')  ,'required');
-        $this->form_validation->set_rules('dari',display('dari ')  ,'required');
-        $this->form_validation->set_rules('ke',display('ke ')  ,'required');
-        $this->form_validation->set_rules('price',display('price'),'required|max_length[20]');
+        $this->form_validation->set_rules('emailassign',display('emailassign ')  ,'required');
+        $this->form_validation->set_rules('dateassign',display('dateassign ')  ,'required');
+       $tripId = $this->input->post('tripId') != null ? $this->input->post('tripId') : [];
         
-        $id = $this->input->post('id');
-       $paket_info = $this->db->select('*')->from('packet')->where('id',$id)->get();
-        #-------------------------------#
-        if ($this->form_validation->run() === true) {
+       #-------------------------------#
+       if ($this->form_validation->run() === true) {
 
-            $Data = [    
-                'packet_code'  => $packet_number,
-                'sender_name'  => $this->input->post('pengirim',true),
-                'sender_phone'  => $this->input->post('nopengirim',true),
-                'receiver_name'  => $this->input->post('penerima',true),
-                'receiver_phone'  => $this->input->post('nopenerima',true),
-                'weight'  => $this->input->post('berat',true),
-                'width'  => $this->input->post('panjang',true),
-                'height'  => $this->input->post('lebar',true),
-                'pool_sender_id'  => $this->input->post('dari',true),
-                'pool_receiver_id'  => $this->input->post('ke',true),
-                'price'           => $this->input->post('price',true),
+            $postData = [
+                'email_assign'  => $this->input->post('emailassign',true),
+                'trip_date'  => $this->input->post('dateassign',true),
             ];   
-        if($paket_info->num_rows() < 2){
-            if ($this->manifest_model->update_paket($Data)) { 
+            if ($this->manifest_model->update_manifest($id,$postData)) { 
+                $this->manifest_model->delete_manifest_trip($id);
+                foreach ($tripId as $key => $value) {
+                        $typeArr = [];
+                        $typeArr['manifest_id'] = $id;
+                        $typeArr['trip_id_no'] = $value;
+                        $typeArr['status'] = 1;
+                        $this->manifest_model->manifestInside($typeArr);
+                    }
                 $this->session->set_flashdata('message', display('successfully_updated'));
             } else {
                 $this->session->set_flashdata('exception',  display('please_try_again'));
             }
-        }else{
-               $this->session->set_flashdata('exception', 'This Route Price Already Exist');  
-            }
-            redirect("paket/paket_controller/create_paket");
+            redirect("manifest/manifest_controller/create_manifest");
 
         } else {
             $data['title']     = display('update');
-            $data['data']      =$this->manifest_model->paket_updateForm($id);
-            $data['rout']      = $this->manifest_model->rout();
-            $data['vehc']      = $this->manifest_model->vehicles();
-            $data['bb']        =$this->manifest_model->get_id($id);
-            $data['module']    = "paket";    
-            $data['page']      = "update_paket_form";   
+            $data['data']      =$this->manifest_model->manifest_updateForm($id);
+            $data['manifest_trip']      =$this->manifest_model->manifest_trip($id);
+            $data['trip_list'] = $this->manifest_model->tripDropdown();
+            $data['module']    = "manifest";    
+            $data['page']      = "update_manifest_form";   
             echo Modules::run('template/layout', $data);  
         }   
     }

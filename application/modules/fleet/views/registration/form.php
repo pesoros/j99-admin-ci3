@@ -23,12 +23,12 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
+                    <!-- <div class="form-group row">
                         <label for="fleet_type_id" class="col-sm-3 col-form-label"><?php echo display('fleet_type') ?> *</label>
                         <div class="col-sm-9">
                             <?php echo form_dropdown('fleet_type_id', $fleet_type_list, (!empty($fleet_registration->fleet_type_id)?$fleet_registration->fleet_type_id:null), ' class="form-control"') ?> 
                         </div>
-                    </div> 
+                    </div>  -->
 
                     <div class="form-group row">
                         <label for="engine_no" class="col-sm-3 col-form-label"><?php echo display('engine_no') ?></label>
@@ -83,7 +83,25 @@
                             </label> 
                         </div>
                     </div>
-         
+                    <div class="form-group row">
+                        <label for="status" class="col-sm-3 col-form-label">Type</label>
+                        <div class="col-sm-9">
+                            <?php echo form_dropdown('type_list', $fleet_type_list, null, 'class="form-control type_list" id="type_list"') ?></td>
+                        </div>
+                    </div>
+
+                    <div class="typefield">
+                        <?php if (isset($fleet_type)) { ?>
+                            <?php foreach ($fleet_type as $key => $value) { ?>
+                                <div class="form-group row" id="fl-<?php echo $value->type_id ?>"><label for="status" class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-7 ">
+                                <input class="form-control" type="text"id="typeText" name="typeText[]" value="<?php echo $value->type ?>" readonly>
+                                <input class="form-control" type="hidden" id="typeList" name="typeList[]" value="<?php echo $value->type_id ?>" readonly></div>
+                                <div class="col-sm-1 "><button class="btn btn-danger w-md m-b-5 btn_remove_e" onclick="deletethis(<?php echo $value->type_id ?>)" id="<?php echo $value->type_id ?>" type="button">Delete</button></div>
+                                </div>
+                            <?php }?>
+                        <?php } ?>
+                    </div>
          
                     <div class="form-group text-right">
                         <button type="reset" class="btn btn-primary w-md m-b-5"><?php echo display('reset') ?></button>
@@ -96,3 +114,24 @@
     </div>
 </div>
 
+<script type="text/javascript">
+    $('#type_list').on('select2:select', function (e) {
+        var data = e.params.data;
+        $('.typefield').append(
+            '<div class="form-group row" id="fl-'+data.id+'"><label for="status" class="col-sm-3 col-form-label"></label>' +
+            '<div class="col-sm-7 ">' +
+            '<input class="form-control" type="text"id="typeText" name="typeText[]" value="'+ data.text +'" readonly>' +
+            '<input class="form-control" type="hidden"id="typeList" name="typeList[]" value="'+ data.id +'" readonly></div>' +
+			'<div class="col-sm-1 "><button class="btn btn-danger w-md m-b-5 btn_remove" id="'+data.id+'" type="button">Delete</button></div>' +
+            '</div>'
+        );
+
+        $(document).on('click', '.btn_remove', function () {
+            var button_id = $(this).attr("id");
+            $('#fl-' + button_id + '').remove();
+        });
+    });
+    function deletethis(button_id) {
+        $('#fl-' + button_id + '').remove();
+    }
+</script>

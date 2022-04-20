@@ -212,6 +212,7 @@ class Assign extends MX_Controller {
 			$trArr[$value] = $value;
 		}
 		$data['tripPoint'] = $this->assign_model->getTripPoint($id);
+		$data['type'] = $this->assign_model->getFleetType($id);
 		$data['tripRoute'] = $trArr;
 		$data['id'] = $id;
 		$data['module'] = "trip";
@@ -227,10 +228,16 @@ class Assign extends MX_Controller {
 			'arr_point'        => $this->input->post('to'), 
 			'dep_time'        => $this->input->post('timefrom'), 
 			'arr_time'        => $this->input->post('timeto'), 
-			'price'        => $this->input->post('price'), 
 		]; 
 
 		$save = $this->assign_model->pointSave($postData);
+		foreach ($this->input->post('price') as $key => $value) {
+			$pricing = [];
+			$pricing['point_id'] = $save;
+			$pricing['type'] = $key;
+			$pricing['price'] = $value;
+			$saveType = $this->assign_model->pointTypeSave($pricing);
+		}
 
 		redirect("trip/assign/point/".$this->input->post('trip_assign_id')); 
 	}

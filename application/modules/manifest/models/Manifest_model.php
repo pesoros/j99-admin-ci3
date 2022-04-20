@@ -1,11 +1,12 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Manifest_model extends CI_Model {
- 
+class Manifest_model extends CI_Model
+{
+
     public function manifest_view()
-	{
-		return $this->db->select("
+    {
+        return $this->db->select("
                 mn.id,
                 mn.status,
                 mn.email_assign,
@@ -13,110 +14,151 @@ class Manifest_model extends CI_Model {
                 tr.trip_title
             ")
             ->from("manifest mn")
-            ->join('trip tr','mn.trip_id_no = tr.trip_id','left')
-            ->order_by('mn.id','desc')
+            ->join('trip tr', 'mn.trip_id_no = tr.trip_id', 'left')
+            ->order_by('mn.id', 'desc')
             ->get()
             ->result();
-	}
-	public function manifest_create($data = array())
-	{
-		return $this->db->insert('manifest', $data);
-	}
+    }
+    public function manifest_create($data = array())
+    {
+        $this->db->insert('manifest', $data);
+        $insert_id = $this->db->insert_id();
 
-	public function delete_manifest($id = null)
-	{
-		$this->db->where('id',$id)
-			->delete('manifest');
+        return $insert_id;
 
-		if ($this->db->affected_rows()) {
-			return true;
-		} else {
-			return false;
-		}
-	} 
+    }
+
+    public function manifestInside($data = [])
+    {
+        return $this->db->insert('manifest_trip', $data);
+    }
+
+    public function delete_manifest($id = null)
+    {
+        $this->db->where('id', $id)
+            ->delete('manifest');
+
+        if ($this->db->affected_rows()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public function close_manifest($id = null)
-	{
+    {
         $data['status'] = 2;
-		$this->db->where('id', $id)
-			->update("manifest", $data);
+        $this->db->where('id', $id)
+            ->update("manifest", $data);
 
-			return true;
-	} 
+        return true;
+    }
 
-    public function update_paket($data = array())
-	{
-		return $this->db->where('id', $data["paket_id"])
-			->update("manifest", $data);
-	}
-	public function paket_updateForm($id){
-        $this->db->where('id',$id);
-        $query = $this->db->get('packet');
+    public function update_manifest($id,$data = array())
+    {
+        return $this->db->where('id', $id)
+            ->update("manifest", $data);
+    }
+
+    public function manifest_updateForm($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('manifest');
         return $query->row();
     }
-public  function get_id($id)
-    {
-        $query=$this->db->get_where('packet',array('id'=>$id));
-        return $query->row_array();
-    } 
 
-    public function rout(){
+    public function manifest_trip($id)
+    {
+        return $this->db->select("
+                mnt.trip_id_no,
+                tr.trip_title
+            ")
+            ->from("manifest_trip mnt")
+            ->join('trip tr', 'mnt.trip_id_no = tr.trip_id', 'left')
+            ->order_by('mnt.id', 'desc')
+            ->get()
+            ->result();
+    }
+
+    public function delete_manifest_trip($id = null)
+    {
+        $this->db->where('manifest_id', $id)
+            ->delete('manifest_trip');
+
+        if ($this->db->affected_rows()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function get_id($id)
+    {
+        $query = $this->db->get_where('packet', array('id' => $id));
+        return $query->row_array();
+    }
+
+    public function rout()
+    {
         $this->db->select('*');
         $this->db->from('trip_route');
-        $query=$this->db->get();
-        $data=$query->result();
+        $query = $this->db->get();
+        $data = $query->result();
         $list[''] = display('select_option');
-        if(!empty($data)){
-            foreach ($data as  $value) {
-                $list[$value->id]=$value->name;
+        if (!empty($data)) {
+            foreach ($data as $value) {
+                $list[$value->id] = $value->name;
             }
         }
         return $list;
     }
 
-    public function vehicles(){
+    public function vehicles()
+    {
         $this->db->select('*');
         $this->db->from('fleet_type');
-        $query=$this->db->get();
-        $data=$query->result();
+        $query = $this->db->get();
+        $data = $query->result();
         $list[''] = display('select_option');
-        if(!empty($data)){
-            foreach ($data as  $value) {
-                $list[$value->id]=$value->type;
+        if (!empty($data)) {
+            foreach ($data as $value) {
+                $list[$value->id] = $value->type;
             }
         }
         return $list;
     }
     // currency and web information
-     public function retrieve_setting_editdata()
+    public function retrieve_setting_editdata()
     {
         $this->db->select('*');
         $this->db->from('ws_setting');
-        $this->db->where('id',1);
+        $this->db->where('id', 1);
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
-            return $query->result_array();  
+            return $query->result_array();
         }
         return false;
     }
-	
-    public function tripDropdown()
-	{
-		$data = $this->db->select("*")
-			->from('trip')
-			->where('status', 1) 
-			->order_by('trip_title', 'asc')
-			->get()
-			->result();
 
-		$list[''] = display('select_option');
-		if (!empty($data)) {
-			foreach($data as $value)
-				$list[$value->trip_id] = $value->trip_title;
-			return $list;
-		} else {
-			return false; 
-		}
-	}
+    public function tripDropdown()
+    {
+        $data = $this->db->select("*")
+            ->from('trip')
+            ->where('status', 1)
+            ->order_by('trip_title', 'asc')
+            ->get()
+            ->result();
+
+        $list[''] = display('select_option');
+        if (!empty($data)) {
+            foreach ($data as $value) {
+                $list[$value->trip_id] = $value->trip_title;
+            }
+
+            return $list;
+        } else {
+            return false;
+        }
+    }
 
 }

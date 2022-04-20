@@ -320,8 +320,20 @@ public function create_shedule($data = [])
 
 	public function getTripPoint($tripAssignId){
 		return $this->db->select("*")
-					->from("trip_point ")
+					->from("trip_point")
 					->where("trip_assign_id",$tripAssignId)
+					->get()
+					->result();
+	}
+
+	public function getFleetType($traid)
+	{
+		return $this->db->select("frt.*,ft.type as typeName")
+					->from("fleet_registration_type frt")
+					->join("fleet_registration fr", "fr.reg_no = frt.registration")
+					->join("trip_assign ta", "ta.fleet_registration_id = fr.id")
+					->join("fleet_type ft", "ft.id = frt.type")
+					->where("ta.id",$traid)
 					->get()
 					->result();
 	}
@@ -338,7 +350,18 @@ public function create_shedule($data = [])
 
 	public function pointSave($data)
 	{
-		return $this->db->insert('trip_point', $data);
+		$this->db->insert('trip_point', $data);
+		$insert_id = $this->db->insert_id();
+
+        return $insert_id;
+	}
+
+	public function pointTypeSave($data)
+	{
+		$this->db->insert('trip_point_price', $data);
+		$insert_id = $this->db->insert_id();
+
+        return $insert_id;
 	}
 
 	public function deletePoint($id = null)

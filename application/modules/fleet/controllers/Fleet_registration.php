@@ -37,8 +37,10 @@ class Fleet_registration extends MX_Controller {
 		} else {
 			$this->form_validation->set_rules('reg_no',display('reg_no') ,'required');
 		}
-		$this->form_validation->set_rules('fleet_type_id',display('fleet_type') ,'required');
 		$this->form_validation->set_rules('status',display('status') ,'required');
+
+        $typelist = $this->input->post('typeList') != null ? $this->input->post('typeList') : [];
+		
 		#-------------------------------#
 		$data['fleet_registration'] = (Object) $postData = [
 			'id' 	         => $this->input->post('id'), 
@@ -58,12 +60,19 @@ class Fleet_registration extends MX_Controller {
 	
 		#-------------------------------#
 		if ($this->form_validation->run()) { 
-
+			
 			if (empty($postData['id'])) {
 
         		$this->permission->method('fleet','create')->redirect();
 
 				if ($this->fleet_registration_model->create($postData)) { 
+					foreach ($typelist as $key => $value) {
+						$typeArr = [];
+						$typeArr['registration'] = $this->input->post('reg_no');
+						$typeArr['type'] = $value;
+						$typeArr['status'] = 1;
+						$this->fleet_registration_model->typeInside($typeArr);
+					}
 				
 					$this->session->set_flashdata('message', display('save_successfully'));
 				} else {
@@ -72,6 +81,15 @@ class Fleet_registration extends MX_Controller {
 				redirect("fleet/fleet_registration/form"); 
 
 			} else {
+
+				$this->fleet_registration_model->deleteTypeUpdate($this->input->post('reg_no'));
+				foreach ($typelist as $key => $value) {
+					$typeArr = [];
+					$typeArr['registration'] = $this->input->post('reg_no');
+					$typeArr['type'] = $value;
+					$typeArr['status'] = 1;
+					$this->fleet_registration_model->typeInside($typeArr);
+				}
 
         		$this->permission->method('fleet','update')->redirect();
 
@@ -89,6 +107,7 @@ class Fleet_registration extends MX_Controller {
 			if(!empty($id)) {
 				$data['title'] = display('update');
 				$data['fleet_registration']   = $this->fleet_registration_model->findById($id);
+				$data['fleet_type']   = $this->fleet_registration_model->getType($data['fleet_registration']->reg_no);
 			}
 			$data['fleet_type_list']   = $this->fleet_type_model->dropdown();
 			$data['fleet_facilities_list']   = $this->fleet_facilities_model->dropdown();

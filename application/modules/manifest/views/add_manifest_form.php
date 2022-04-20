@@ -1,5 +1,3 @@
-
-
 <div class="row">
         <div class="col-sm-12 col-md-12">
             <div class="panel panel-bd lobidrag">
@@ -10,19 +8,19 @@
                 </div>
                 <div class="panel-body">
 
-                    <?= form_open('manifest/manifest_controller/manifest_update/'. $data->id) ?>
-                    <input type="hidden" name="id" value="<?php echo $data->id?>">
+                    <?= form_open('manifest/manifest_controller/addmanifest/') ?>
+                    <input type="hidden" name="id" value="">
 
                          <div class="form-group row">
                             <label for="route_id" class="col-sm-3 col-form-label">Email*</label>
                             <div class="col-sm-9">
-                                <input name="emailassign" value="<?php echo $data->email_assign?>" class="form-control" type="text" placeholder="" id="emailassign">
+                                <input name="emailassign" class="form-control" type="text" placeholder="" id="emailassign">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="vehicle_type_id" class="col-sm-3 col-form-label">Tanggal *</label>
                             <div class="col-sm-9">
-                                <input type="text" name="dateassign" value="<?php echo $data->trip_date?>" class="form-control datetimepicker" value="" placeholder="Date">
+                                <input type="text" name="dateassign" class="form-control datetimepicker" value="" placeholder="Date">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -31,18 +29,7 @@
                                 <?php echo form_dropdown('trip_id', $trip_list,null, 'class="form-control" id="trip_id"') ?>
                             </div>
                         </div>
-                        <div class="tripfield">
-                            <?php if ($manifest_trip) { ?>
-                                <?php foreach ($manifest_trip as $key => $value) { ?>
-                                    <div class="form-group row" id="fl-<?php echo $value->trip_id_no ?>"><label for="status" class="col-sm-3 col-form-label"></label>
-                                    <div class="col-sm-7 ">
-                                    <input class="form-control" type="text"id="tripText" name="tripText[]" value="<?php echo $value->trip_title ?>" readonly>
-                                    <input class="form-control" type="hidden"id="tripId" name="tripId[]" value="'<?php echo $value->trip_id_no ?>" readonly></div>
-                                    <div class="col-sm-1 "><button class="btn btn-danger w-md m-b-5 btn_remove" id="<?php echo $value->trip_id_no ?>" onclick="deletethis(<?php echo $value->trip_id_no ?>)" type="button">Delete</button></div>
-                                    </div>
-                                <?php } ?>
-                            <?php } ?>
-                        </div>
+                        <div class="tripfield"></div>
              
                         <div class="form-group text-right">
                             <button type="reset" class="btn btn-primary w-md m-b-5"><?php echo display('reset') ?></button>
@@ -75,13 +62,13 @@
             $('#fl-' + button_id + '').remove();
         }
 
-function Checkmanifest() {
-     var gp = document.getElementById("group_manifest_per_person").value;
-     var ap = document.getElementById("manifest").value;
+function Checkprice() {
+     var gp = document.getElementById("group_price_per_person").value;
+     var ap = document.getElementById("price").value;
            if (parseInt(ap) < parseInt(gp)) {
         setTimeout(function(){
-        alert('Group manifest Can not Greater Than Adult manifest');
-        document.getElementById("group_manifest_per_person").value = '';
+        alert('Group Price Can not Greater Than Adult price');
+        document.getElementById("group_price_per_person").value = '';
 
         },500);
 

@@ -10,6 +10,11 @@ class Fleet_registration_model extends CI_Model {
 		return $this->db->insert($this->table,$data);
 	}
 
+	public function typeInside($data = [])
+	{	 
+		return $this->db->insert('fleet_registration_type',$data);
+	}
+
 	public function read()
 	{
 		return $this->db->select("fr.*, ft.type as fleet_type")
@@ -28,6 +33,20 @@ class Fleet_registration_model extends CI_Model {
 			->get()
 			->row();
 	} 
+	
+	public function getType($reg)
+	{
+		return $this->db->select("
+				frt.type as type_id
+				,ft.type
+			")
+			->from("fleet_registration_type as frt")
+			->join("fleet_type as ft", "ft.id = frt.type", "left")
+			->where("registration",$reg)
+			->order_by('frt.id','asc')
+			->get()
+			->result();
+	} 
  
 	public function update($data = [])
 	{
@@ -35,6 +54,18 @@ class Fleet_registration_model extends CI_Model {
 			->update($this->table,$data); 
 	} 
 
+
+	public function deleteTypeUpdate($registration = null)
+	{
+		$this->db->where('registration',$registration)
+			->delete('fleet_registration_type');
+
+		if ($this->db->affected_rows()) {
+			return true;
+		} else {
+			return false;
+		}
+	} 
 
 	public function delete($id = null)
 	{
