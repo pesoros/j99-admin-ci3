@@ -110,11 +110,11 @@ public function autocancel(){
             $diffHours = round(($day2 - $day1) /3600)+0.001;
            // print_r($diffHours);exit;
             // $sql = "DELETE FROM tkt_booking WHERE $diffHours > 1 AND payment_status=2";
-            if ($this->db->query($sql) === TRUE) {
-                return true;
-            } else {
-                return false;
-            }
+            // if ($this->db->query($sql) === TRUE) {
+            //     return true;
+            // } else {
+            //     return false;
+            // }
         }else{
             return false;
         }
