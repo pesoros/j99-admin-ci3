@@ -51,6 +51,10 @@
                                 <?php endif; ?>
 
                                 <?php if($this->permission->method('trip','update')->access()): ?>
+                                    <a href="<?php echo base_url("trip/assign/priceext/$assign->id") ?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Point Price"><i class="fa fa-money" aria-hidden="true"></i></a>
+                                <?php endif; ?>
+
+                                <?php if($this->permission->method('trip','update')->access()): ?>
                                     <?php if(empty($assign->closed_by_id)): ?>
                                     <a href="<?php echo base_url("trip/close/form/$assign->id") ?>" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Close Trip"><i class="fa fa-check" aria-hidden="true"></i></a>
                                     <?php endif; ?>

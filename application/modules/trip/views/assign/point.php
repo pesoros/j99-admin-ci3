@@ -33,9 +33,14 @@
                     <?php foreach ($type as $key => $value) {?>
                         <div class="form-group row">
                             <label for="[rice]" class="col-sm-3 col-form-label"><?php echo $value->typeName ?> Price</label>
-                            <div class="col-sm-9">
+                            <div class="col-sm-4">
                                 <input name="price[<?php echo $value->type ?>]" class="form-control" type="number"
-                                    placeholder="0" id="distance"
+                                    placeholder="Normal Price" id="distance"
+                                    value="">
+                            </div>
+                            <div class="col-sm-4">
+                                <input name="sp_price[<?php echo $value->type ?>]" class="form-control" type="number"
+                                    placeholder="Special Price" id="distance"
                                     value="">
                             </div>
                         </div>
@@ -64,7 +69,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php if (!empty($tripPoint)) ?>ba
+                            <?php if (!empty($tripPoint)) ?>
                             <?php $sl = 1; ?>
                             <?php foreach ($tripPoint as $value) { ?>
                             <tr class="<?php echo (!empty($value->isClosed)?$value->isClosed:null) ?>">
