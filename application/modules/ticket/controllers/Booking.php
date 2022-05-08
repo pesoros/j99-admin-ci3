@@ -378,7 +378,7 @@ class Booking extends MX_Controller {
             $setBookingData["pergi"]["seatPicked"][$key]["baggage"] = $bodyRaw['baggage'][$key];
         }
 
-        $setBooking = $this->httpPostXform("http://localhost:8080/booking/add", $setBookingData);
+        $setBooking = $this->httpPostXform("https://backend.tiketjuragan99.id/booking/add", $setBookingData);
 
         redirect("ticket/booking/index");
     }
