@@ -12,17 +12,23 @@ class Passenger_model extends CI_Model {
 
 	public function read($limit = null, $start = null)
 	{
-		return $this->db->select("
-				tp.*
-				,tb.booking_code
-				,tbh.payment_status
-			")->from("tkt_passenger_pcs AS tp")
-			->join("tkt_booking AS tb", "tp.booking_id = tb.id_no", "left") 
-			->join("tkt_booking_head AS tbh", "tb.booking_code = tbh.booking_code", "left") 
-			->order_by('tp.id', 'desc')
-    		->limit($limit, $start)
-			->get()
-			->result();
+		$this->db->select("
+			tp.*
+			,tb.booking_code
+			,tbh.payment_status
+		");
+		$this->db->from("tkt_passenger_pcs AS tp");
+		$this->db->join("tkt_booking AS tb", "tp.booking_id = tb.id_no", "left") ;
+		$this->db->join("tkt_booking_head AS tbh", "tb.booking_code = tbh.booking_code", "left") ;
+		if ($this->session->userdata('isAdmin') == 0) {
+			$this->db->where('tbh.agent', $this->session->userdata('id'));
+		}
+		$this->db->order_by('tp.id', 'desc');
+		$this->db->limit($limit, $start);
+		$query = $this->db->get();
+		// if ($query->num_rows() > 0) {
+			return $query->result();
+		// }
 	} 
 
 	public function passenger_ticket_info($id)

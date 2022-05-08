@@ -19,7 +19,7 @@ class Booking extends MX_Controller {
  
 	public function index()
 	{   
-        $this->permission->method('ticket','read')->redirect();
+        // $this->permission->method('ticket','read')->redirect();
          $currency_details = $this->price_model->retrieve_setting_editdata();
         foreach ($currency_details as $price) {
         }
@@ -67,12 +67,10 @@ class Booking extends MX_Controller {
 
     public function view($id = null)
     { 
-        $this->permission->method('ticket','create')->redirect(); 
+        // $this->permission->method('ticket','create')->redirect(); 
         $data['title'] = display('view');
         #-------------------------------#
-        $data['ticket'] = $this->booking_model->ticket($id);
-        $rokute_id= $data['ticket']->trip_route_id;
-        $data['pricess']=$this->db->select('*')->from('pri_price')->where('route_id',$rokute_id)->get()->row();
+        $data['booking'] = $this->booking_model->booking($id);
         $data['appSetting'] = $this->booking_model->website_setting();
         $data['module'] = "ticket";
         $data['page']   = "booking/ticket";   
@@ -82,10 +80,10 @@ class Booking extends MX_Controller {
 
  	public function form()
 	{ 
-        $this->permission->method('ticket','create')->redirect(); 
+        // $this->permission->method('ticket','create')->redirect(); 
 		$data['title'] = display('add');
 		#-------------------------------#
-        $data['location_dropdown'] = $this->booking_model->location_dropdown();
+        $data['city_dropdown'] = $this->booking_model->city_dropdown();
         $data['route_dropdown'] = $this->booking_model->route_dropdown();
         $data['facilities_dropdown'] = $this->booking_model->facilities_dropdown();
         $data['country_dropdown'] = $this->country_model->country();
@@ -98,7 +96,7 @@ class Booking extends MX_Controller {
 
 	public function delete($id = null) 
 	{ 
-        $this->permission->method('ticket','delete')->redirect();
+        // $this->permission->method('ticket','delete')->redirect();
 
 		if ($this->booking_model->delete($id)) {
 			#set success message
@@ -118,7 +116,7 @@ class Booking extends MX_Controller {
 
     public function newPassenger()
     {  
-        $this->permission->method('ticket','create')->redirect();
+        // $this->permission->method('ticket','create')->redirect();
         #-------------------------------#
         $this->form_validation->set_rules('firstname', display('firstname')  ,'required|max_length[50]');
         $this->form_validation->set_rules('lastname', display('lastname')  ,'required|max_length[50]');
@@ -353,179 +351,36 @@ class Booking extends MX_Controller {
 
     public function createBooking()
     { 
-        $this->permission->method('ticket','create')->redirect();
-        #-------------------------------# 
-        $this->form_validation->set_rules('route_id',display('route_name') ,'required|max_length[255]');
-        $this->form_validation->set_rules('approximate_time',display('booking_date') ,'required|max_length[20]');
-        $this->form_validation->set_rules('tripIdNo',display('trip_id') ,'required');
-        $this->form_validation->set_rules('seat_number',display('select_seats') ,'required');
-        $this->form_validation->set_rules('price',display('price') ,'required|numeric');
-        $this->form_validation->set_rules('amount',display('amount') ,'required');
-        $this->form_validation->set_rules('passenger_id_no',display('passenger_id') ,'required|max_length[30]');
-        #-------------------------------# 
-        $request_facilities = $this->input->post('request_facilities');  
-        if (sizeof($request_facilities) > 0) {
-            $fa = "";
-            foreach($request_facilities as $fa) {
-                $facilities .= $fa. ", ";
-            }
+        $bodyRaw = $this->input->post();
+        
+        $chooseBus = explode("-", $bodyRaw["choosebus"]);
+        $setBookingData["booker_id"] = $this->session->userdata('id');
+        $setBookingData["booker_name"] = $this->session->userdata('fullname');
+        $setBookingData["booker_phone"] = "-";
+        $setBookingData["booker_email"] = $this->session->userdata('email');
+        $setBookingData["payment_method"] = "CASH";
+        $setBookingData["payment_channel_code"] = "-";
+        $setBookingData["agent"] = 1;
+
+        $setBookingData["pergi"]["trip_id_no"] = $chooseBus[0];
+        $setBookingData["pergi"]["trip_route_id"] = $chooseBus[1];
+        $setBookingData["pergi"]["pickup_location"] = $chooseBus[5];
+        $setBookingData["pergi"]["drop_location"] = $chooseBus[6];
+        $setBookingData["pergi"]["pricePerSeat"] = $chooseBus[2];;
+        $setBookingData["pergi"]["booking_date"] = $bodyRaw['approximate_time'];
+        $setBookingData["pergi"]["fleet_type_id"] = $chooseBus[3];
+
+        foreach ($bodyRaw['name'] as $key => $value) {
+            $setBookingData["pergi"]["seatPicked"][$key]["name"] = $bodyRaw['name'][$key];
+            $setBookingData["pergi"]["seatPicked"][$key]["phone"] = $bodyRaw['phone'][$key];
+            $setBookingData["pergi"]["seatPicked"][$key]["food"] = $bodyRaw['food'][$key];
+            $setBookingData["pergi"]["seatPicked"][$key]["seat"] = $bodyRaw['seat'][$key];
+            $setBookingData["pergi"]["seatPicked"][$key]["baggage"] = $bodyRaw['baggage'][$key];
         }
 
-        $trip_id_no      = $this->input->post('tripIdNo');
-        $fleet_registration_id = $this->input->post('fleet_registration_id');
-        $fleet_type_id   = $this->input->post('ftypes');
-        $seat_number     = $this->input->post('seat_number');
-        $routeId         = $this->input->post('route_id');
-        $passenger_id    = $this->input->post('passenger_id_no');
-        $offer_code      = $this->input->post('offer_code');
-        $total_seat      = $this->input->post('total_seat');
-        $pickup_location = $this->input->post('pickup_location');
-        $drop_location   = $this->input->post('drop_location');
-        $booking_dates   = $this->input->post('approximate_time');
-        $adult           = $this->input->post('adult');
-        $child           = $this->input->post('child_no');
-        $special         = $this->input->post('special');
-        #-------------------------------#
-        $booking_date    = date('Y-m-d', strtotime($booking_dates));
-        $b_dates    = date('Y-m-d H:i:s', strtotime($booking_dates));
-        $price           = $this->input->post('price');
-        $discount        = $this->input->post('discount'); 
-         $agent_com_per = $this->db->select('*')->from('agent_info')->where('agent_email',$this->session->userdata('email'))->get()->row();
-            $agent_commission = $agent_com_per->agent_commission;
-        $id=$this->randomId();
-         $totl_inpt = $child+$adult+$special;
-        #-------------------------------#
-         $cs = $this->db->select("
-                count(tb.child) AS tchild, 
-                count(tb.special) AS tspecial 
-            ")
-            ->from('tkt_booking AS tb')
-            ->where('tb.trip_id_no', $this->input->post('tripIdNo'))
-            ->like('tb.booking_date',$booking_date,'after')
-            ->get()
-            ->row();
-            $tcs = $cs->tchild+$this->input->post('child_no');
-            $tspecialck = $cs->tspecial+$this->input->post('special');
-            $rout_chsp_seat = $this->db->select('*')->from('trip_route')->where('id',$this->input->post('route_id'))->get()->row();
-            $req_children_seat = (!empty($rout_chsp_seat->children_seat)?$rout_chsp_seat->children_seat:20);
-            $req_special_seat = (!empty($rout_chsp_seat->special_seat)?$rout_chsp_seat->special_seat:20);
-            
-        if ($this->form_validation->run()) { 
-             if($total_seat == $totl_inpt){
+        $setBooking = $this->httpPostXform("http://localhost:8080/booking/add", $setBookingData);
 
-            //check seats
-            if ($this->checkBooking($trip_id_no,$fleet_type_id,$seat_number,$booking_date)) 
-            {
-               
-                //check passenger
-                if ($this->checkPassenger($passenger_id)) {
-
-                    $postData = [
-                        'id_no'                => $id, 
-                        'trip_id_no'           => $trip_id_no, 
-                        'tkt_passenger_id_no'  => $passenger_id, 
-                        'trip_route_id'        => $routeId, 
-                        'pickup_trip_location' => $pickup_location, 
-                        'drop_trip_location'   => $drop_location, 
-                        'request_facilities'   => $facilities, 
-                        'price'        => $price, 
-                        'discount'     => $discount, 
-                        'total_seat'   => $total_seat, 
-                        'seat_numbers' => $seat_number, 
-                        'offer_code'   => $offer_code,
-                        'adult'        => $adult,
-                        'child'        => $child,
-                        'special'      => $special, 
-                        'tkt_refund_id'=> null, 
-                        'agent_id'     => null, 
-                        'booking_date' => $b_dates,
-                        'booking_type' => 'Cash('.$this->session->userdata("fullname").')',
-                        'payment_status'=> $this->input->post('status'),  
-                        'date'         => date('Y-m-d H:i:s'),
-                        'booked_by'    =>  $this->session->userdata('id')
-                    ];  
-
-                    $notice =[
-                'b_idno'       => $id,
-                'passenger_id' => $passenger_id,
-                'route_id'     => $routeId,
-                'booking_time' => date('Y-m-d H:i:s'),
-                'trip_id'      => $trip_id_no,
-                'no_tkts'      => $total_seat,
-                'amount'       => $price,
-                'booked_by'    =>  $this->session->userdata('id')
-                      ];
-                      
-         $accoutn_transaction = [
-        'account_id'                => 3,
-        'transaction_description'   => 'Trip Id-'.$trip_id_no.' Ticket No-'.$seat_number,
-        'amount'                    => $price,
-        'create_by_id'              => $this->session->userdata('id'),
-            ]; 
-            $agent_ledger = [
-                'booking_id'      => $id,
-                'credit'          => ($agent_commission*$price)/100,
-                'date'            => date('Y-m-d'),
-                'agent_id'        => $agent_com_per->agent_id,
-                'commission_rate' => $agent_commission,
-                'total_price'     => $price,
-            ];
-
-                    if ($this->booking_model->create($postData)) { 
-                        $this->db->insert('ticket_notification',$notice);
-                        if($this->input->post('status')=="NULL"){
-                        $this->db->insert('acn_account_transaction',$accoutn_transaction);
-                    }
-                        if($this->session->userdata('isAdmin')==0){
-                          $this->db->insert('agent_ledger',$agent_ledger);  
-                        }
-                        $data['status'] = true;
-                        $data['id_no']  = $postData['id_no'];
-                        $data['message'] = display('save_successfully');
-                        
-                        $passeninfo=$this->db->select('*')->from('tkt_passenger')->where('id_no',$passenger_id)->get()->row();
-                        $email=$passeninfo->email;       
-                        $this->load->library('pdfgenerator'); 
-                        $datas['appSetting'] = $this->website_model->read_setting();
-                        $datas['ticket'] = $this->website_model->getTicket($id);
-                        $html = $this->load->view('booking/ticket_pdf', $datas, true);
-                        $dompdf = new DOMPDF();
-                        $dompdf->load_html($html);
-                        $dompdf->render();
-                        $output = $dompdf->output();
-                        file_put_contents('assets/data/pdf/'.$id.'.pdf', $output);
-                        $file_path = 'assets/data/pdf/'.$id.'.pdf';
-                         $send_email = '';
-                         if (!empty($email)) {
-                            $send_email = $this->setmail($email,$file_path);
-                            
-                 }
-                    } else { 
-                        $data['status'] = false;
-                        $data['exception'] = display('please_try_again');
-                    } 
-
-                } else {
-                    $data['status'] = false;
-                    $data['exception'] = display('invalid_passenger_id');
-                }
-                    
-
-            }  else {
-                $data['status'] = false;
-                $data['exception'] = display('invalid_input');
-            }
-            } else {
-            $data['status'] = false;
-            $data['exception'] = 'Please Check Your Seat Quantity';
-        } 
-
-        } else {
-            $data['status'] = false;
-            $data['exception'] = validation_errors();
-        } 
-        #-------------------------------#
-        echo json_encode($data);
+        redirect("ticket/booking/index");
     }
          
     /*
@@ -580,16 +435,16 @@ class Booking extends MX_Controller {
             ta.`type`,
             sh.`start`,
             sh.`end`
-FROM trip AS ta
-LEFT JOIN fleet_type AS fr ON fr.`id` = ta.`type`
-LEFT JOIN trip_route AS tr ON tr.`id` = ta.`route`
-LEFT JOIN shedule AS sh ON sh.`shedule_id` = ta.`shedule_id`
-WHERE tr.`id`= $routeID
-AND fr.`id` = $type
-AND (!FIND_IN_SET(DAYOFWEEK('$date'),ta.`weekend`))
-GROUP BY ta.`trip_id`
+            FROM trip AS ta
+            LEFT JOIN fleet_type AS fr ON fr.`id` = ta.`type`
+            LEFT JOIN trip_route AS tr ON tr.`id` = ta.`route`
+            LEFT JOIN shedule AS sh ON sh.`shedule_id` = ta.`shedule_id`
+            WHERE tr.`id`= $routeID
+            AND fr.`id` = $type
+            AND (!FIND_IN_SET(DAYOFWEEK('$date'),ta.`weekend`))
+            GROUP BY ta.`trip_id`
 
-")->result();
+            ")->result();
 
         $html = "<table class=\"table table-condensed table-striped\">
             <thead>
@@ -909,7 +764,7 @@ GROUP BY ta.`trip_id`
     // loacally ticket view
     public function ticket_view($booking_id_no = null)
     { 
-        $this->permission->method('ticket','create')->redirect(); 
+        // $this->permission->method('ticket','create')->redirect(); 
         $data['title'] = display('view');
         #-------------------------------#
         $data['ticket'] = $this->booking_model->ticket($booking_id_no);
@@ -923,7 +778,7 @@ GROUP BY ta.`trip_id`
     {
      
 
-     //$this->permission->method('ticket','create')->redirect(); 
+     $this->permission->method('ticket','create')->redirect(); 
 
         $data['title'] = display('paid');
         #-------------------------------#
@@ -1127,7 +982,7 @@ $setting_detail = $this->db->select('*')->from('email_config')->get()->row();
     //payment term and condition
     public function terms_and_condition_form($id = null)
  {
-  $this->permission->method('ticket','create')->redirect();
+//   $this->permission->method('ticket','create')->redirect();
   $data['title'] = display('add');
   #-------------------------------#
   $this->form_validation->set_rules('how_to_pay', display('how_to_pay')  ,'required|max_length[1000]');
@@ -1143,7 +998,7 @@ $setting_detail = $this->db->select('*')->from('email_config')->get()->row();
 
    if (empty($postData['id'])) {
 
-          $this->permission->method('ticket','create')->redirect();
+        //   $this->permission->method('ticket','create')->redirect();
        
     if ($this->booking_model->create_terms($postData)) { 
      $this->session->set_flashdata('message', display('save_successfully'));
@@ -1155,7 +1010,7 @@ $setting_detail = $this->db->select('*')->from('email_config')->get()->row();
 
    } else {
 
-    $this->permission->method('ticket','update')->redirect();
+    // $this->permission->method('ticket','update')->redirect();
 
     if ($this->booking_model->update_condition($postData)) { 
     
@@ -1200,6 +1055,17 @@ $setting_detail = $this->db->select('*')->from('email_config')->get()->row();
      redirect("ticket/booking/terms_and_condition_list");
     } 
 
+    public function httpPostXform($url, $data)
+    {
+        $curl = curl_init($url);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/x-www-form-urlencoded'));
+        $result = curl_exec($curl);
+        curl_close($curl);
+        $result = json_decode($result, true);
+        return $result;
+    }
       
-
 }

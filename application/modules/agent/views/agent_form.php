@@ -50,7 +50,7 @@
                                             <?php echo $sl; ?>
                                         </td>
                                         <td>
-                                         <a href="<?php echo base_url("agent/agent_controller/agent_ledger/$query->agent_id") ?>"><?php echo $query->agent_first_name.' '.$query->agent_second_name; ?></a>    
+                                         <a href="<?php echo base_url("agent/agent_controller/agent_ledger/$query->user_id") ?>"><?php echo $query->agent_first_name.' '.$query->agent_second_name; ?></a>    
                                         </td>
                                         <td>
                                             <?php echo $query->agent_company_name; ?>
@@ -70,15 +70,15 @@
 
                                         <td> 
                                             <?php if($this->permission->method('agent','read')->access()): ?>
-                                            <a href="<?php echo base_url("agent/agent_controller/agent_details/$query->agent_id") ?>" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
+                                            <a href="<?php echo base_url("agent/agent_controller/agent_details/$query->user_id") ?>" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
                                             <?php endif; ?>
 
                                             <?php if($this->permission->method('agent','update')->access()): ?>
-                                            <a href="<?php echo base_url("agent/agent_controller/agent_update/$query->agent_id") ?>" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a> 
+                                            <a href="<?php echo base_url("agent/agent_controller/agent_update/$query->user_id") ?>" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a> 
                                             <?php endif; ?>
 
                                             <?php if($this->permission->method('agent','delete')->access()): ?>
-                                            <a href="<?php echo base_url("agent/agent_controller/agent_delete/$query->agent_id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') "><i class="fa fa-times" aria-hidden="true"></i>
+                                            <a href="<?php echo base_url("agent/agent_controller/agent_delete/$query->user_id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') "><i class="fa fa-times" aria-hidden="true"></i>
                                             </a> 
                                             <?php endif; ?>
                                         </td>

@@ -6,7 +6,6 @@ class Agent_controller extends MX_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->permission->module('agent')->redirect();
         $this->load->model(array(
             'agent_model'
         ));      
@@ -14,7 +13,7 @@ class Agent_controller extends MX_Controller {
 
     public function create_agent()
     { 
-        $this->permission->method('agent','read')->redirect();
+        // $this->permission->method('agent','read')->redirect();
         $data['title'] = display('agent');//agent_picture
         #-------------------------------#
         $this->form_validation->set_rules('agent_first_name',display('agent_first_name'),'required|max_length[50]');
@@ -117,7 +116,7 @@ class Agent_controller extends MX_Controller {
 
     public function agent_delete($id = null)
     {
-        $this->permission->method('agent','delete')->redirect();
+        // $this->permission->method('agent','delete')->redirect();
         if($this->agent_model->delete_agent($id)) {
             #set success message
             $this->session->set_flashdata('message',display('delete_successfully'));
@@ -130,7 +129,7 @@ class Agent_controller extends MX_Controller {
 
     public function agent_update($id = null)
     { 
-        $this->permission->method('agent','update')->redirect();
+        // $this->permission->method('agent','update')->redirect();
         $data['title'] = display('agent');
         #-------------------------------#
         $this->form_validation->set_rules('agent_id',display('agent_id'), 'required');
@@ -209,7 +208,7 @@ class Agent_controller extends MX_Controller {
 
        public function agent_details()
        { 
-        $this->permission->method('agent','read')->redirect();
+        // $this->permission->method('agent','read')->redirect();
         $id = $this->uri->segment(4);
         $data['title']  = display('details');  
         $data['detls']  = $this->agent_model->details($id);
@@ -221,7 +220,7 @@ class Agent_controller extends MX_Controller {
 
       // Agent Ledger Information
        public function agent_ledger($id){
-        $this->permission->method('agent','read')->redirect();
+        // $this->permission->method('agent','read')->redirect();
         $data['title']  = display('agent_ledger');  
         $data['ledger'] = $this->agent_model->agent_ledger($id);
         $data['detls']  = $this->agent_model->agent_inf($id);

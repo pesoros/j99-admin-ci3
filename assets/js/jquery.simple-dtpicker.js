@@ -54,7 +54,7 @@
 			days: ['Sø', 'Ma', 'Ti', 'On', 'To', 'Fr', 'Lø'],
 			months: [ "Jan", "Feb", "Mar", "Apr", "Maj", "Juni", "Juli", "Aug", "Sept", "Okt", "Nov", "Dec" ],
 			sep: '-',
-			format: 'DD-MM-YYYY hh:mm',
+			format: 'YYYY-MM-DD hh:mm',
 			prevMonth: 'Forrige måned',
 			nextMonth: 'Næste måned',
 			today: 'I dag'
@@ -97,7 +97,7 @@
 		nl: {
 			days: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
 			months: [ "jan", "feb", "mrt", "apr", "mei", "jun", "jul", "aug", "sep", "okt", "nov", "dec" ],
-			format: 'DD-MM-YYYY hh:mm'
+			format: 'YYYY-MM-DD hh:mm'
 		},
 		no: {
 			days: ['Søn', 'Man', 'Tir', 'Ons', 'Tor', 'Fre', 'Lør'],
@@ -116,7 +116,7 @@
 		fr: {
 			days: ['Dim', 'Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam'],
 			months: [ "Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre" ],
-			format: 'DD-MM-YYYY hh:mm'
+			format: 'YYYY-MM-DD hh:mm'
 		},
 		pl: {
 			days: ['N', 'Pn', 'Wt', 'Śr', 'Cz', 'Pt', 'So'],
@@ -131,7 +131,7 @@
 			days: ['Κυ', 'Δε', 'Τρ', 'Τε', 'Πε', 'Πα', 'Σα'],
 			months: [ "Ιαν", "Φεβ", "Μαρ", "Απρ", "Μαϊ", "Ιουν", "Ιουλ", "Αυγ", "Σεπ", "Οκτ", "Νοε", "Δεκ" ],
 			sep: '-',
-			format: 'DD-MM-YYYY hh:mm',
+			format: 'YYYY-MM-DD hh:mm',
 			prevMonth: 'Προηγ. μήνας',
 			nextMonth: 'Επόμ. μήνας',
 			today: 'Σήμερα'

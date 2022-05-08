@@ -31,7 +31,11 @@
             <!-- Left side column. contains the sidebar -->
             <aside class="main-sidebar">
                 <!-- sidebar -->
-                <?php $this->load->view('includes/sidebar') ?>
+                <?php if ($this->session->userdata('isAdmin') == false) { ?>
+                    <?php $this->load->view('includes/sidebar_agent') ?>
+                <?php } else { ?>
+                    <?php $this->load->view('includes/sidebar') ?>
+                <?php } ?>
             </aside>
 
             <!-- Content Wrapper. Contains page content -->

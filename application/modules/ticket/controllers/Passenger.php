@@ -6,7 +6,7 @@ class Passenger extends MX_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->permission->module('ticket')->redirect();
+		// $this->permission->module('ticket')->redirect();
 		$this->load->model(array(
 			'passenger_model',
 			'country_model'
@@ -15,7 +15,7 @@ class Passenger extends MX_Controller {
  
 	public function index()
 	{   
-        $this->permission->method('ticket','read')->redirect();
+        // $this->permission->method('ticket','read')->redirect();
 		$data['title']    = display('list'); 
 		#-------------------------------#		
 		#
@@ -113,7 +113,7 @@ class Passenger extends MX_Controller {
 
 			if (empty($postData['id'])) {
 
-        		$this->permission->method('ticket','create')->redirect();  
+        		// $this->permission->method('ticket','create')->redirect();  
 			$this->session->set_flashdata('message', display('image_upload_successfully'));
 				if ($this->passenger_model->create($postData)) { 
 					$id = $this->db->insert_id();
@@ -127,7 +127,7 @@ class Passenger extends MX_Controller {
 
 			} else {
 
-        		$this->permission->method('ticket','update')->redirect();
+        		// $this->permission->method('ticket','update')->redirect();
 
         		
 				if ($this->passenger_model->update($postData)) { 
@@ -157,7 +157,7 @@ class Passenger extends MX_Controller {
 	public function view($id = null) 
 	{ 
 		$id_no =$this->db->select('*')->from('tkt_passenger')->where('id',$id)->get()->row();
-        $this->permission->method('ticket','read')->redirect();
+        // $this->permission->method('ticket','read')->redirect();
         $data['title']     = display('passenger');
 		$data['passenger'] = $this->passenger_model->findById($id);
 		$data['tkt']       = $this->passenger_model->passenger_ticket_info($id_no->id_no);
@@ -169,7 +169,7 @@ class Passenger extends MX_Controller {
 
 	public function delete($id = null) 
 	{ 
-        $this->permission->method('ticket','delete')->redirect();
+        // $this->permission->method('ticket','delete')->redirect();
 
 		if ($this->passenger_model->delete($id)) {
 			#set success message

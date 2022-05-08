@@ -48,13 +48,13 @@
                                 <!-- <td><?php echo $booking->route_name; ?></td> -->
                                 <td><?php echo $booking->total_seat; ?></td>
                                 <td><?php echo $currency; ?><?php echo $booking->price; ?></td>
-                                <td><?php  echo $booking->booking_type; ?></td>
+                                <td><?php  echo $booking->payment_method.' - '.$booking->payment_channel_code; ?></td>
                                 <td ><?php 
                                 if($booking->payment_status == 1 OR $booking->payment_status == 2){
                                     if($this->session->userdata('isAdmin')==1){
                                     echo '<a type="button" class="test btn btn-primary btn-xs" onclick="modal_load('."'".$booking->booking_code."'".')" data-toggle="modal">Unpaid</a>';
                                     }else{
-                                        echo '';
+                                        echo 'waiting';
                                     }
                                     }else{
                                     echo "Paid";

@@ -21,7 +21,9 @@
                              <th class="text-center"><?php echo display('serial') ?></th>
                             <th class="text-center"><?php echo display('date') ?></th>
                             <th class="text-center"><?php echo display('booking_id') ?></th>
-                             <th class="text-center">Total Harga</th>
+                             <th class="text-center"><?php echo display('debit') ?></th>
+                            <th class="text-center"><?php echo display('credit') ?></th>
+                             <th class="text-center"><?php echo display('balance') ?></th>
                            
                         </tr>
                     </thead>
@@ -29,25 +31,31 @@
                         <?php if (!empty($ledger)) { ?>
                             <?php $sl = 1; ?>
                             <?php
+                            $balance = 0;
+                            $total_credit = 0;
+                            $total_debit = 0;
                             $total_balance = 0;
                              foreach ($ledger as $query) {
-                                $total_balance += $query->total_price;
+                                $amount = $query->debit - $query->credit;
+                                $balance = $balance - $amount;
+                                $total_credit += $query->credit;
+                                $total_debit += $query->debit;
+                                $total_balance += $amount;
                               ?>
                                <tr>
                                     <td><?php echo $sl; ?></td>
-                                    <td><?php echo $query->created_at; ?></td>
-                                     <td><?php echo $query->booking_code; ?></td> 
-                                    <td class="text-right"><?php echo $currency; ?> <?php echo $query->total_price; ?></td>
+                                    <td><?php echo $query->date; ?></td>
+                                     <td><?php echo $query->booking_id; ?></td> 
+                                    <td class="text-right"><?php echo $currency; ?> <?php echo $query->debit; ?></td>
+                                    <td class="text-right"> <?php echo $currency; ?> <?php echo $query->credit; ?></td>  
+                                    <td class="text-right" class="text-right"><?php echo $currency; ?> <?php echo $balance; ?></td>  
                                 </tr>
                                 <?php $sl++; ?>
                             <?php } ?> 
                         <?php } ?> 
                     </tbody>
                     <tfooter>
-                        <tr>
-                            <td colspan="3" class="text-right"><b>Total </b></td>
-                            <td class="text-right"><b><?php echo $currency; ?> <?php echo $total_balance;?></b></td>
-                        </tr>
+                        <tr><td colspan="3" class="text-right"><b>Total </b></td><td class="text-right"><b><?php echo $currency; ?> <?php echo $total_debit;?></b></td><td class="text-right"><b><?php echo $currency; ?> <?php echo $total_credit;?></b></td><td class="text-right"><b><?php echo $currency; ?> <?php echo $total_balance;?></b></td></tr>
                     </tfooter>
                 </table>  <!-- /.table-responsive -->
             </div> 

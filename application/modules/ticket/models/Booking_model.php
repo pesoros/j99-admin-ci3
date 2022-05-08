@@ -13,12 +13,18 @@ class Booking_model extends CI_Model
     public function read($limit = null, $start = null)
     {
 
-        $this->db->select('tb.*, tr.name AS route_name,tbh.booker');
+        $this->db->select('tb.*
+            , tr.name AS route_name
+            ,tbh.booker
+            ,pr.payment_method
+            ,pr.payment_channel_code
+        ');
         $this->db->from('tkt_booking_head AS tbh');
         $this->db->join("tkt_booking AS tb", "tb.booking_code = tbh.booking_code");
         $this->db->join("trip_route AS tr", "tr.id = tb.trip_route_id", "left");
+        $this->db->join("payment_registration AS pr", "pr.booking_code = tbh.booking_code", "left");
         if ($this->session->userdata('isAdmin') == 0) {
-            $this->db->where('tb.booked_by', $this->session->userdata('id'));
+            $this->db->where('tbh.agent', $this->session->userdata('id'));
         }
         $this->db->limit($limit, $start);
         $this->db->order_by('tb.id', 'desc');
@@ -51,37 +57,43 @@ class Booking_model extends CI_Model
             ->row();
     }
 
-    public function ticket($id_no = null)
+    public function booking($booking_code = null)
     {
         // return booking data
-        return $this->db->select("
-                tb.pickup_trip_location,
-                tb.drop_trip_location,
-                CONCAT_WS(' ', tp.firstname, tp.lastname) AS passenger_name,
-                tb.tkt_passenger_id_no AS tkt_passenger_id_no,
-                tb.trip_id_no AS trip_id_no,
-                tb.id_no AS booking_id_no,
-                DATE_FORMAT(tb.booking_date, '%m/%d/%Y %h:%i %p') as booking_date,
-                tr.name AS route_name,
-                tb.request_facilities AS request_facilities,
-                tb.price AS price,
-                tb.total_seat AS quantity,
-                tb.discount AS discount,
-                tb.seat_numbers AS seat_serial,
-                tb.payment_status,
-                tb.adult,
-                tb.child,
-                tb.special,
-                tb.trip_route_id,
-                tb.booking_type,
-                tp.nid
+        $result = $this->db->select("
+                tb.*,
+                tbh.booker,
+                tbh.total_price,
+                tbh.payment_status as ps,
+                tr.name as route_name
             ")
             ->from('tkt_booking AS tb')
-            ->join('tkt_passenger AS tp', 'tb.tkt_passenger_id_no = tp.id_no', 'full')
-            ->join('trip_route AS tr', 'tr.id = tb.trip_route_id', 'full')
-            ->where('tb.id_no', $id_no)
+            ->join('tkt_booking_head AS tbh', 'tb.booking_code = tbh.booking_code', 'left')
+            ->join('trip_route AS tr', 'tr.id = tb.trip_route_id', 'left')
+            ->where('tb.booking_code', $booking_code)
             ->get()
-            ->row();
+            ->result();
+
+        foreach ($result as $key => $value) {
+            $value->ticket = $this->ticket($value->id_no);
+        }
+
+        return $result;
+    }
+
+    public function ticket($id_no)
+    {
+        return $this->db->select("
+                tps.*,
+                tb.price,
+                rm.food_name as makanan
+            ")
+            ->from('tkt_passenger_pcs AS tps')
+            ->join('tkt_booking AS tb', 'tb.id_no = tps.booking_id', 'left')
+            ->join('resto_menu AS rm', 'rm.id = tps.food', 'left')
+            ->where('tps.booking_id', $id_no)
+            ->get()
+            ->result();
     }
 
     public function website_setting()
@@ -120,6 +132,26 @@ class Booking_model extends CI_Model
         if (!empty($data)) {
             foreach ($data as $value) {
                 $list[$value->id] = $value->name;
+            }
+
+            return $list;
+        } else {
+            return false;
+        }
+    }
+
+    public function city_dropdown()
+    {
+        $data = $this->db->select("*")
+            ->from("wil_city")
+            ->order_by('name', 'ASC')
+            ->get()
+            ->result();
+
+        $list[''] = display('select_option');
+        if (!empty($data)) {
+            foreach ($data as $value) {
+                $list[$value->name] = $value->name;
             }
 
             return $list;
