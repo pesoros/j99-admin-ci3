@@ -18,7 +18,6 @@
     <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
             <!-- fitness period notice start-->
-             <?php if($this->permission->method('fitness','read')->access()): ?>
              <!-- <li class="dropdown messages-menu">
                  <a href="<?php echo base_url("fitness/fitness_controller/create_fit_period") ?>">
                     <i class="fa fa-cogs"></i>
@@ -26,10 +25,8 @@
                 </a>
               
             </li>  -->
-            <?php endif; ?>
             <!-- fitness period notice end -->
         <!-- Ticket Notice Start-->
-         <?php if($this->permission->method('ticket','read')->access()): ?>
               <li class="dropdown messages-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     <i class="fa fa-ticket"></i>
@@ -64,10 +61,8 @@
                     <li class="footer"><a href="<?php echo base_url('dashboard/notice/sea_all') ?>"><?php echo display('see_all') ?></a></li>
                 </ul>
             </li> 
-            <?php endif; ?>
             <!-- Ticket Notice End-->
              <!-- Bus Notice Start-->
-              <?php if($this->permission->method('trip','read')->access()): ?>
              <li class="dropdown messages-menu">
                  <a href="<?php echo base_url("trip/assign/index") ?>">
                     <i class="fa fa-bus"></i>
@@ -75,7 +70,6 @@
                 </a>
               
             </li> 
-            <?php endif; ?>
              <!-- Bus Notice End-->
               <!-- Message Notice Start-->
             <li class="dropdown messages-menu">
