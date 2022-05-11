@@ -3,7 +3,6 @@
     <!-- Quick Link -->
     <div class="col-sm-3">
         <div class="row">
-         <?php if($this->permission->method('ticket','create')->access()): ?>
             <div class="col-sm-12">
                 <div class="panel panel-bd">
                     <div class="panel-body">
@@ -14,8 +13,6 @@
                     </div>
                 </div>
             </div>
-           <?php endif; ?>
-           <?php if($this->permission->method('reports','read')->access()): ?>
             <div class="col-sm-12">
                 <div class="panel panel-bd">
                     <div class="panel-body">
@@ -26,9 +23,6 @@
                     </div>
                 </div>
             </div> 
-<?php endif; ?>
-
- <?php if($this->permission->method('account','create')->access()): ?>
             <div class="col-sm-12">
                 <div class="panel panel-bd">
                     <div class="panel-body">
@@ -39,7 +33,6 @@
                     </div>
                 </div>
             </div> 
-<?php endif; ?>
         </div>
     </div>
  
