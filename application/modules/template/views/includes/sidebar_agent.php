@@ -53,9 +53,9 @@
 								class="fa fa-angle-left pull-right"></i></span>
 					</a>
 					<ul class="treeview-menu ">
-						<li class=""><a href="<?php echo base_url('') ?>/j99-admin-ci3/ticket/passenger/form">Add Passenger</a>
+						<li class=""><a href="<?php echo base_url('') ?>j99-admin-ci3/ticket/passenger/form">Add Passenger</a>
 						</li>
-						<li class=""><a href="<?php echo base_url('') ?>/j99-admin-ci3/ticket/passenger/index">Passenger List</a>
+						<li class=""><a href="<?php echo base_url('') ?>j99-admin-ci3/ticket/passenger/index">Passenger List</a>
 						</li>
 
 					</ul>
@@ -66,8 +66,8 @@
 								class="fa fa-angle-left pull-right"></i></span>
 					</a>
 					<ul class="treeview-menu ">
-						<li class=""><a href="<?php echo base_url('') ?>/j99-admin-ci3/ticket/booking/form">Add Booking</a></li>
-						<li class=""><a href="<?php echo base_url('') ?>/j99-admin-ci3/ticket/booking/index">Booking List</a></li>
+						<li class=""><a href="<?php echo base_url('') ?>j99-admin-ci3/ticket/booking/form">Add Booking</a></li>
+						<li class=""><a href="<?php echo base_url('') ?>j99-admin-ci3/ticket/booking/index">Booking List</a></li>
 
 					</ul>
 				</li>
@@ -77,8 +77,8 @@
 								class="fa fa-angle-left pull-right"></i></span>
 					</a>
 					<ul class="treeview-menu ">
-						<li class=""><a href="<?php echo base_url('') ?>/j99-admin-ci3/ticket/refund/form">Add Refund</a></li>
-						<li class=""><a href="<?php echo base_url('') ?>/j99-admin-ci3/ticket/refund/index">Refund List</a></li>
+						<li class=""><a href="<?php echo base_url('') ?>j99-admin-ci3/ticket/refund/form">Add Refund</a></li>
+						<li class=""><a href="<?php echo base_url('') ?>j99-admin-ci3/ticket/refund/index">Refund List</a></li>
 
 					</ul>
 				</li>
