@@ -64,6 +64,25 @@ class Booking extends MX_Controller {
 		$data['page']   = "booking/list";   
 		echo Modules::run('template/layout', $data); 
 	}  
+    
+    public function akumulasi()
+    {
+        // $this->permission->method('ticket','read')->redirect();
+        $currency_details = $this->price_model->retrieve_setting_editdata();
+        foreach ($currency_details as $price) {
+        }
+        $currency=$price['currency'];
+		$data['title']    = display('list');  
+        /* ends of bootstrap */
+        $data["bookings"] = $this->booking_model->akumulasi();
+        #
+        #pagination ends
+        #   
+        $data['currency'] = $currency;
+		$data['module'] = "ticket";
+		$data['page']   = "booking/list_akumulasi";   
+		echo Modules::run('template/layout', $data); 
+    }
 
     public function view($id = null)
     { 
@@ -378,7 +397,9 @@ class Booking extends MX_Controller {
             $setBookingData["pergi"]["seatPicked"][$key]["baggage"] = $bodyRaw['baggage'][$key];
         }
 
-        $setBooking = $this->httpPostXform("https://api.tiketjuragan99.id/booking/add", $setBookingData);
+        $setBooking = $this->httpPostXform(getenv("API_URL")."/booking/add", $setBookingData);
+        // echo json_encode($setBooking);
+        // return;
 
         redirect("ticket/booking/index");
     }

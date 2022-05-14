@@ -34,3 +34,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 application/config/*
 !application/config/database.php
 assets/data/backup/*
+.env
+.env.development
+.env.production

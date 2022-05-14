@@ -74,35 +74,12 @@ $active_group = 'default';
 $query_builder = TRUE;
 $active_record = TRUE;//ci version 2.x
 
-$db['default'] = array(
-    'dsn'   => '',
-    'hostname' => '127.0.0.1',
-    'username' => 'tika4847_admin',
-    'password' => 'Sukses2022!',
-    'database' => 'tika4847_juragansem',
-    'dbdriver' => 'mysqli',
-    'dbprefix' => '',
-    'pconnect' => FALSE,
-    'db_debug' => (ENVIRONMENT !== 'development'),
-    'cache_on' => FALSE,
-    'cachedir' => '',
-    'char_set' => 'utf8',
-    'dbcollat' => 'utf8_general_ci',
-    'swap_pre' => '',
-    'encrypt'  => FALSE,
-    'compress' => FALSE,
-    'autoinit' => TRUE,//ci version 2.x
-    'stricton' => FALSE,
-    'failover' => array(),
-    'save_queries' => TRUE
-);
- 
 // $db['default'] = array(
 //     'dsn'   => '',
 //     'hostname' => '127.0.0.1',
-//     'username' => 'root',
-//     'password' => '',
-//     'database' => 'juragansem',
+//     'username' => 'tika4847_admin',
+//     'password' => 'Sukses2022!',
+//     'database' => 'tika4847_juragansem',
 //     'dbdriver' => 'mysqli',
 //     'dbprefix' => '',
 //     'pconnect' => FALSE,
@@ -119,3 +96,26 @@ $db['default'] = array(
 //     'failover' => array(),
 //     'save_queries' => TRUE
 // );
+ 
+$db['default'] = array(
+    'dsn'   => '',
+    'hostname' => getenv('DB_HOST'),
+    'username' => getenv('DB_USERNAME'),
+    'password' => getenv('DB_PASSWORD'),
+    'database' => getenv('DB_DATABASE'),
+    'dbdriver' => 'mysqli',
+    'dbprefix' => '',
+    'pconnect' => FALSE,
+    'db_debug' => (ENVIRONMENT !== 'development'),
+    'cache_on' => FALSE,
+    'cachedir' => '',
+    'char_set' => 'utf8',
+    'dbcollat' => 'utf8_general_ci',
+    'swap_pre' => '',
+    'encrypt'  => FALSE,
+    'compress' => FALSE,
+    'autoinit' => TRUE,//ci version 2.x
+    'stricton' => FALSE,
+    'failover' => array(),
+    'save_queries' => TRUE
+);

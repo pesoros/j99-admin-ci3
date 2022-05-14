@@ -61,18 +61,15 @@
                                 } ?>
                                 </td>
                                 <td>
-                                <?php if($this->permission->method('ticket','read')->access()): ?>
                                     <a href="<?php echo base_url("ticket/booking/view/$booking->booking_code") ?>" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="left" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                <?php endif; ?>
+                                
 
-                                <?php if($this->permission->method('ticket','update')->access() && empty($booking->tkt_refund_id)): ?>
                                     <a href="<?php echo base_url("ticket/refund/form?bid=$booking->booking_code&pid=$booking->tkt_passenger_id_no") ?>" class="btn btn-warning btn-xs" data-toggle="tooltip" data-placement="left" title="Refund"><i class="fa fa-undo" aria-hidden="true"></i></a>
                                     <input type="hidden" id="bookingid" value="<?php echo $booking->booking_code; ?>">
-                                <?php endif; ?>
+                                
 
-                                <?php if($this->permission->method('ticket','delete')->access()): ?>
                                     <a href="<?php echo base_url("ticket/booking/delete/$booking->id") ?>" onclick="return confirm('<?php echo display("are_you_sure") ?>')" class="btn btn-danger btn-xs" data-toggle="tooltip" data-placement="right" title="Delete "><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-                                <?php endif; ?>
+                                
                                 </td>
                             </tr>
                             <?php } ?> 

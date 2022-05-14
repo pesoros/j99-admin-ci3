@@ -144,7 +144,9 @@
                                             if($this->permission->check_label($name)->access()){
                                             // if ($this->permission->method($moduleName,$value['permission'])->access()) {  
                                             ?>
-                                            <li class="<?php echo (($this->uri->segment(3)==$value['method'])?"active":null) ?>"><a href="<?php echo base_url($moduleName."/".$value['controller']."/".$value['method']) ?>"><?php echo display($name) ?></a></li>
+                                            <li class="<?php echo (($this->uri->segment(3)==$value['method'])?"active":null) ?>"><a href="<?php echo base_url($moduleName."/".$value['controller']."/".$value['method']) ?>">
+                                                <?php echo (($value['method'] == 'akumulasi') ? 'Akumulasi' : display($name)) ?></a>
+                                            </li>
                                             <?php 
                                             } //endif
                                         } //endforeach

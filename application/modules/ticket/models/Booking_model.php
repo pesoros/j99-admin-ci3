@@ -36,6 +36,31 @@ class Booking_model extends CI_Model
 
     }
 
+    public function akumulasi()
+    {
+
+        $this->db->select('tb.*
+            , tr.name AS route_name
+            ,tbh.booker
+            ,pr.payment_method
+            ,pr.payment_channel_code
+        ');
+        $this->db->from('tkt_booking_head AS tbh');
+        $this->db->join("tkt_booking AS tb", "tb.booking_code = tbh.booking_code");
+        $this->db->join("trip_route AS tr", "tr.id = tb.trip_route_id", "left");
+        $this->db->join("payment_registration AS pr", "pr.booking_code = tbh.booking_code", "left");
+        if ($this->session->userdata('isAdmin') == 0) {
+            $this->db->where('tbh.agent', $this->session->userdata('id'));
+        }
+        $this->db->order_by('tb.id', 'desc');
+        $query = $this->db->get();
+        // if ($query->num_rows() > 0) {
+            return $query->result();
+        // }
+        return false;
+
+    }
+
     public function findById($id_no = null)
     {
         return $this->db->select("

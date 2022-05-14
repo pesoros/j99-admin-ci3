@@ -210,7 +210,7 @@
                 // console.log(departure,arrive)
                 $.ajax({
                     method: 'POST',
-                    url: "https://api.tiketjuragan99.id/listbus",
+                    url: "<?php echo getenv("API_URL"); ?>/listbus",
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                     contentType: 'application/x-www-form-urlencoded; charset=utf-8',
                     dataType: 'json',
@@ -246,7 +246,7 @@
 
             $.ajax({
                 method: 'POST',
-                url: "https://api.tiketjuragan99.id/seatlist",
+                url: "<?php echo getenv("API_URL"); ?>/seatlist",
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 contentType: 'application/x-www-form-urlencoded; charset=utf-8',
                 dataType: 'json',
@@ -267,7 +267,7 @@
 
             $.ajax({
                 method: 'POST',
-                url: "https://api.tiketjuragan99.id/datarestomenu",
+                url: "<?php echo getenv("API_URL"); ?>/datarestomenu",
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                 contentType: 'application/x-www-form-urlencoded; charset=utf-8',
                 dataType: 'json',

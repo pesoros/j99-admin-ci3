@@ -33,6 +33,11 @@ $HmvcMenu["ticket"] = array(
             "method"     => "index",
             "permission" => "read"
         ), 
+        'akumulasi'  => array( 
+            "controller" => "booking",
+            "method"     => "akumulasi",
+            "permission" => "read"
+        ), 
         "unpaid_cash_booking_list" => array(  
         "controller" => "booking",
         "method"     => "unpaisd_cash_booking",
