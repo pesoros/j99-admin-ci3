@@ -15,7 +15,6 @@ class Refund extends MX_Controller {
  
 	public function index()
 	{   
-        $this->permission->method('ticket','read')->redirect();
         $currency_details = $this->price_model->retrieve_setting_editdata();
         foreach ($currency_details as $price) {
         }
@@ -63,7 +62,6 @@ class Refund extends MX_Controller {
 
  	public function form()
 	{ 
-		$this->permission->method('ticket','create')->redirect();
 		$data['title'] = display('add');
 		#-------------------------------#
 		$this->form_validation->set_rules('tkt_booking_id_no', display('booking_id')  ,'required|max_length[30]|is_unique[tkt_refund.tkt_booking_id_no]');
@@ -118,7 +116,6 @@ class Refund extends MX_Controller {
 
 	public function delete($id = null) 
 	{ 
-        $this->permission->method('ticket','delete')->redirect();
 
 		if ($this->refund_model->delete($id)) {
 

@@ -14,7 +14,6 @@ class Paket_controller extends MX_Controller {
 
     public function create_paket()
     { 
-        $this->permission->method('price', 'read')->redirect();
         #-------------------------------#
         $this->form_validation->set_rules('pengirim',display('pengirim ')  ,'required');
         $this->form_validation->set_rules('nopengirim',display('nopengirim ')  ,'required');
@@ -61,7 +60,6 @@ class Paket_controller extends MX_Controller {
     }
 
     public function paket_delete($id=null){
-        $this->permission->method('price','delete')->redirect();
         if($this->paket_model->delete_paket($id)) {
             #set success message
             $this->session->set_flashdata('message',display('delete_successfully'));
@@ -74,7 +72,6 @@ class Paket_controller extends MX_Controller {
 
     public function paket_update($id = null)
     { 
-        $this->permission->method('price','update')->redirect();
         #-------------------------------#
          $this->form_validation->set_rules('id',display('id'));
          $this->form_validation->set_rules('pengirim',display('pengirim ')  ,'required');

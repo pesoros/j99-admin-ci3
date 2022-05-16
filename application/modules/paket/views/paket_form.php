@@ -1,9 +1,7 @@
 <div class="form-group text-right">
-    <?php if($this->permission->method('price', 'create')->access()): ?>
     <button type="button" class="btn btn-primary btn-md" data-target="#add0" data-toggle="modal">
         Tambah Paket
     </button>
-    <?php endif; ?> 
 </div>
 
 <div class="row">
