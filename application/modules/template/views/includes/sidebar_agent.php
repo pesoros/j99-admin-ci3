@@ -40,7 +40,7 @@
 		<li class="treeview">
 
 			<a href="javascript:void(0)">
-				<i class="fa fa-ticket"></i> <span>Ticket Management</span>
+				<i class="fa fa-ticket"></i> <span><?php echo display('ticket')?></span>
 				<span class="pull-right-container">
 					<i class="fa fa-angle-left pull-right"></i>
 				</span>
@@ -49,36 +49,36 @@
 			<ul class="treeview-menu">
 
 				<li class="">
-					<a href="#">Passenger <span class="pull-right-container"><i
+					<a href="#"><?php echo display('passenger')?> <span class="pull-right-container"><i
 								class="fa fa-angle-left pull-right"></i></span>
 					</a>
 					<ul class="treeview-menu ">
-						<li class=""><a href="<?php echo base_url('') ?>ticket/passenger/form">Add Passenger</a>
+						<li class=""><a href="<?php echo base_url('') ?>ticket/passenger/form"><?php echo display('add')?></a>
 						</li>
-						<li class=""><a href="<?php echo base_url('') ?>ticket/passenger/index">Passenger List</a>
+						<li class=""><a href="<?php echo base_url('') ?>ticket/passenger/index"><?php echo display('list')?></a>
 						</li>
 
 					</ul>
 				</li>
 
 				<li class="">
-					<a href="#">Booking Information <span class="pull-right-container"><i
+					<a href="#"><?php echo display('booking')?> <span class="pull-right-container"><i
 								class="fa fa-angle-left pull-right"></i></span>
 					</a>
 					<ul class="treeview-menu ">
-						<li class=""><a href="<?php echo base_url('') ?>ticket/booking/form">Add Booking</a></li>
-						<li class=""><a href="<?php echo base_url('') ?>ticket/booking/index">Booking List</a></li>
+						<li class=""><a href="<?php echo base_url('') ?>ticket/booking/form"><?php echo display('add')?></a></li>
+						<li class=""><a href="<?php echo base_url('') ?>ticket/booking/index"><?php echo display('list')?></a></li>
 
 					</ul>
 				</li>
 
 				<li class="">
-					<a href="#">Refund <span class="pull-right-container"><i
+					<a href="#"><?php echo display('refund')?> <span class="pull-right-container"><i
 								class="fa fa-angle-left pull-right"></i></span>
 					</a>
 					<ul class="treeview-menu ">
-						<li class=""><a href="<?php echo base_url('') ?>ticket/refund/form">Add Refund</a></li>
-						<li class=""><a href="<?php echo base_url('') ?>ticket/refund/index">Refund List</a></li>
+						<li class=""><a href="<?php echo base_url('') ?>ticket/refund/form"><?php echo display('add')?></a></li>
+						<li class=""><a href="<?php echo base_url('') ?>ticket/refund/index"><?php echo display('list')?></a></li>
 
 					</ul>
 				</li>
@@ -88,7 +88,7 @@
 
 		<li class="treeview">
 			<a href="<?php echo base_url('agent/agent_controller/agent_ledger/'.$this->session->userdata('id')); ?>"><i class="ti-home"></i>
-				<span>Report</span>
+				<span>Laporan</span>
 			</a>
 		</li>
 
