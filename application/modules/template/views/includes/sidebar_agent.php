@@ -48,7 +48,7 @@
 
 			<ul class="treeview-menu">
 
-				<li class="">
+				<!-- <li class="">
 					<a href="#"><?php echo display('passenger')?> <span class="pull-right-container"><i
 								class="fa fa-angle-left pull-right"></i></span>
 					</a>
@@ -59,7 +59,7 @@
 						</li>
 
 					</ul>
-				</li>
+				</li> -->
 
 				<li class="">
 					<a href="#"><?php echo display('booking')?> <span class="pull-right-container"><i
