@@ -32,9 +32,9 @@
                             <th>
                                 Ke
                             </th>
-                            <th>
+                            <!-- <th>
                                 <?php echo display('action') ?>
-                            </th>
+                            </th> -->
 
                         </tr>
                     </thead>
@@ -62,13 +62,13 @@
                                             <?php echo $value->sendto; ?>
                                         </td>
                                        
-                                        <td class="center">
-                                            <!-- <a href="<?php echo base_url("paket/paket_controller/paket_update/$value->packet_id") ?>" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a>  -->
+                                        <!-- <td class="center">
+                                            <a href="<?php echo base_url("paket/paket_controller/paket_update/$value->packet_id") ?>" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a> 
 
 
                                             <a href="<?php echo base_url("paket/paket_controller/paket_delete/$value->packet_id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') "><i class="fa fa-times" aria-hidden="true"></i>
                                             </a> 
-                                        </td>
+                                        </td> -->
                                     </tr>
                                     <?php $sl++; ?>
                                 <?php } ?>
