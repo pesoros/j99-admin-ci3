@@ -80,6 +80,18 @@ class Agent_model extends CI_Model
             ->result();
     }
 
+    public function agent_komisi($id)
+    {
+        return $this->db->select('ai.agent_commission')
+            ->from('agent_info AS ai')
+            ->join('user AS us', 'us.email = ai.agent_email', 'left')
+            ->where('us.id !=', 0)
+            ->where('us.id', $id)
+            ->order_by('us.id', 'desc')
+            ->get()
+            ->row();
+    }
+
     public function agent_inf($id)
     {
         return $this->db->select('*')

@@ -222,6 +222,7 @@ class Agent_controller extends MX_Controller {
        public function agent_ledger($id){
         // $this->permission->method('agent','read')->redirect();
         $data['title']  = display('agent_ledger');  
+        $data['komisi'] = $this->agent_model->agent_komisi($id);
         $data['ledger'] = $this->agent_model->agent_ledger($id);
         $data['detls']  = $this->agent_model->agent_inf($id);
         $price          = $this->agent_model->retrieve_setting_editdata();

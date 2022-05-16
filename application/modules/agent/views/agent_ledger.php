@@ -22,6 +22,7 @@
                             <th class="text-center"><?php echo display('date') ?></th>
                             <th class="text-center"><?php echo display('booking_id') ?></th>
                              <th class="text-center">Total Harga</th>
+                             <th class="text-center">Komisi Agen (<?php echo $komisi->agent_commission ?>%)</th>
                            
                         </tr>
                     </thead>
@@ -30,14 +31,18 @@
                             <?php $sl = 1; ?>
                             <?php
                             $total_balance = 0;
+                            $total_komisi = 0;
                              foreach ($ledger as $query) {
+                                 $komisiagen = $query->total_price * intval($komisi->agent_commission)/100;
                                 $total_balance += $query->total_price;
+                                $total_komisi += $komisiagen;
                               ?>
                                <tr>
                                     <td><?php echo $sl; ?></td>
                                     <td><?php echo $query->created_at; ?></td>
                                      <td><?php echo $query->booking_code; ?></td> 
                                     <td class="text-right"><?php echo $currency; ?> <?php echo $query->total_price; ?></td>
+								    <td class="text-right"><?php echo $currency; ?><?php echo $komisiagen; ?></td>
                                 </tr>
                                 <?php $sl++; ?>
                             <?php } ?> 
@@ -45,8 +50,9 @@
                     </tbody>
                     <tfooter>
                         <tr>
-                            <td colspan="3" class="text-right"><b>Total </b></td>
+                            <td colspan="3" class="text-right"><b>Total</b></td>
                             <td class="text-right"><b><?php echo $currency; ?> <?php echo $total_balance;?></b></td>
+                            <td class="text-right"><b><?php echo $currency; ?> <?php echo $total_komisi;?></b></td>
                         </tr>
                     </tfooter>
                 </table>  <!-- /.table-responsive -->
