@@ -377,8 +377,8 @@ class Booking extends MX_Controller {
         $setBookingData["booker_name"] = $this->session->userdata('fullname');
         $setBookingData["booker_phone"] = "-";
         $setBookingData["booker_email"] = $this->session->userdata('email');
-        $setBookingData["payment_method"] = "CASH";
-        $setBookingData["payment_channel_code"] = "-";
+        $setBookingData["payment_method"] = "VIRTUAL_ACCOUNT";
+        $setBookingData["payment_channel_code"] = $bodyRaw["bank"];
         $setBookingData["agent"] = 1;
 
         $setBookingData["pergi"]["trip_id_no"] = $chooseBus[0];
@@ -398,10 +398,8 @@ class Booking extends MX_Controller {
         }
 
         $setBooking = $this->httpPostXform(getenv("API_URL")."/booking/add", $setBookingData);
-        // echo json_encode($setBooking);
-        // return;
-
-        redirect("ticket/booking/index");
+        
+        redirect("ticket/booking/view/".$setBooking['bookingCode']);
     }
          
     /*

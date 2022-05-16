@@ -200,16 +200,16 @@
         <li class="treeview <?php echo (($this->uri->segment(2)=="role")?"active":null) ?>">
             <a href="#">
 
-                <i class="ti-lock"></i><span><?php echo display('role_permission')?></span>
+                <i class="ti-lock"></i><span><?php echo display('module_permission')?></span>
                 <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li><a href="<?php echo base_url('dashboard/permission_setup') ?>"><?php echo display('permission_setup')?></a></li> 
-                <li><a href="<?php echo base_url('dashboard/role/create_system_role') ?>"><?php echo display('add_role')?></a></li>
-                  <li><a href="<?php echo base_url('dashboard/role/role_list') ?>"><?php echo display('role_list')?></a></li>
-                  <li><a href="<?php echo base_url('dashboard/role/user_access_role') ?>"><?php echo display('user_access_role')?></a></li>
+                <li><a href="<?php echo base_url('dashboard/permission_setup') ?>"><?php echo display('module_permission')?></a></li> 
+                <li><a href="<?php echo base_url('dashboard/role/create_system_role') ?>"><?php echo display('add')?></a></li>
+                  <li><a href="<?php echo base_url('dashboard/role/role_list') ?>"><?php echo display('list')?></a></li>
+                  <li><a href="<?php echo base_url('dashboard/role/user_access_role') ?>"><?php echo display('user_permission')?></a></li>
                <!--  <li><a href="<?php echo base_url('dashboard/module_permission/create') ?>"><?php echo display('add_module_permission')?></a></li>
                 <li><a href="<?php echo base_url('dashboard/module_permission/index') ?>"><?php echo display('module_permission_list')?></a></li>  -->
             </ul>

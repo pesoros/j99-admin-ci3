@@ -1081,7 +1081,7 @@
 
                     formhtml += '<div class="form-group row"><label for="seat" class="col-sm-3 col-form-label">Pilih Kursi</label>'
                     formhtml +=         '<div class="col-sm-2">'
-					formhtml += 			'<input type="text" name="seatgo[]" class="form-control btn-choose-seat seatgo" id="seatgo'+ index +'" data-target="seatgo'+ index +'" data-type="0" autocomplete="off" placeholder="-" readonly>'
+					formhtml += 			'<input type="text" name="seat['+ index +']" class="form-control btn-choose-seat seatgo" id="seatgo'+ index +'" data-target="seatgo'+ index +'" data-type="0" autocomplete="off" placeholder="-" readonly>'
 					formhtml += 		'</div>'
 					formhtml += 	'</div>'
                 }

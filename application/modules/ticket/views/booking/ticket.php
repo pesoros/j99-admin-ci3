@@ -91,6 +91,17 @@
                                                     }
                                                 ?>
 											</li>
+											<li>
+                                                <strong>Payment :</strong>
+												<?php echo $value->method.' - '.$value->channel ?>
+												<br>
+												<?php if ($value->method == 'VIRTUAL_ACCOUNT') {
+													echo '<span id="copytext">'.$value->va.'</span>';
+												} else { 
+													echo '<span id="copytext">'.$value->link.'</span>';
+												} ?>
+												<button id="second-button" class="position-absolute btn btn-sm btn-primary" style="right:0;" onclick="copyText('copytext');" title="Copy Text">Copy</button>
+                                            </li>
                                         </dl>
                                     </td>
 								</tr>
@@ -156,3 +167,20 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	function copyText(element) {
+		var $copyText = document.getElementById(element).innerText;
+		var button = document.getElementById(element + '-button');
+		navigator.clipboard.writeText($copyText).then(function() {
+			var originalText = button.innerText;
+			button.innerText = 'Copied!';
+			setTimeout(function(){
+			button.innerText = originalText;
+			}, 750);
+		}, function() {
+			button.style.cssText = "background-color: var(--red);";
+			button.innerText = 'Error';
+		});
+	}
+</script>

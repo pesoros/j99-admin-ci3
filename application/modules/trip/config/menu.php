@@ -7,12 +7,12 @@ $HmvcMenu["trip"] = array(
 
     // location
     "location" => array( 
-        'add_location'    => array( 
+        'add'    => array( 
             "controller" => "location",
             "method"     => "form",
             "permission" => "create"
         ), 
-        'location_list'  => array( 
+        'list'  => array( 
             "controller" => "location",
             "method"     => "index",
             "permission" => "read"
@@ -21,39 +21,39 @@ $HmvcMenu["trip"] = array(
 
     // route
     "route" => array( 
-        'add_route'    => array( 
+        'add'    => array( 
             "controller" => "route",
             "method"     => "form",
             "permission" => "create"
         ), 
-        'route_list'  => array( 
+        'list'  => array( 
             "controller" => "route",
             "method"     => "index",
             "permission" => "read"
         ), 
     ), 
 
-    "shedules" => array(
+    "schedules" => array(
 
-        'add_shedule' => array(
+        'add' => array(
         'controller'  => "shedule",
         'method'      => 'add_shedule',
         'permission'  => 'create'
         ),
-        'shedule_list' => array(
+        'list' => array(
         'controller'  => "shedule",
         'method'      => 'shedule_list',
         'permission'  => 'create'
         ),
     ),
-   "trips" => array(
+   "trip" => array(
 
-        'add_trip' => array(
+        'add' => array(
         'controller'  => "trip",
         'method'      => 'form',
         'permission'  => 'create'
         ),
-        'trip_list' => array(
+        'list' => array(
         'controller'  => "trip",
         'method'      => 'index',
         'permission'  => 'read'
@@ -62,12 +62,12 @@ $HmvcMenu["trip"] = array(
 
     // assign
     "assigns" => array( 
-        'add_assign'    => array( 
+        'add'    => array( 
             "controller" => "assign",
             "method"     => "form",
             "permission" => "create"
         ), 
-        'assign_list'  => array( 
+        'list'  => array( 
             "controller" => "assign",
             "method"     => "index",
             "permission" => "read"
@@ -76,7 +76,7 @@ $HmvcMenu["trip"] = array(
 
     // close
     "close" => array(  
-        'close_list'  => array( 
+        'list'  => array( 
             "controller" => "close",
             "method"     => "index",
             "permission" => "read"
