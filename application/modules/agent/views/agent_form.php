@@ -34,9 +34,6 @@
                                 <?php echo display('agent_commission') ?> %
                             </th>
                             <th>
-                                <?php echo display('agent_picture') ?>
-                            </th>
-                            <th>
                                 <?php echo display('action') ?>
                             </th>
                         </tr>
@@ -64,21 +61,18 @@
                                         <td class="text-right">
                                             <?php echo $query->agent_commission; ?>%
                                         </td>
-                                        <td>
-                                            <?php echo "<img src='" . base_url().$query->agent_picture."' width=60px; height=60px; class=img-thumbnail>";?>
-                                        </td>
 
                                         <td> 
                                             <?php if($this->permission->method('agent','read')->access()): ?>
-                                            <a href="<?php echo base_url("agent/agent_controller/agent_details/$query->user_id") ?>" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
+                                            <a href="<?php echo base_url("agent/agent_controller/agent_details/$query->agent_id") ?>" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
                                             <?php endif; ?>
 
                                             <?php if($this->permission->method('agent','update')->access()): ?>
-                                            <a href="<?php echo base_url("agent/agent_controller/agent_update/$query->user_id") ?>" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a> 
+                                            <a href="<?php echo base_url("agent/agent_controller/agent_update/$query->agent_id") ?>" class="btn btn-xs btn-success"><i class="fa fa-pencil"></i></a> 
                                             <?php endif; ?>
 
                                             <?php if($this->permission->method('agent','delete')->access()): ?>
-                                            <a href="<?php echo base_url("agent/agent_controller/agent_delete/$query->user_id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') "><i class="fa fa-times" aria-hidden="true"></i>
+                                            <a href="<?php echo base_url("agent/agent_controller/agent_delete/$query->agent_id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') "><i class="fa fa-times" aria-hidden="true"></i>
                                             </a> 
                                             <?php endif; ?>
                                         </td>
@@ -151,19 +145,6 @@
                                         <div class="col-sm-4">
                                             <input name="agent_document_id" class="form-control" type="text" placeholder="<?php echo display('agent_document_id') ?>" id="agent_document_id">
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div for="agent_pic_document" class="col-sm-2 col-form-div">
-                                            <?php echo display('agent_pic_document') ?> </div>
-                                        <div class="col-sm-4">
-                                            <input name="agent_pic_document" class="form-control" type="file" placeholder="<?php echo display('agent_pic_document') ?>" id="agent_pic_document">
-                                        </div>
-                                        <div for="agent_picture" class="col-sm-2 col-form-div">
-                                            <?php echo display('agent_picture') ?></div>
-                                        <div class="col-sm-4">
-                                            <input name="agent_picture" class="form-control" type="file" placeholder="<?php echo display('agent_picture') ?>" id="agent_picture">
-                                        </div>
-
                                     </div>
                                     <div class="form-group row">
                                         <div for="agent_email" class="col-sm-2 col-form-div">
@@ -462,7 +443,7 @@
                                     </div>
                                      <div class="form-group row">
                                           <div for="agent_commission" class="col-sm-2 col-form-div">
-                                            <?php echo display('agent_commission'); ?>%
+                                            Komisi %
                                         </div>
                                           <div class="col-sm-4">
                                             <input name="agent_commission" class="form-control" type="text" placeholder="<?php echo display('agent_commission'); ?>" id="agent_commission">

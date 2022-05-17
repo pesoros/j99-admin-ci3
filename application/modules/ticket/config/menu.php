@@ -6,18 +6,18 @@ $HmvcMenu["ticket"] = array(
     "icon" => "<i class='fa fa-ticket'></i>",
 
     // passenger
-    "passenger" => array(
-        'add' => array(
-            "controller" => "passenger",
-            "method" => "form",
-            "permission" => "create",
-        ),
-        'list' => array(
-            "controller" => "passenger",
-            "method" => "index",
-            "permission" => "read",
-        ),
-    ),
+    // "passenger" => array(
+    //     'add' => array(
+    //         "controller" => "passenger",
+    //         "method" => "form",
+    //         "permission" => "create",
+    //     ),
+    //     'list' => array(
+    //         "controller" => "passenger",
+    //         "method" => "index",
+    //         "permission" => "read",
+    //     ),
+    // ),
 
     // booking
     "booking" => array(

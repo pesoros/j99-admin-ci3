@@ -113,7 +113,6 @@
 						<div class="col-sm-12">
 							<div class="table-responsive">
 								<table class="table table-bordered">
-									<?php foreach ($value->ticket as $key => $tickvalue) { ?>
 									<thead>
 										<tr>
 											<th>Nama</th>
@@ -124,6 +123,7 @@
 											<th>Harga</th>
 										</tr>
 									</thead>
+									<?php foreach ($value->ticket as $key => $tickvalue) { ?>
 									<tbody>
 										<tr>
 											<td>

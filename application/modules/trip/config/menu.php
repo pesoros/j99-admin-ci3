@@ -75,13 +75,13 @@ $HmvcMenu["trip"] = array(
     ), 
 
     // close
-    "close" => array(  
-        'list'  => array( 
-            "controller" => "close",
-            "method"     => "index",
-            "permission" => "read"
-        ), 
-    ), 
+    // "close" => array(  
+    //     'list'  => array( 
+    //         "controller" => "close",
+    //         "method"     => "index",
+    //         "permission" => "read"
+    //     ), 
+    // ), 
   
 );
    

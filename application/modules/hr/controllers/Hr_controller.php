@@ -113,10 +113,10 @@ class Hr_controller extends MX_Controller {
     {
         $this->permission->method('hr','delete')->redirect();
         if($this->hr_model->delete_hr($id)) {
-            $this->db->where('driver_id',$id)
-            ->delete('driver_history');
-            $this->db->where('assistant_id',$id)
-            ->delete('assistant_history');
+            // $this->db->where('driver_id',$id)
+            // ->delete('driver_history');
+            // $this->db->where('assistant_id',$id)
+            // ->delete('assistant_history');
 
             #set success message
             $this->session->set_flashdata('message',display('delete_successfully'));

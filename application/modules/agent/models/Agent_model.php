@@ -14,6 +14,7 @@ class Agent_model extends CI_Model
             $this->db->where('ain.agent_email', $this->session->userdata('email'));
         }
         $this->db->limit($limit, $start);
+        $this->db->group_by('agent_id');
         $this->db->order_by('agent_id', 'desc');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {

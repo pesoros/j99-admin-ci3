@@ -40,13 +40,13 @@ input[type=checkbox]:checked + label {
                     <?php echo form_hidden('trip_id', $trips->trip_id); ?>
 
                     <div class="form-group row">
-                        <label for="trip_title" class="col-sm-3 col-form-label"><?php echo display('trip_title') ?> *</label>
+                        <label for="trip_title" class="col-sm-3 col-form-label">Judul Trip *</label>
                         <div class="col-sm-9">
                                     <textarea name="trip_title" id="trip_title" class="form-control" readonly=""><?php echo $trips->trip_title; ?></textarea>
                         </div>
                     </div> 
                  <div class="form-group row">
-                        <label for="types" class="col-sm-3 col-form-label"><?php echo display('types') ?> *</label>
+                        <label for="types" class="col-sm-3 col-form-label">Tipe *</label>
                         <div class="col-sm-9">
                             <?php echo form_dropdown('types', $types, (!empty($trips->types)?$trips->types:null), ' class="form-control trips_info"') ?> 
                         </div>
@@ -61,7 +61,7 @@ input[type=checkbox]:checked + label {
                     </div> 
 
                     <div class="form-group row">
-                        <label for="shedule" class="col-sm-3 col-form-label"><?php echo display('shedules') ?> *</label>
+                        <label for="shedule" class="col-sm-3 col-form-label"><?php echo display('schedules') ?> *</label>
                         <div class="col-sm-9">
                             <?php echo form_dropdown('shedule', $shedule, (!empty($trips->shedule)?$trips->shedule:null), ' class="form-control trips_info"') ?> 
                         </div>
