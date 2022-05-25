@@ -155,7 +155,7 @@ class Manifest_model extends CI_Model
         $list[''] = display('select_option');
         if (!empty($data)) {
             foreach ($data as $value) {
-                $list[$value->id] = $value->id;
+                $list[$value->id] = $value->trip_title;
             }
 
             return $list;
