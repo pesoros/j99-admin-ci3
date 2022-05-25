@@ -50,7 +50,7 @@ class Trip extends MX_Controller {
 			'trip_title' 	     => $this->input->post('trip_title'), 
 			'route' 	         => $routes->id, 
 			'shedule_id' 	     => $shedule->shedule_id, 
-			'type' 	             => $types->id,
+			'type' 	             => '0',
 			'weekend'            => (!empty($weekday)?$weekday:8),
 			'status'             => $this->input->post('status'), 
 		];  

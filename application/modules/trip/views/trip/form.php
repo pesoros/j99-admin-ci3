@@ -45,12 +45,6 @@ input[type=checkbox]:checked + label {
                                     <textarea name="trip_title" id="trip_title" class="form-control" readonly=""><?php echo $trips->trip_title; ?></textarea>
                         </div>
                     </div> 
-                 <div class="form-group row">
-                        <label for="types" class="col-sm-3 col-form-label">Tipe *</label>
-                        <div class="col-sm-9">
-                            <?php echo form_dropdown('types', $types, (!empty($trips->types)?$trips->types:null), ' class="form-control trips_info"') ?> 
-                        </div>
-                    </div> 
 
 
                     <div class="form-group row">
