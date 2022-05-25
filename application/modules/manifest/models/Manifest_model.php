@@ -144,10 +144,11 @@ class Manifest_model extends CI_Model
 
     public function tripAssignDropdown()
     {
-        $data = $this->db->select("*")
-            ->from('trip_assign')
-            ->where('status', 1)
-            ->order_by('id', 'asc')
+        $data = $this->db->select("a.*, b.trip_title")
+            ->from('trip_assign a')
+            ->join('trip b', 'b.id = a.trip', 'left')
+            ->where('a.status', 1)
+            ->order_by('a.id', 'asc')
             ->get()
             ->result();
 
