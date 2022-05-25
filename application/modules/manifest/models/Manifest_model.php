@@ -146,7 +146,7 @@ class Manifest_model extends CI_Model
     {
         $data = $this->db->select("a.*, b.trip_title")
             ->from('trip_assign a')
-            ->join('trip b', 'b.id = a.trip', 'left')
+            ->join('trip b', 'b.trip_id = a.trip', 'left')
             ->where('a.status', 1)
             ->order_by('a.id', 'asc')
             ->get()
