@@ -16,7 +16,6 @@ class Trip_model extends CI_Model {
 		return $this->db->select("
 			a.*,b.*,c.*,d.*")
 		->from("trip AS a")
-		->join('fleet_type AS b', 'a.type = b.id')
 		->join('trip_route AS c', 'a.route = c.id')
 		->join('shedule AS d', 'a.shedule_id = d.shedule_id')
         ->limit($limit, $start)
