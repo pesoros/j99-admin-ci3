@@ -21,7 +21,7 @@
 
 
          <div class="form-group row">
-                        <label for="trip" class="col-sm-3 col-form-label"><?php echo display('trips') ?> *</label>
+                        <label for="trip" class="col-sm-3 col-form-label">Nama Perjalanan*</label>
                         <div class="col-sm-9">
                             <?php echo form_dropdown('trip', $trip, (!empty($assign->trip) ? $assign->trip : null), ' class="form-control"') ?>
                         </div>
