@@ -14,7 +14,7 @@ class Trip_model extends CI_Model {
 	public function read()
 	{
 		return $this->db->select("
-			a.*,b.*,c.*,d.*")
+			a.*,c.*,d.*")
 		->from("trip AS a")
 		->join('trip_route AS c', 'a.route = c.id')
 		->join('shedule AS d', 'a.shedule_id = d.shedule_id')
