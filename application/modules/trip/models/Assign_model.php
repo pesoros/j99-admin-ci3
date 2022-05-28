@@ -334,11 +334,44 @@ class Assign_model extends CI_Model
 
     public function getTripPoint($tripAssignId)
     {
-        return $this->db->select("*")
+        $trip = $this->db->select("*")
             ->from("trip_point")
             ->where("trip_assign_id", $tripAssignId)
             ->get()
             ->result();
+
+        foreach ($trip as $key => $value) {
+            $price = $this->db->select("a.*, b.type as class")
+                ->from("trip_point_price a")
+                ->where("a.point_id", $value->id)
+                ->join("fleet_type b", "b.id = a.type")
+                ->get()
+                ->result();
+            $value->price = $price;
+        }
+        
+        return $trip;
+    }
+
+    public function getTripPointUpdate($id)
+    {
+        $trip = $this->db->select("*")
+            ->from("trip_point")
+            ->where("id", $id)
+            ->get()
+            ->result();
+
+        foreach ($trip as $key => $value) {
+            $price = $this->db->select("a.*, b.type as class")
+                ->from("trip_point_price a")
+                ->where("a.point_id", $value->id)
+                ->join("fleet_type b", "b.id = a.type")
+                ->get()
+                ->result();
+            $value->price = $price;
+        }
+        
+        return $trip;
     }
 
     public function getFleetType($traid)
@@ -378,6 +411,24 @@ class Assign_model extends CI_Model
         $insert_id = $this->db->insert_id();
 
         return $insert_id;
+    }
+
+    public function pointSaveUpdate($data,$id)
+    {
+        return $this->db->where('id', $id)
+            ->update('trip_point', $data);
+    }
+
+    public function pointTypeDelete($pointid)
+    {
+        $this->db->where('point_id', $pointid)
+            ->delete('trip_point_price');
+
+        if ($this->db->affected_rows()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function deletePoint($id = null)

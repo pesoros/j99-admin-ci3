@@ -65,6 +65,7 @@
                                 <!-- <th><?php echo display('sl_no') ?></th> -->
                                 <th>Departure</th>
                                 <th>Arrive</th>
+                                <th>Price</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -76,8 +77,25 @@
                                 <!-- <td><?php echo $sl++; ?></td> -->
                                 <td><?php echo $value->dep_point; ?></td>
                                 <td><?php echo $value->arr_point; ?></td>
+                                <td>
+                                    <table class="table table-bordered">
+                                        <tr>
+                                        <?php foreach ($value->price as $keyprice => $valPrice) { ?>
+                                                <th><?php echo $valPrice->class ?></th>
+                                        <? } ?>
+                                        </tr>
+                                        <tr>
+                                        <?php foreach ($value->price as $keyprice => $valPrice) { ?>
+                                                <td>
+                                                    Rp.<?php echo $valPrice->price." / " ?> Rp.<?php echo $valPrice->sp_price ?>
+                                                </td>
+                                        <? } ?>
+                                        </tr>
+                                    </table>
+                                </td>
                                 <td width="150">
                                 <?php if($this->permission->method('trip','update')->access()): ?>
+                                    <a href="<?php echo base_url("trip/assign/pointupdate/$value->id/$value->trip_assign_id") ?>" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="left" title="Delete"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                     <a href="<?php echo base_url("trip/assign/pointdelete/$value->id/$value->trip_assign_id") ?>" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="left" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                 <?php endif; ?>
                                 </td>

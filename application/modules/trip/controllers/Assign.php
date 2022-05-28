@@ -235,6 +235,26 @@ class Assign extends MX_Controller
         echo Modules::run('template/layout', $data);
     }
 
+    public function pointupdate($id,$back)
+    {
+        $tripRoute = $this->assign_model->getTripRoute($back);
+        $tripRoute = explode(',', $tripRoute->stoppage_points);
+        $trArr = [];
+        foreach ($tripRoute as $key => $value) {
+            $trArr[$value] = $value;
+        }
+        $data['tripPoint'] = $this->assign_model->getTripPointUpdate($id);
+        // echo json_encode($data);
+        // return;
+        $data['type'] = $this->assign_model->getFleetType($back);
+        $data['tripRoute'] = $trArr;
+        $data['idpoint'] = $id;
+        $data['id'] = $back;
+        $data['module'] = "trip";
+        $data['page'] = "assign/pointupdate";
+        echo Modules::run('template/layout', $data);
+    }
+
     public function pointsave(Type $var = null)
     {
         $data['assign'] = (Object) $postData = [
@@ -251,6 +271,29 @@ class Assign extends MX_Controller
         foreach ($pricearr as $key => $value) {
             $pricing = [];
             $pricing['point_id'] = $save;
+            $pricing['type'] = $key;
+            $pricing['price'] = $value;
+            $pricing['sp_price'] = $sp_pricearr[$key];
+            $saveType = $this->assign_model->pointTypeSave($pricing);
+        }
+
+        redirect("trip/assign/point/" . $this->input->post('trip_assign_id'));
+    }
+
+    public function pointsaveupdate(Type $var = null)
+    {
+        $data['assign'] = (Object) $postData = [
+            'dep_time' => $this->input->post('timefrom'),
+            'arr_time' => $this->input->post('timeto'),
+        ];
+
+        $save = $this->assign_model->pointSave($postData,$this->input->post('pointid'));
+        $pricearr = $this->input->post('price');
+        $sp_pricearr = $this->input->post('sp_price');
+        $saveType = $this->assign_model->pointTypeDelete($this->input->post('pointid'));
+        foreach ($pricearr as $key => $value) {
+            $pricing = [];
+            $pricing['point_id'] = $this->input->post('pointid');
             $pricing['type'] = $key;
             $pricing['price'] = $value;
             $pricing['sp_price'] = $sp_pricearr[$key];
