@@ -68,6 +68,30 @@
    
     <table id="layoutimg">
           <?php $total_s = $fleet_type->total_seat;
+           if(!empty($total_s) && $fleet_type->layout == "1-1-1"){
+            for($i=1;$i <=$total_s/2;$i++){?>
+                <tr>
+         <td>
+            <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
+          ?>  </td>  
+           
+           <td>
+            <?php if($i == round($total_s/2) && $fleet_type->lastseat == "last"){ ?>
+            <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
+          ?>
+            <?php  }else{?>
+                <span style="color:white">Line Break</span>
+                <?php } ?>  </td>
+           <td>
+            <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
+          ?>  </td>  
+          
+          
+     <tr>
+
+         <?php  } 
+          }
+
                      if(!empty($total_s) && $fleet_type->layout == "2-2"){
                     for($i=1;$i <=$total_s/4;$i++){?>
                         <tr>
@@ -232,30 +256,6 @@
                    <td>
                     <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
                   ?>  </td> 
-                  
-             <tr>
-
-                 <?php  } 
-                  }
-
-                  if(!empty($total_s) && $fleet_type->layout == "1-1"){
-                    for($i=1;$i <=$total_s/2;$i++){?>
-                        <tr>
-                 <td>
-                    <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
-                  ?>  </td>  
-                   
-                   <td>
-                    <?php if($i == round($total_s/2) && $fleet_type->lastseat == "last"){ ?>
-                    <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
-                  ?>
-                    <?php  }else{?>
-                        <span style="color:white">Line Break</span>
-                        <?php } ?>  </td>
-                   <td>
-                    <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
-                  ?>  </td>  
-                  
                   
              <tr>
 
