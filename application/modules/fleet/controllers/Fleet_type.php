@@ -27,6 +27,21 @@ class Fleet_type extends MX_Controller {
 	{ 
 		$this->permission->method('fleet','create')->redirect();
 		$data['title'] = display('add');
+
+		//image upload
+        $image = $this->fileupload->do_upload(
+            'application/modules/fleet/assets/images/',
+            'image'
+        );
+        // if image is uploaded then resize the image
+        if ($image !== false && $image != null) {
+            $this->fileupload->do_resize($image, 640, 380);
+        }
+        //if image is not uploaded
+        if ($image === false) {
+            $this->session->set_flashdata('exception', display('invalid_logo'));
+        }
+
 		#-------------------------------#
 		$this->form_validation->set_rules('type',display('fleet_type')  ,'required|max_length[255]');
 		$this->form_validation->set_rules('status',display('status') ,'required');
@@ -43,6 +58,7 @@ class Fleet_type extends MX_Controller {
 			'total_seat' 	 => $this->input->post('total_seat'), 
 			'seat_numbers' 	 => $this->input->post('seat_numbers'),
 			'fleet_facilities'=> $facilities,   
+			'image'=> $image,   
 			'status' => $this->input->post('status'), 
 		];  
 	

@@ -13,7 +13,7 @@
             </div>
             <div class="panel-body">
 
-                <?= form_open('fleet/fleet_type/form/') ?>
+                <?= form_open_multipart('fleet/fleet_type/form/') ?>
                     <?php echo form_hidden('id', $fleet_type->id); ?>
 
                     <div class="form-group row">
@@ -37,6 +37,7 @@
                         <option value="1-2" <?php if ($fleet_type->layout == "1-2") {echo "selected"; }?>>1-2</option>
                         <option value="3-2" <?php if ($fleet_type->layout == "3-2") {echo "selected"; }?>>3-2</option>
                         <option value="2-3" <?php if ($fleet_type->layout == "2-3") {echo "selected"; }?>>2-3</option>
+                        <option value="1-1-1" <?php if ($fleet_type->layout == "1-1-1") {echo "selected"; }?>>1-1-1</option>
                        </select>        
                     </div>
                     <div class="col-sm-4"> 
@@ -237,6 +238,30 @@
                  <?php  } 
                   }
 
+                  if(!empty($total_s) && $fleet_type->layout == "1-1"){
+                    for($i=1;$i <=$total_s/2;$i++){?>
+                        <tr>
+                 <td>
+                    <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
+                  ?>  </td>  
+                   
+                   <td>
+                    <?php if($i == round($total_s/2) && $fleet_type->lastseat == "last"){ ?>
+                    <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
+                  ?>
+                    <?php  }else{?>
+                        <span style="color:white">Line Break</span>
+                        <?php } ?>  </td>
+                   <td>
+                    <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
+                  ?>  </td>  
+                  
+                  
+             <tr>
+
+                 <?php  } 
+                  }
+
                          ?>
     </table>
 
@@ -280,6 +305,22 @@
                             </label> 
                         </div>
                     </div>
+
+                    <div class="form-group row">
+                        <label for="preview" class="col-sm-3 col-form-label">Gambar</label>
+                        <div class="col-sm-9">
+                            <img src="<?php echo base_url(!empty($fleet_type->image)?$fleet_type->image: "./assets/img/icons/default.jpg") ?>" class="img-thumbnail" width="125" height="100">
+                        </div>
+                        <input type="hidden" name="old_image" value="<?php echo $fleet_type->image ?>">
+                    </div> 
+
+                    <div class="form-group row">
+                        <label for="logo" class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9">
+                            <input type="file" name="image" id="image" aria-describedby="fileHelp">
+                            <small id="fileHelp" class="text-muted"></small>
+                        </div>
+                    </div> 
          
          
                     <div class="form-group text-right">
