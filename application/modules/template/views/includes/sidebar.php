@@ -57,6 +57,22 @@
                 <li><a href="<?php echo base_url('resto/resto_controller/create_resto') ?>">List Resto</a></li>
             </ul>
         </li>
+
+        <li class="treeview <?php echo (($this->uri->segment(2)=="website")?"active":null) ?>">
+            <a href="#">
+                <i class="fa fa-globe"></i><span>Website</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="<?php echo base_url('cms/cms/home') ?>">Home Text</a></li>
+                <li><a href="<?php echo base_url('cms/cms/footer') ?>">Footer</a></li>
+                <li><a href="<?php echo base_url('cms/cms/facilities') ?>">Fasilitas</a></li>
+                <li><a href="<?php echo base_url('cms/cms/sosmed') ?>">Sosial Media</a></li>
+                <li><a href="<?php echo base_url('cms/cms/pointtext') ?>">Point Text</a></li>
+            </ul>
+        </li>
       
 <?php if($this->uri->segment(2) !=='User'){?>
   
