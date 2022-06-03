@@ -10,7 +10,7 @@ class Cms extends MX_Controller
         $this->load->model(array(
             'cms_model',
         ));
-    }
+    } 
 
     public function footer(Type $var = null)
     {
