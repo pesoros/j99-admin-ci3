@@ -17,7 +17,7 @@ class Cms extends MX_Controller
         $data['title'] = display('cms');
         #-------------------------------#
         $this->form_validation->set_rules('email', '', 'required');
-
+ 
         //image upload
         $image = $this->fileupload->do_upload(
             'application/modules/cms/assets/images/offer/',
