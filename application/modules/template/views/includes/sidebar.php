@@ -124,7 +124,7 @@
 					<i class="fa fa-angle-left pull-right"></i>
 				</span>
 			</a>
-
+ 
 			<ul class="treeview-menu">
 				<?php foreach ($moduleData as $groupLabel => $label) {?>
 				<?php   
