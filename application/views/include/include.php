@@ -624,7 +624,7 @@
 						var num = val + 1;
 						var lasseat = $('#checkbox').val();
 
-						if (lasseat == 'last' && num == testn / 2) {
+						if (lasseat == 'last' && num == testn / 3) {
 							lastclass = 'docIcon';
 						} else {
 							lastclass = 'midlesp';
@@ -660,7 +660,7 @@
 			var y = 4;
 		} else if (lay == '1-1') {
 			var y = 2;
-		} else if (lay == '2-1' || lay == '1-2') {
+		} else if (lay == '2-1' || lay == '1-2' | lay == '1-1-1') {
 			var y = 3;
 		} else {
 			var y = 5;

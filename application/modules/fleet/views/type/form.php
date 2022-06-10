@@ -76,7 +76,7 @@
           ?>  </td>  
            
            <td>
-            <?php if($i == round($total_s/2) && $fleet_type->lastseat == "last"){ ?>
+            <?php if($i == round($total_s/3) && $fleet_type->lastseat == "last"){ ?>
             <?php echo "<img class='img' width='50px' height='50px' src='../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' onerror=this.src='../../../assets/img/f2dcc1cda37a23d4dd30125ebf2ac6ae.png' title='' />";
           ?>
             <?php  }else{?>
