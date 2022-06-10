@@ -40,7 +40,7 @@
                     <div class="form-group row">
                         <label for="model_no" class="col-sm-3 col-form-label">Nomor Polisi*</label>
                         <div class="col-sm-9">
-                            <input name="model_no" class="form-control" type="text" placeholder="<?php echo display('model_no') ?>" id="model_no" value="<?php echo $fleet_registration->model_no ?>">
+                            <input name="model_no" class="form-control" type="text" placeholder="Nomor Polisi" id="model_no" value="<?php echo $fleet_registration->model_no ?>">
                         </div>
                     </div> 
 
