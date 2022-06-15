@@ -20,6 +20,12 @@
                     </div>
                 </div>
                 <div class="form-group row">
+					<label for="end_point" class="col-sm-3 col-form-label">Class</label>
+					<div class="col-sm-9">
+                        <?php echo form_dropdown('class', $class, null, 'class="form-control type_list" id="class"') ?></td>
+                    </div>
+                </div>
+                <div class="form-group row">
 					<label for="end_point" class="col-sm-3 col-form-label">Price</label>
 					<div class="col-sm-9">
                         <input name="price" class="form-control" type="number"

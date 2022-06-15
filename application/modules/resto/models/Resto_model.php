@@ -166,4 +166,21 @@ class Resto_model extends CI_Model
         }
     }
 
+    public function getClass()
+    {
+		$data = $this->db->select("id,type")
+			->from('fleet_type')
+			->get()
+			->result();
+
+        $list[''] = display('select_option');
+        if (!empty($data)) {
+            foreach($data as $value)
+                $list[$value->id] = $value->type;
+            return $list;
+        } else {
+            return false; 
+        }
+	} 
+
 }

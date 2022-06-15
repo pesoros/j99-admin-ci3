@@ -49,6 +49,7 @@ class Resto_controller extends MX_Controller {
     public function resto_menu($id = null)
 	{
 		$data['menu'] = $this->resto_model->getMenu($id);
+		$data['class'] = $this->resto_model->getClass();
 		$data['id'] = $id;
 		$data['module'] = "resto";
 		$data['page']   = "resto_menu";   
@@ -61,6 +62,7 @@ class Resto_controller extends MX_Controller {
 			'id_resto'          => $this->input->post('resto_id'), 
 			'food_name'          => $this->input->post('menu'), 
 			'price'        => $this->input->post('price'),
+			'class'        => $this->input->post('class'),
 			'status'        => 1,
 		]; 
 
