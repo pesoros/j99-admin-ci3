@@ -75,6 +75,7 @@ class Resto_model extends CI_Model
             ")
             ->from("resto_menu as a")
             ->join("fleet_type as b","b.id = a.class","left")
+            ->where('id_resto', $id)
             ->order_by('a.id', 'desc')
             ->get()
             ->result();
