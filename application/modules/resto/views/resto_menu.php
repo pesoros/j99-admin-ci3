@@ -44,6 +44,7 @@
                                 <!-- <th><?php echo display('sl_no') ?></th> -->
                                 <th>Menu</th>
                                 <th>Harga</th>
+                                <th>Kelas</th>
                                 <th>Status</th>
                                 <th>Action</th>
                             </tr>
@@ -56,6 +57,7 @@
                                 <!-- <td><?php echo $sl++; ?></td> -->
                                 <td><?php echo $value->food_name; ?></td>
                                 <td><?php echo $value->price; ?></td>
+                                <td><?php echo $value->classname; ?></td>
                                 <td><?php echo $value->status; ?></td>
                                 <td width="150">
                                 <?php if($this->permission->method('trip','update')->access()): ?>

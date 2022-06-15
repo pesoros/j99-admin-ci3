@@ -69,9 +69,15 @@ class Resto_model extends CI_Model
 
     public function getMenu($id)
     {
-        $this->db->where('id_resto', $id);
-        $query = $this->db->get('resto_menu');
-        return $query->result();
+        return $this->db->select("
+                a.*,
+                b.type as classname
+            ")
+            ->from("resto_menu as a")
+            ->join("fleet_type as b","b.id = a.class","left")
+            ->order_by('a.id', 'desc')
+            ->get()
+            ->result();
     }
 
     public function menuSave($data)
