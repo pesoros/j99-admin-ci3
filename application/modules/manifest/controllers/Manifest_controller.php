@@ -143,7 +143,6 @@ class Manifest_controller extends MX_Controller {
         $data['title']     = 'Report';
         $data['data']      =$this->manifest_model->manifest_report($id);
         $data['saldo']      =$this->manifest_model->manifest_saldo($id);
-        echo json_encode($data['saldo']);
         $data['module']    = "manifest";    
         $data['page']      = "manifest_report";   
         echo Modules::run('template/layout', $data);  
