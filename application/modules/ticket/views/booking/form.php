@@ -731,6 +731,10 @@
 .modbut {
     text-align: center;
 }
+.road-space {
+    background-color: #f0f8ff00 !important;
+    border-color: #f0f8ff00 !important;
+}
 </style>
 
 <div id="output" class="hide alert alert-danger"></div>
@@ -1002,27 +1006,28 @@
         $('.seatlay').empty();
         let counter = 0;
         theSeats.forEach(element => {
-            if (element.isSeat == true) {
-
-                if (counter == 0) {
-                    htmlModal += '<div class="d-flex justify-content-between align-items-center"><div class="item-top-left"><table><tr>';
+            if (counter == 0) {
+                if (seatInfo.layout == '1-1') {
+                    htmlModal += '<div class="d-flex justify-content-center align-items-center" style="margin-left: 55px;"><table><tr>';
+                } else if (seatInfo.layout == '1-1-1') {
+                    htmlModal += '<div class="d-flex justify-content-center align-items-center" style="margin-left: 45px;"><table><tr>';
                 }
-                
-                counter+=1;
+            }
+            
+            counter+=1;
+            if (element.name == '-') { 
+                htmlModal += '<td class="item-list-seat road-space" data=""></td>';
+            } else {
                 if (element.isAvailable == true) {
                     htmlModal += '<td class="item-list-seat" data="'+element.name+'">'+element.name+'</td>';
                 } else {
                     htmlModal += '<td class="item-list-seat reserved" data="'+element.name+'">'+element.name+'</td>';
                 }
+            }
 
-                if (counter == 2) {
-                    htmlModal += '</tr></table></div><div class="item-top-right"><table><tr>';
-                }
-
-                if (counter == 4) {
-                    htmlModal += '</tr></table></div></div>';
-                    counter = 0;
-                }
+            if (counter == 5) {
+                htmlModal += '</tr></table></div>';
+                counter = 0;
             }
         });
         setTimeout(function() { 

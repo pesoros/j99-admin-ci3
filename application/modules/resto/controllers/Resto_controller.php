@@ -98,6 +98,53 @@ class Resto_controller extends MX_Controller {
         redirect('resto/resto_controller/create_resto');
     }
 
+    public function menu_update($idResto,$id=null){
+		$data['menu'] = $this->resto_model->getMenuSingle($id)[0];
+		$data['class'] = $this->resto_model->getClass();
+		$data['id'] = $id;
+		$data['idResto'] = $idResto;
+		$data['module'] = "resto";
+		$data['page']   = "resto_menu_update";   
+        echo json_encode($data['menu']);
+		echo Modules::run('template/layout', $data);  
+    }
+
+    public function editsave_menu()
+    { 
+        //image upload
+        $image = $this->fileupload->do_upload(
+            'application/modules/resto/assets/images/',
+            'image'
+        );
+        // if image is uploaded then resize the image
+        if ($image !== false && $image != null) {
+            $this->fileupload->do_resize($image, 640, 380);
+        }
+        //if image is not uploaded
+        if ($image === false) {
+            $this->session->set_flashdata('exception', display('invalid_logo'));
+        }
+
+        if ($image) {
+            $data['menu'] = (Object) $postData = [
+                'food_name'          => $this->input->post('menu'), 
+                'price'        => $this->input->post('price'),
+                'class'        => $this->input->post('class'),
+                'image'         => $image,   
+            ]; 
+        } else {
+            $data['menu'] = (Object) $postData = [
+                'food_name'          => $this->input->post('menu'), 
+                'price'        => $this->input->post('price'),
+                'class'        => $this->input->post('class'),
+            ]; 
+        }
+
+		$save = $this->resto_model->menuEditSave($this->input->post('id'),$postData);
+
+		redirect("resto/resto_controller/resto_menu/".$this->input->post('idResto')); 
+    }
+
     public function menu_deactivate($idResto,$id=null){
         $this->permission->method('price','delete')->redirect();
         if($this->resto_model->deactivate_menu($id)) {

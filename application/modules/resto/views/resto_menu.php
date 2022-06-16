@@ -59,6 +59,7 @@
                             <tr>
                                 <!-- <th><?php echo display('sl_no') ?></th> -->
                                 <th>Menu</th>
+                                <th>Gambar</th>
                                 <th>Harga</th>
                                 <th>Kelas</th>
                                 <th>Status</th>
@@ -72,12 +73,14 @@
                             <tr class="<?php echo (!empty($value->isClosed)?$value->isClosed:null) ?>">
                                 <!-- <td><?php echo $sl++; ?></td> -->
                                 <td><?php echo $value->food_name; ?></td>
+                                <td><img src="<?php echo ($value->image) ? base_url().$value->image : 'https://api.tiketjuragan99.id/assets/default_food.jpeg'; ?>" alt="" style="max-width:100px;"></td>
                                 <td><?php echo $value->price; ?></td>
                                 <td><?php echo $value->classname; ?></td>
                                 <td><?php echo $value->status; ?></td>
                                 <td width="150">
                                 <?php if($this->permission->method('trip','update')->access()): ?>
                                     <!-- <a href="<?php echo base_url("trip/assign/pointdelete/$value->id/$value->id") ?>" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="left" title="Delete"><i class="fa fa-trash" aria-hidden="true"></i></a> -->
+                                    <a href="<?php echo base_url("resto/resto_controller/menu_update/$id/$value->id") ?>" class="btn btn-xs btn-info">Update</a>
                                     <?php if ($value->status == 1) { ?>
                                         <a href="<?php echo base_url("resto/resto_controller/menu_deactivate/$id/$value->id") ?>" class="btn btn-xs btn-warning" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Deactivate
                                         </a> 

@@ -81,10 +81,32 @@ class Resto_model extends CI_Model
             ->result();
     }
 
+    public function getMenuSingle($id)
+    {
+        return $this->db->select("
+                a.*,
+                b.type as classname
+            ")
+            ->from("resto_menu as a")
+            ->join("fleet_type as b","b.id = a.class","left")
+            ->where('a.id', $id)
+            ->order_by('a.id', 'desc')
+            ->get()
+            ->result();
+    }
+
     public function menuSave($data)
 	{
 		return $this->db->insert('resto_menu', $data);
 	}
+
+    public function menuEditSave($id,$data)
+    {
+        $this->db->where('id', $id)
+            ->update("resto_menu", $data);
+
+        return true;
+    }
 
     public function deactivate_menu($id = null)
     {
