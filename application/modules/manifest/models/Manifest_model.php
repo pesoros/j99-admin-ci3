@@ -76,8 +76,8 @@ class Manifest_model extends CI_Model
                 b.allowance
             ")
             ->from("manifest a")
-            ->join('trip_assign b', 'b.id = a.trip_assign', 'left')
-            ->join('trip_expenses c', 'c.trip_id_no = b.trip and c.trip_date = a.trip_date', 'left')
+            ->join('trip_assign b', 'b.id = a.trip_assign')
+            ->join('trip_expenses c', 'c.trip_id_no = b.trip and c.trip_date = a.trip_date')
             ->order_by('c.id', 'created_at')
             ->get()
             ->result();
