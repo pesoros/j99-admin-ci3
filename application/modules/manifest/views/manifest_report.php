@@ -3,7 +3,7 @@
     <!-- <button type="button" class="btn btn-primary btn-md" data-target="#add0" data-toggle="modal">
         Assign
     </button> -->
-    <a href="<?php echo base_url('manifest/manifest_controller/addmanifest') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> <?php echo display('add') ?></a>  
+    <!-- <a href="<?php echo base_url('manifest/manifest_controller/addmanifest') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> <?php echo display('add') ?></a>   -->
     <?php endif; ?> 
 </div>
 
@@ -21,77 +21,75 @@
                                 <?php echo display('sl') ?>
                             </th>
                             <th>
-                                email assign
+                                Deskripsi
                             </th>
                             <th>
-                                trip assign
+                                Dibuat
                             </th>
                             <th>
-                                trip title
+                                Aksi
                             </th>
                             <th>
-                                date
-                            </th>
-                            <th>
-                                status
-                            </th>
-                            <th>
-                                <?php echo display('action') ?>
+                                Nominal
                             </th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($manifest)) { ?>
-                            <?php $sl = 1; ?>
-                                <?php foreach ($manifest as $value) { ?>
+                        <?php if (!empty($data)) { ?>
+                            <?php $sl = 1; $summary = 0; ?>
+                                <tr class="<?php echo ($sl & 1)?" odd gradeX ":"even gradeC " ?>">
+                                    <td>
+                                        <?php echo $sl; ?>
+                                    </td>
+                                    <td>
+                                        Saldo Awal
+                                    </td>
+                                    <td>
+                                        -
+                                    </td>
+                                    <td>
+                                        -
+                                    </td>
+                                    <td>
+                                        <?php echo 'Rp.'.number_format($data[0]->allowance,2,',','.'); ?>
+                                    </td>
+                                </tr>
+                                <?php foreach ($data as $value) { ?>
                                     <tr class="<?php echo ($sl & 1)?" odd gradeX ":"even gradeC " ?>">
                                         <td>
                                             <?php echo $sl; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->email_assign; ?>
+                                            <?php echo $value->description; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_assign; ?>
+                                            <?php echo $value->created_at; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_title; ?>
+                                            <?php echo $value->action; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_date; ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($value->status == 1) { ?>
-                                                Active
-                                            <?php } elseif($value->status == 2) {?>
-                                                Close
-                                            <?php } else {?>
-                                                Cancel
-                                            <?php } ?>
-                                        </td>
-                                       
-                                        <td class="center">
-                                            <?php if($this->permission->method('price', 'update')->access()): ?>
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_report/$value->id") ?>" class="btn btn-xs btn-info">Report</a> 
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_update/$value->id") ?>" class="btn btn-xs btn-success">Edit</a> 
-                                            <?php endif; ?>
-
-
-                                            <?php if($this->permission->method('price', 'delete')->access()): ?>
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_delete/$value->id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Delete
-                                            </a> 
-                                            <?php if ($value->status == 1) { ?>
-                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_close/$value->id") ?>" class="btn btn-xs btn-warning" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Close
-                                            <?php } ?>
-                                            </a> 
-                                            <?php endif; ?>
+                                            <?php echo 'Rp.'.number_format($value->nominal,2,',','.'); ?>
                                         </td>
                                     </tr>
-                                    <?php $sl++; ?>
+                                    <?php 
+                                        $sl++; 
+                                        if ($value->action == 'spend') {
+                                            $summary = $summary - $value->nominal;
+                                        } else {
+                                            $summary = $summary + $value->nominal;
+                                        }
+                                    ?>
                                 <?php } ?>
                             <?php } ?>
                     </tbody>
+                    <tfoot>
+                        <tr class="<?php echo ($sl & 1)?" odd gradeX ":"even gradeC " ?>">
+                            <td colspan="4" style="text-align: right !important;">Total Saldo : </td>
+                            <td><?php echo 'Rp.'.number_format($data[0]->allowance + $summary,2,',','.'); ?></td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <!-- /.table-responsive -->
             </div>

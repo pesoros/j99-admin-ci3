@@ -69,6 +69,20 @@ class Manifest_model extends CI_Model
         return $query->row();
     }
 
+    public function manifest_report($id)
+    {
+        return $this->db->select("
+                c.*,
+                b.allowance
+            ")
+            ->from("manifest a")
+            ->join('trip_assign b', 'b.id = a.trip_assign', 'left')
+            ->join('trip_expenses c', 'c.trip_id_no = b.trip and c.trip_date = a.trip_date', 'left')
+            ->order_by('c.id', 'created_at')
+            ->get()
+            ->result();
+    }
+
     public function manifest_trip($id)
     {
         return $this->db->select("

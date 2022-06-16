@@ -139,6 +139,16 @@ class Manifest_controller extends MX_Controller {
         }   
     }
 
+    public function manifest_report($id=null){
+        $data['title']     = 'Report';
+        $data['data']      =$this->manifest_model->manifest_report($id);
+        $data['manifest_trip']      =$this->manifest_model->manifest_trip($id);
+        $data['trip_list'] = $this->manifest_model->tripAssignDropdown();
+        $data['module']    = "manifest";    
+        $data['page']      = "manifest_report";   
+        echo Modules::run('template/layout', $data);  
+    }
+
     public function codeGenerate($head = 'J99', $length = 12)
     {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
