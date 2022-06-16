@@ -84,6 +84,18 @@ class Manifest_model extends CI_Model
             ->result();
     }
 
+    public function manifest_saldo($id)
+    {
+        return $this->db->select("
+                b.allowance
+            ")
+            ->from("manifest a")
+            ->join('trip_assign b', 'b.id = a.trip_assign')
+            ->where('a.id',$id)
+            ->get()
+            ->result();
+    }
+
     public function manifest_trip($id)
     {
         return $this->db->select("

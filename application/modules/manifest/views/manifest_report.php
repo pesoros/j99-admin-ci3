@@ -51,7 +51,7 @@
                                     -
                                 </td>
                                 <td>
-                                    <?php echo 'Rp.'.number_format($data[0]->allowance,2,',','.'); ?>
+                                    <?php echo 'Rp.'.number_format($saldo[0]->allowance,2,',','.'); ?>
                                 </td>
                             </tr>
                         <?php if (!empty($data)) { ?>
@@ -88,7 +88,7 @@
                     <tfoot>
                         <tr class="<?php echo ($sl & 1)?" odd gradeX ":"even gradeC " ?>">
                             <td colspan="4" style="text-align: right !important;">Total Saldo : </td>
-                            <td><?php echo 'Rp.'.number_format($data[0]->allowance + $summary,2,',','.'); ?></td>
+                            <td><?php echo 'Rp.'.number_format($saldo[0]->allowance+ $summary,2,',','.'); ?></td>
                         </tr>
                     </tfoot>
                 </table>
