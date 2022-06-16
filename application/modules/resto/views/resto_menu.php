@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="panel-body">
-				<?= form_open('resto/resto_controller/resto_menu_save') ?>
+				<?= form_open_multipart('resto/resto_controller/resto_menu_save') ?>
 				<?php echo form_hidden('resto_id', $id); ?>
                 <div class="form-group row">
 					<label for="end_point" class="col-sm-3 col-form-label">Menu</label>
@@ -33,6 +33,22 @@
 							value="">
                     </div>
                 </div>
+                <div class="form-group row">
+                    <label for="preview" class="col-sm-3 col-form-label">Gambar</label>
+                    <div class="col-sm-9">
+                        <img src="<?php echo base_url(!empty($fleet_type->image)?$fleet_type->image: "./assets/img/icons/default.jpg") ?>" class="img-thumbnail" width="125" height="100">
+                    </div>
+                    <input type="hidden" name="old_image" value="<?php echo $fleet_type->image ?>">
+                </div> 
+
+                <div class="form-group row">
+                    <label for="logo" class="col-sm-3 col-form-label"></label>
+                    <div class="col-sm-9">
+                        <input type="file" name="image" id="image" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="text-muted"></small>
+                    </div>
+                </div> 
+
                 <div class="form-group text-right">
 					<button type="submit" class="btn btn-success w-md m-b-5"><?php echo display('save') ?></button>
 				</div>

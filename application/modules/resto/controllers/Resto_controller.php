@@ -58,11 +58,26 @@ class Resto_controller extends MX_Controller {
 
     public function resto_menu_save(Type $var = null)
     {
+        //image upload
+        $image = $this->fileupload->do_upload(
+            'application/modules/resto/assets/images/',
+            'image'
+        );
+        // if image is uploaded then resize the image
+        if ($image !== false && $image != null) {
+            $this->fileupload->do_resize($image, 640, 380);
+        }
+        //if image is not uploaded
+        if ($image === false) {
+            $this->session->set_flashdata('exception', display('invalid_logo'));
+        }
+
         $data['menu'] = (Object) $postData = [
 			'id_resto'          => $this->input->post('resto_id'), 
 			'food_name'          => $this->input->post('menu'), 
 			'price'        => $this->input->post('price'),
 			'class'        => $this->input->post('class'),
+			'image'         => $image,   
 			'status'        => 1,
 		]; 
 
