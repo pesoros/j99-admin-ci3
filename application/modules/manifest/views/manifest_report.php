@@ -36,25 +36,26 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <?php $summary = 0; ?>
+                            <tr class="<?php echo ($sl & 1)?" odd gradeX ":"even gradeC " ?>">
+                                <td>
+                                    <?php echo $sl; ?>
+                                </td>
+                                <td>
+                                    Saldo Awal
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                                <td>
+                                    -
+                                </td>
+                                <td>
+                                    <?php echo 'Rp.'.number_format($data[0]->allowance,2,',','.'); ?>
+                                </td>
+                            </tr>
                         <?php if (!empty($data)) { ?>
-                            <?php $sl = 1; $summary = 0; ?>
-                                <tr class="<?php echo ($sl & 1)?" odd gradeX ":"even gradeC " ?>">
-                                    <td>
-                                        <?php echo $sl; ?>
-                                    </td>
-                                    <td>
-                                        Saldo Awal
-                                    </td>
-                                    <td>
-                                        -
-                                    </td>
-                                    <td>
-                                        -
-                                    </td>
-                                    <td>
-                                        <?php echo 'Rp.'.number_format($data[0]->allowance,2,',','.'); ?>
-                                    </td>
-                                </tr>
+                            <?php $sl = 1; ?>
                                 <?php foreach ($data as $value) { ?>
                                     <tr class="<?php echo ($sl & 1)?" odd gradeX ":"even gradeC " ?>">
                                         <td>
