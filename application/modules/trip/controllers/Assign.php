@@ -90,6 +90,7 @@ class Assign extends MX_Controller
             'assistant_3' => $this->input->post('assistant_3'),
             'status' => $this->input->post('status'),
             'resto_id' => $this->input->post('resto_id'),
+            'saldo' => $this->input->post('saldo'),
             'assign_time' => date('Y-m-d H:i:s', strtotime((!empty($assigndate) ? $assigndate : date('Y-m-d H:i:s')))),
             'trip' => $this->input->post('trip'),
             'date' => 'NULl',

@@ -20,7 +20,7 @@
 
 
 
-         <div class="form-group row">
+                    <div class="form-group row">
                         <label for="trip" class="col-sm-3 col-form-label">Nama Perjalanan*</label>
                         <div class="col-sm-9">
                             <?php echo form_dropdown('trip', $trip, (!empty($assign->trip) ? $assign->trip : null), ' class="form-control"') ?>
@@ -109,6 +109,13 @@
                     <div class="form-group text-right">
                         <button type="reset" class="btn btn-primary w-md m-b-5"><?php echo display('reset') ?></button>
                         <button type="submit" class="btn btn-success w-md m-b-5"><?php echo display('save') ?></button>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="trip" class="col-sm-3 col-form-label">Saldo*</label>
+                        <div class="col-sm-9">
+                            <input type="number" class="form-control" name="saldo" value="<?php echo (!empty($assign->allowance) ? $assign->allowance : 0) ?>" id="saldo">
+                        </div>
                     </div>
                 <?php echo form_close() ?>
 
