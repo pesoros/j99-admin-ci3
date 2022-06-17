@@ -17,7 +17,7 @@
 			<div class="panel-body" id="PrintMe">
 
 			<div>
-				<img src="http://localhost/j99-admin-ci3/assets/img/j99logo.png" alt="">
+				<img src="<?php echo base_url().'assets/img/j99logo.png' ?>" alt="">
 			</div>
 
 				<?php foreach ($booking as $key => $value) { ?>
