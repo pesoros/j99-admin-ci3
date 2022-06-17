@@ -917,7 +917,8 @@
                 contentType: 'application/x-www-form-urlencoded; charset=utf-8',
                 dataType: 'json',
                 data: {
-                    'idResto'  : idResto
+                    'idResto'  : idResto,
+                    'class'  : type
                 },
                 success: function(datamenu) {
                     foodMenu = datamenu;
