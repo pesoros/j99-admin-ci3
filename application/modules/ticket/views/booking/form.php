@@ -1020,7 +1020,12 @@
                 htmlModal += '<td class="item-list-seat road-space" data=""></td>';
             } else {
                 if (element.isAvailable == true) {
-                    htmlModal += '<td class="item-list-seat" data="'+element.name+'">'+element.name+'</td>';
+                    console.log('ssss'+element.name , jQuery.inArray(element.name.trim(), slctseatpergiset))
+                    if (jQuery.inArray(element.name, slctseatpergiset) >= 0 ) {
+                        htmlModal += '<td class="item-list-seat reserved" data="'+element.name+'">'+element.name+'</td>';
+                    } else {
+                        htmlModal += '<td class="item-list-seat" data="'+element.name+'">'+element.name+'</td>';
+                    }
                 } else {
                     htmlModal += '<td class="item-list-seat reserved" data="'+element.name+'">'+element.name+'</td>';
                 }

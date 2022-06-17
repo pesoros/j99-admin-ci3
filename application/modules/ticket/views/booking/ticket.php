@@ -16,6 +16,10 @@
 
 			<div class="panel-body" id="PrintMe">
 
+			<div>
+				<img src="http://localhost/j99-admin-ci3/assets/img/j99logo.png" alt="">
+			</div>
+
 				<?php foreach ($booking as $key => $value) { ?>
 				<div class="ticket-content">
 					<div class="table-responsive">
