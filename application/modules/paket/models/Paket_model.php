@@ -24,7 +24,14 @@ class Paket_model extends CI_Model {
 	}
 	public function paket_create($data = array())
 	{
-		return $this->db->insert('packet', $data);
+		$this->db->insert('packet', $data);
+        $insert_id = $this->db->insert_id();
+        return  $insert_id;
+	}
+
+    public function trace_create($data = array())
+	{
+		return $this->db->insert('packet_trace', $data);
 	}
 
 	public function delete_paket($id = null)

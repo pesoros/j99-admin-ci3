@@ -385,7 +385,7 @@ class Booking extends MX_Controller {
         $setBookingData["pergi"]["trip_route_id"] = $chooseBus[1];
         $setBookingData["pergi"]["pickup_location"] = $chooseBus[5];
         $setBookingData["pergi"]["drop_location"] = $chooseBus[6];
-        $setBookingData["pergi"]["pricePerSeat"] = $chooseBus[2];;
+        $setBookingData["pergi"]["pricePerSeat"] = $chooseBus[2];
         $setBookingData["pergi"]["booking_date"] = $bodyRaw['approximate_time'];
         $setBookingData["pergi"]["fleet_type_id"] = $chooseBus[3];
 

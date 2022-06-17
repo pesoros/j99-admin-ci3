@@ -42,12 +42,15 @@ class Paket_controller extends MX_Controller {
                 'pool_receiver_id'  => $this->input->post('ke',true),
                 'price'           => $this->input->post('price',true),
             ];   
-
-            if ($this->paket_model->paket_create($postData)) { 
+            $idsave = $this->paket_model->paket_create($postData);
+            // if ($this->paket_model->paket_create($postData)) { 
+                $trace['packet_id'] = $idsave;
+                $trace['description'] = 'Paket diterima juragan 99';
+                $this->paket_model->trace_create($trace);
                 $this->session->set_flashdata('message', display('successfully_saved'));
-            } else {
-                $this->session->set_flashdata('exception',  display('please_try_again'));
-            }
+            // } else {
+            //     $this->session->set_flashdata('exception',  display('please_try_again'));
+            // }
             redirect("paket/paket_controller/create_paket");
         } else {
             $data['title'] = "paket";
