@@ -63,6 +63,11 @@
                                         </td>
 
                                         <td> 
+
+                                            <?php if($this->permission->method('agent','read')->access()): ?>
+                                            <a href="<?php echo base_url("agent/agent_controller/agent_ledger/$query->agent_id") ?>" class="btn btn-xs btn-warning"><i class="fa fa-bar-chart"></i></a>
+                                            <?php endif; ?>
+
                                             <?php if($this->permission->method('agent','read')->access()): ?>
                                             <a href="<?php echo base_url("agent/agent_controller/agent_details/$query->agent_id") ?>" class="btn btn-xs btn-default"><i class="fa fa-eye"></i></a>
                                             <?php endif; ?>
