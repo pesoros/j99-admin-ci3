@@ -100,7 +100,7 @@
                                 <?php echo form_radio('status', '1', (($assign->status == 1) ? 1 : 0), 'id="status"'); ?>Active
                             </label>
                             <label class="radio-inline">
-                                <?php echo form_radio('status', '0', (($assign->status == "0") ? 1 : 0), 'id="status"'); ?>Inactive
+                                <?php echo form_radio('status', '0', (($assign->status == 0) ? 1 : 0), 'id="status"'); ?>Inactive
                             </label>
                         </div>
                     </div>
