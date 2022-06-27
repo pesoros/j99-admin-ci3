@@ -30,6 +30,7 @@ class Assign_model extends CI_Model
     {
         return $this->db->select("
 			a.*,
+			a.status as statusassign,
 			c.*,
 			b.reg_no AS fleet_registration_name,
 			e.name AS trip_route_name,

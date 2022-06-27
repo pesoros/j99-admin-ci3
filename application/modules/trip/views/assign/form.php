@@ -97,10 +97,10 @@
                         <label for="status" class="col-sm-3 col-form-label">Status *</label>
                         <div class="col-sm-9">
                             <label class="radio-inline">
-                                <?php echo form_radio('status', '1', (($assign->status == 1) ? 1 : 0), 'id="status"'); ?>Active
+                                <?php echo form_radio('status', '1', (($assign->statusassign == 1) ? 1 : 0), 'id="status"'); ?>Active
                             </label>
                             <label class="radio-inline">
-                                <?php echo form_radio('status', '0', (($assign->status == 0) ? 1 : 0), 'id="status"'); ?>Inactive
+                                <?php echo form_radio('status', '0', (($assign->statusassign == 0) ? 1 : 0), 'id="status"'); ?>Inactive
                             </label>
                         </div>
                     </div>
