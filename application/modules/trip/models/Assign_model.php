@@ -13,7 +13,7 @@ class Assign_model extends CI_Model
 
     public function read($limit = null, $start = null)
     {
-        return $this->db->select("a.*,b.reg_no,c.*,CONCAT_WS(' ', d.first_name, d.second_name) AS driver_name,CASE WHEN a.closed_by_id THEN 'bg-success' ELSE NULL END AS isClosed,e.name AS trip_route_name")
+        return $this->db->select("a.*,a.status as statusassign,b.reg_no,c.*,CONCAT_WS(' ', d.first_name, d.second_name) AS driver_name,CASE WHEN a.closed_by_id THEN 'bg-success' ELSE NULL END AS isClosed,e.name AS trip_route_name")
             ->from("trip_assign a")
             ->join('trip c', 'a.trip = c.trip_id', 'left')
             ->join('fleet_registration b', 'a.fleet_registration_id = b.id', 'left')
