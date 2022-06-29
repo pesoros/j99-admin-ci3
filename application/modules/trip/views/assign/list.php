@@ -35,7 +35,7 @@
                                 <td><?php echo $assign->reg_no; ?></td>
                                 <td><?php echo $assign->trip_route_name; ?></td>
                                 <td><?php echo $assign->driver_name; ?></td>
-                                <td><?php echo (($assign->status==1)?display('active'):display('inactive')); ?></td>
+                                <td><?php echo (($assign->statusassign==1)?display('active'):display('inactive')); ?></td>
                                 <td width="150">
 
                                 <!-- <?php if($this->permission->method('trip','read')->access()): ?>
