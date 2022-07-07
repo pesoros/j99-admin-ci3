@@ -21,8 +21,8 @@
                                 <!-- <th><?php echo display('route_name') ?></th> -->
                                 <th><?php echo display('total_seat') ?></th>
                                 <th><?php echo display('price') ?></th>
-                                <th><?php echo display('payment_type') ?></th>
-                                <th><?php echo display('payment_status') ?></th>
+                                <th>Metode Pembayaran</th>
+                                <th>Pembayaran</th>
                                
                                 <th><?php echo display('action') ?></th> 
                             </tr>
@@ -49,16 +49,14 @@
                                 <td><?php echo $booking->total_seat; ?></td>
                                 <td><?php echo $currency; ?><?php echo $booking->price; ?></td>
                                 <td><?php  echo $booking->payment_method.' - '.$booking->payment_channel_code; ?></td>
-                                <td ><?php 
-                                if($booking->payment_status == 1 OR $booking->payment_status == 2){
-                                    if($this->session->userdata('isAdmin')==1){
-                                    echo '<a type="button" class="test btn btn-primary btn-xs" onclick="modal_load('."'".$booking->booking_code."'".')" data-toggle="modal">Unpaid</a>';
-                                    }else{
-                                        echo 'waiting';
-                                    }
-                                    }else{
-                                    echo "Paid";
-                                } ?>
+                                <td >
+                                <?php 
+                                if($booking->ps == 0){
+                                    echo '<a type="button" class="test btn btn-primary btn-xs" onclick="modal_load('."'".$booking->booking_code."'".')" data-toggle="modal">Menunggu</a>';
+                                } else if($booking->ps == 1){
+                                    echo '<a type="button" class="test btn btn-success btn-xs" )">Terbayar</a>';
+                                }
+                                ?>
                                 </td>
                                 <td>
                                     <a href="<?php echo base_url("ticket/booking/view/$booking->booking_code") ?>" class="btn btn-success btn-xs" data-toggle="tooltip" data-placement="left" title="View"><i class="fa fa-eye" aria-hidden="true"></i></a>

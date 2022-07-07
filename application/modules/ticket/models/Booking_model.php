@@ -16,6 +16,7 @@ class Booking_model extends CI_Model
         $this->db->select('tb.*
             , tr.name AS route_name
             ,tbh.booker
+            ,tbh.payment_status as ps
             ,pr.payment_method
             ,pr.payment_channel_code
         ');
