@@ -146,12 +146,18 @@
 												<?php echo (!empty($tickvalue->baggage)?($tickvalue->baggage == 1?"Bawa":"Tidak Bawa"):null) ?>
 											</td>
                                             <td>
-                                            <?php echo (!empty($tickvalue->price)?(str_replace(',', ', ', $tickvalue->price)):null) ?>
+                                            <?php echo (!empty($tickvalue->price)?(str_replace(',', ', ', $tickvalue->price / count($value->ticket))):null) ?>
 											</td>
 										</tr>
 
 									</tbody>
 									<?php } ?>
+									<tfoot>
+										<tr>
+											<td colspan=5 style="text-align: right;">Total Harga :</td>
+											<td><?php echo (!empty($value->total_price)?$value->total_price:null) ?></td>
+										</tr>
+									</tfoot>
 								</table>
 
 								<table class="table table-responsive">

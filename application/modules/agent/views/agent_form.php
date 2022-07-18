@@ -153,7 +153,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <div for="agent_email" class="col-sm-2 col-form-div">
-                                            <?php echo display('agent_email') ?>
+                                            <?php echo display('email') ?>
                                         </div>
                                         <div class="col-sm-4">
                                             <input name="agent_email" class="form-control" type="email" placeholder="<?php echo display('agent_email') ?>" id="agent_email" onkeyup="logdata(this.value)" required>
@@ -452,6 +452,14 @@
                                         </div>
                                           <div class="col-sm-4">
                                             <input name="agent_commission" class="form-control" type="text" placeholder="<?php echo display('agent_commission'); ?>" id="agent_commission">
+                                        </div>
+                                        <div for="agent_country" class="col-sm-2 col-form-div">
+                                            Pembayaran Cash</div>
+                                        <div class="col-sm-4">
+                                            <select name="agent_country" class="form-control" style="width: 100%">
+                                                <option value="0" rel="">Tidak</option>
+                                                <option value="1" rel="">Ya</option>
+                                            </select>
                                         </div>
                                          </div>
                                             <div class="form-group row">
