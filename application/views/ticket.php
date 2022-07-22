@@ -52,7 +52,7 @@
                             <tbody>
                                 <tr>
                                     <td><strong><?php echo display('pickup_location') ?>:</strong> <?php echo (!empty($ticket->pickup_trip_location)?$ticket->pickup_trip_location:null) ?></td>
-                                    <td><strong><?php echo display('drop_location') ?>:</strong> <?php echo (!empty($ticket->drop_trip_location)?$ticket->drop_trip_location:null) ?></td>
+                                    <td><strong>Lokasi Tujuan:</strong> <?php echo (!empty($ticket->drop_trip_location)?$ticket->drop_trip_location:null) ?></td>
                                     <td><strong><?php echo display('date') ?>:</strong> <?php echo (!empty($ticket->booking_date)?$ticket->booking_date:null) ?></td>
                                 </tr>
                             </tbody>

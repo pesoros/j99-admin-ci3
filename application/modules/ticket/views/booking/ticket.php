@@ -48,7 +48,7 @@
 									<td><strong><?php echo display('pickup_location') ?>:</strong>
 										<?php echo (!empty($value->pickup_trip_location)?$value->pickup_trip_location:null) ?>
 									</td>
-									<td><strong><?php echo display('drop_location') ?>:</strong>
+									<td><strong>Lokasi Tujuan:</strong>
 										<?php echo (!empty($value->drop_trip_location)?$value->drop_trip_location:null) ?>
 									</td>
 									<td><strong><?php echo display('date') ?>:</strong>
