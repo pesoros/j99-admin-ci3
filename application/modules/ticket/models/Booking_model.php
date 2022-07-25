@@ -117,11 +117,13 @@ class Booking_model extends CI_Model
         return $this->db->select("
                 tps.*,
                 tb.price,
-                rm.food_name as makanan
+                rm.food_name as makanan,
+                ftp.type as class
             ")
             ->from('tkt_passenger_pcs AS tps')
             ->join('tkt_booking AS tb', 'tb.id_no = tps.booking_id', 'left')
             ->join('resto_menu AS rm', 'rm.id = tps.food', 'left')
+            ->join('fleet_type AS ftp', 'ftp.id = tps.fleet_type')
             ->where('tps.booking_id', $id_no)
             ->get()
             ->result();

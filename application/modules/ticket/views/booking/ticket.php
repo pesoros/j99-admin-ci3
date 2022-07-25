@@ -74,7 +74,7 @@
 											</li>
 											<li>
 												<strong><?php echo display('phone') ?> :</strong>
-												<?php echo (!empty($appSetting->phone)?$appSetting->phone:null) ?>
+												<?php echo (!empty($value->ticket[0]->phone)?$value->ticket[0]->phone:null) ?>
 											</li>
 									</td>
                                     <td>  
@@ -84,28 +84,33 @@
                                                 <?php echo (!empty($value->total_price)?$value->total_price:null) ?>
                                             </li>
                                             <li>
-												<strong><?php echo display('payment_status');?> :</strong>
+												<strong>Status Pembayaran :</strong>
 												<?php $payment=$value->ps;
                                                     if($payment == 1){
-                                                        echo display('paid');
+                                                        echo 'Terbayar';
                                                     }elseif($payment == 2){
-                                                        echo display('cancel');
+                                                        echo 'Dibatalkan';
                                                     }else{
-                                                        echo display('unpaid');
+                                                        echo 'Belum di bayar';
                                                     }
                                                 ?>
 											</li>
-											<li>
-                                                <strong>Payment :</strong>
-												<?php echo $value->method.' - '.$value->channel ?>
-												<br>
-												<?php if ($value->method == 'VIRTUAL_ACCOUNT') {
-													echo '<span id="copytext">'.$value->va.'</span>';
-												} else { 
-													echo '<span id="copytext">'.$value->link.'</span>';
-												} ?>
-												<button id="second-button" class="position-absolute btn btn-sm btn-primary" style="right:0;" onclick="copyText('copytext');" title="Copy Text">Copy</button>
-                                            </li>
+											<?php $payment=$value->ps;
+												if($payment != 1){ ?>
+												<li>
+													<strong>Payment :</strong>
+													<?php echo $value->method.' - '.$value->channel ?>
+													<br>
+													<?php if ($value->method == 'VIRTUAL_ACCOUNT') {
+														echo '<span id="copytext">'.$value->va.'</span>';
+													} else { 
+														echo '<span id="copytext">'.$value->link.'</span>';
+													} ?>
+													<button id="second-button" class="position-absolute btn btn-sm btn-primary" style="right:0;" onclick="copyText('copytext');" title="Copy Text">Copy</button>
+												</li>	
+											<?php }
+											?>
+											
                                         </dl>
                                     </td>
 								</tr>
@@ -121,6 +126,7 @@
 										<tr>
 											<th>Nama</th>
 											<th>Phone</th>
+											<th>Class</th>
 											<th>Seat</th>
 											<th>Makanan</th>
 											<th>Bagasi</th>
@@ -135,6 +141,9 @@
 											</td>
 											<td>
 												<?php echo (!empty($tickvalue->phone)?(str_replace(',', ', ', $tickvalue->phone)):null) ?>
+											</td>
+											<td>
+												<?php echo (!empty($tickvalue->class)?(str_replace(',', ', ', $tickvalue->class)):null) ?>
 											</td>
 											<td>
 												<?php echo (!empty($tickvalue->seat_number)?(str_replace(',', ', ', $tickvalue->seat_number)):null) ?>
@@ -154,7 +163,7 @@
 									<?php } ?>
 									<tfoot>
 										<tr>
-											<td colspan=5 style="text-align: right;">Total Harga :</td>
+											<td colspan=6 style="text-align: right;">Total Harga :</td>
 											<td><?php echo (!empty($value->total_price)?$value->total_price:null) ?></td>
 										</tr>
 									</tfoot>
