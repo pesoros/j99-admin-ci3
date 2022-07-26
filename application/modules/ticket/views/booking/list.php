@@ -55,6 +55,8 @@
                                     echo '<a type="button" class="test btn btn-primary btn-xs" onclick="modal_load('."'".$booking->booking_code."'".')" data-toggle="modal">Menunggu</a>';
                                 } else if($booking->ps == 1){
                                     echo '<a type="button" class="test btn btn-success btn-xs" )">Terbayar</a>';
+                                } else if($booking->ps == 2){
+                                    echo '<a type="button" class="test btn btn-warning btn-xs" )">Dikembalikan</a>';
                                 }
                                 ?>
                                 </td>

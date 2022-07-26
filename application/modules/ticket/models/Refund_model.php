@@ -7,7 +7,16 @@ class Refund_model extends CI_Model {
 
 	public function create($data = [])
 	{	 
-		return $this->db->insert($this->table,$data);
+		$updata['payment_status'] = 2;
+        $update = $this->db->where('booking_code',$data['tkt_booking_id_no'])
+            ->update('tkt_booking_head',$updata);
+
+		$ref = $this->db->insert($this->table,$data);
+		
+		$update = $this->db->where('booking_code',$data['tkt_booking_id_no'])
+            ->update('tkt_booking',['tkt_refund_id' => '1']);
+
+		return $ref;
 	}
 
 	public function read($limit = null, $start = null)
