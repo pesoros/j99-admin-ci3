@@ -106,7 +106,6 @@ class Booking_model extends CI_Model
             ->join('trip_assign AS tras', 'tb.trip_id_no = tras.trip')
             ->join('trip_point AS tpoint', 'tpoint.trip_assign_id = tras.id AND tpoint.dep_point = tb.pickup_trip_location AND tpoint.arr_point = tb.drop_trip_location')
             ->where('tb.booking_code', $booking_code)
-            ->groupBy('tb.booking_code')
             ->get()
             ->result();
 
