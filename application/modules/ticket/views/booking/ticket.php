@@ -52,7 +52,11 @@
 										<?php echo (!empty($value->drop_trip_location)?$value->drop_trip_location:null) ?>
 									</td>
 									<td><strong><?php echo display('date') ?>:</strong>
-										<?php echo (!empty($value->booking_date)?$value->booking_date:null) ?></td>
+										<?php 
+											$date=date_create($value->booking_date);
+											echo date_format($date,"Y-m-d").' '.(!empty($value->dep_time)?$value->dep_time:null) 
+										?>
+									</td>
 								</tr>
 							</tbody>
 						</table>

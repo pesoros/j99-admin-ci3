@@ -95,12 +95,16 @@ class Booking_model extends CI_Model
                 pr.payment_method as method,
                 pr.payment_channel_code as channel,
                 pr.va_number as va,
-                pr.mobile_link as link
+                pr.mobile_link as link,
+                tpoint.dep_time,
+                tpoint.arr_time
             ")
             ->from('tkt_booking AS tb')
             ->join('tkt_booking_head AS tbh', 'tb.booking_code = tbh.booking_code', 'left')
             ->join('trip_route AS tr', 'tr.id = tb.trip_route_id', 'left')
             ->join('payment_registration AS pr', 'pr.booking_code = tb.booking_code', 'left')
+            ->join('trip_assign AS tras', 'tb.trip_id_no = tras.trip')
+            ->join('trip_point AS tpoint', 'tpoint.trip_assign_id = tras.id AND tpoint.dep_point = tb.pickup_trip_location AND tpoint.arr_point = tb.drop_trip_location')
             ->where('tb.booking_code', $booking_code)
             ->get()
             ->result();
