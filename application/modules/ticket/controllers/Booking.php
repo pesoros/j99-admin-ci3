@@ -386,6 +386,7 @@ class Booking extends MX_Controller {
         $setBookingData["payment_channel_code"] = $bodyRaw["bank"];
         if ($bodyRaw["bank"] == "--cash--") {
             $setBookingData["payment_method"] = "CASH";
+            $setBookingData["payment_channel_code"] = $this->session->userdata('fullname');
         } else {
             $setBookingData["payment_method"] = "VIRTUAL_ACCOUNT";
         }
