@@ -453,10 +453,10 @@
                                           <div class="col-sm-4">
                                             <input name="agent_commission" class="form-control" type="text" placeholder="<?php echo display('agent_commission'); ?>" id="agent_commission">
                                         </div>
-                                        <div for="agent_country" class="col-sm-2 col-form-div">
+                                        <div for="cash" class="col-sm-2 col-form-div">
                                             Pembayaran Cash</div>
                                         <div class="col-sm-4">
-                                            <select name="agent_country" class="form-control" style="width: 100%">
+                                            <select name="cashpay" class="form-control" style="width: 100%">
                                                 <option value="0" rel="">Tidak</option>
                                                 <option value="1" rel="">Ya</option>
                                             </select>

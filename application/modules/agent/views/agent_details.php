@@ -55,6 +55,12 @@
                             <th><?php echo display('zip_code') ?></th>
                             <td><?php echo $row->agent_address_zip_code;?></td>
                         </tr>
+                        <tr>
+                            <th>Pembayaran Cash</th>
+                            <td>
+                                <?php echo $row->cashpay == '1' ? 'Ya' : 'Tidak' ?>    
+                            </td>
+                        </tr>
                     </thead>
                 </table> 
             </div> 
