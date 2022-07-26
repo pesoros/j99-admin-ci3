@@ -99,6 +99,12 @@ class Booking extends MX_Controller {
 
  	public function form()
 	{ 
+        $cash = $this->booking_model->cashpaycheck($this->session->userdata('id'));
+        if (count($cash) == 0) {
+            $data['cash'] = false;
+        } else {
+            $data['cash'] = true;
+        }
         // $this->permission->method('ticket','create')->redirect(); 
 		$data['title'] = display('add');
 		#-------------------------------#

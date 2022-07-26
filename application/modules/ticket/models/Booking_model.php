@@ -133,6 +133,19 @@ class Booking_model extends CI_Model
             ->result();
     }
 
+    public function cashpaycheck($iduser)
+    {
+        return $this->db->select("
+                ai.*
+            ")
+            ->from('user AS us')
+            ->join('agent_info AS ai', 'ai.agent_email = us.email')
+            ->where('ai.cashpay', 1)
+            ->where('us.id', $iduser)
+            ->get()
+            ->result();
+    }
+
     public function website_setting()
     {
         return $this->db->get('ws_setting')->row();

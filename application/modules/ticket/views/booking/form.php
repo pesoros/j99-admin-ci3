@@ -764,6 +764,9 @@
 					<div class="col-sm-9">
                         <select name="bank" class="form-control" style="width: 100%">
                             <option value="">Pilih Metode</option>
+                            <?php if ($cash == true) { ?>
+                            <option value="--cash--">Cash / Tunai</option>
+                            <? } ?>
                             <option value="BCA">BCA</option>
                             <option value="MANDIRI">Mandiri</option>
                             <option value="BRI">BRI</option>
