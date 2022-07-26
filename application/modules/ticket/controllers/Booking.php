@@ -382,7 +382,7 @@ class Booking extends MX_Controller {
         $setBookingData["booker_id"] = $this->session->userdata('id');
         $setBookingData["booker_name"] = $this->session->userdata('fullname');
         $setBookingData["booker_phone"] = "-";
-        $setBookingData["booker_email"] = strtolower($this->session->userdata('email'));
+        $setBookingData["booker_email"] = $this->session->userdata('email');
         $setBookingData["payment_method"] = "VIRTUAL_ACCOUNT";
         $setBookingData["payment_channel_code"] = $bodyRaw["bank"];
         $setBookingData["agent"] = 1;
@@ -394,9 +394,6 @@ class Booking extends MX_Controller {
         $setBookingData["pergi"]["pricePerSeat"] = $chooseBus[2];
         $setBookingData["pergi"]["booking_date"] = $bodyRaw['approximate_time'];
         $setBookingData["pergi"]["fleet_type_id"] = $chooseBus[3];
-
-        echo json_encode($setBookingData);
-        return;
 
         foreach ($bodyRaw['name'] as $key => $value) {
             $setBookingData["pergi"]["seatPicked"][$key]["name"] = $bodyRaw['name'][$key];
