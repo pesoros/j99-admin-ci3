@@ -383,8 +383,12 @@ class Booking extends MX_Controller {
         $setBookingData["booker_name"] = $this->session->userdata('fullname');
         $setBookingData["booker_phone"] = "-";
         $setBookingData["booker_email"] = $this->session->userdata('email');
-        $setBookingData["payment_method"] = "VIRTUAL_ACCOUNT";
         $setBookingData["payment_channel_code"] = $bodyRaw["bank"];
+        if ($bodyRaw["bank"] == "--cash--") {
+            $setBookingData["payment_method"] = "CASH";
+        } else {
+            $setBookingData["payment_method"] = "VIRTUAL_ACCOUNT";
+        }
         $setBookingData["agent"] = 1;
 
         $setBookingData["pergi"]["trip_id_no"] = $chooseBus[0];

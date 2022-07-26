@@ -179,6 +179,7 @@ class Agent_controller extends MX_Controller {
                 'agent_address_zip_code'=> $this->input->post('agent_address_zip_code',true),
                 'agent_country'     => $this->input->post('agent_country',true),
                  'agent_commission'  => $this->input->post('agent_commission',true),
+                'cashpay'               => $this->input->post('cashpay',true),
             ];   
             
             $user = [
