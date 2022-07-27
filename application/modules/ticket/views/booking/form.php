@@ -941,7 +941,7 @@
             savebutton.prop('disabled', true)
             formpenumpang.empty()
 
-            if (jumpenumpang == 0 || jumpenumpang > 4) {
+            if (jumpenumpang == 0 || jumpenumpang > 9) {
                 return;
             } else {
                 for (let index = 0; index < jumpenumpang; index++) {
