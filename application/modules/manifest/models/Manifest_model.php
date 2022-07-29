@@ -191,4 +191,50 @@ class Manifest_model extends CI_Model
         }
     }
 
+    public function manifest_check($id)
+    {
+        return $this->db->select("
+                a.trip_assign,
+                a.trip_date
+            ")
+            ->from("manifest a")
+            ->where('a.id',$id)
+            ->get()
+            ->row();
+    }
+
+    public function manifest_detail($trip_id_no,$booking_date)
+    {
+        $query = $this->db->select("
+                tps.name,
+                tps.ticket_number,
+                tps.seat_number,
+                tps.phone,
+                rmen.food_name,
+                IF(tps.baggage = 1, 'Bawa', 'Tidak Bawa') as baggage,
+                IF(cst.status_name IS NULL, 'Menunggu', cst.status_name) as checkin_status,
+                tb.pickup_trip_location,
+                tb.drop_trip_location,
+                tpoint.dep_time,
+                tpoint.arr_time,
+                ftp.type as class,
+            ")
+            ->from('tkt_passenger_pcs AS tps')
+            ->join('tkt_booking AS tb', 'tps.booking_id = tb.id_no')
+            ->join('tkt_booking_head AS tbh', 'tb.booking_code = tbh.booking_code')
+            ->join('trip_assign AS tras', 'tb.trip_id_no = tras.trip')
+            ->join('fleet_type AS ftp', 'ftp.id = tps.fleet_type')
+            ->join('trip_point AS tpoint', 'tpoint.trip_assign_id = tras.id AND tpoint.dep_point = tb.pickup_trip_location AND tpoint.arr_point = tb.drop_trip_location')
+            ->join('checkin AS cn', 'tps.ticket_number = cn.ticket_number','left')
+            ->join('resto_menu AS rmen', 'tps.food = rmen.id','left')
+            ->join('checkin_status AS cst', 'cn.status = cst.id','left')
+            ->where('tras.id', $trip_id_no)
+            ->where('tbh.payment_status', 1)
+            ->where('DATE(tb.booking_date)', $booking_date)
+            ->get()
+            ->result();
+
+        return $query;
+    }
+
 }

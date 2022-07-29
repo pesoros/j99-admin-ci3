@@ -3,7 +3,7 @@
     <!-- <button type="button" class="btn btn-primary btn-md" data-target="#add0" data-toggle="modal">
         Assign
     </button> -->
-    <a href="<?php echo base_url('manifest/manifest_controller/addmanifest') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> <?php echo display('add') ?></a>  
+    <!-- <a href="<?php echo base_url('manifest/manifest_controller/addmanifest') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> <?php echo display('add') ?></a>   -->
     <?php endif; ?> 
 </div>
 
@@ -21,75 +21,73 @@
                                 <?php echo display('sl') ?>
                             </th>
                             <th>
-                                email assign
+                                Nama
                             </th>
                             <th>
-                                trip assign
+                                Nomor tiket
                             </th>
                             <th>
-                                trip title
+                                Phone
                             </th>
                             <th>
-                                date
+                                Kursi
                             </th>
                             <th>
-                                status
+                                Makanan
                             </th>
                             <th>
-                                <?php echo display('action') ?>
+                                Titik Jemput
+                            </th>
+                            <th>
+                                Titik Akhir
+                            </th>
+                            <th>
+                                Bagasi
                             </th>
 
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($manifest)) { ?>
+                        <?php if (!empty($data)) { ?>
                             <?php $sl = 1; ?>
-                                <?php foreach ($manifest as $value) { ?>
+                                <?php foreach ($data as $value) { ?>
                                     <tr class="<?php echo ($sl & 1)?" odd gradeX ":"even gradeC " ?>">
                                         <td>
                                             <?php echo $sl; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->email_assign; ?>
+                                            <?php echo $value->name; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_assign; ?>
+                                            <?php echo $value->ticket_number; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_title; ?>
+                                            <?php echo $value->phone; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_date; ?>
+                                            <?php echo $value->seat_number; ?>
                                         </td>
                                         <td>
-                                            <?php if ($value->status == 1) { ?>
-                                                Active
-                                            <?php } elseif($value->status == 2) {?>
-                                                Close
-                                            <?php } else {?>
-                                                Cancel
-                                            <?php } ?>
+                                            <?php echo $value->food_name; ?>
                                         </td>
-                                       
-                                        <td class="center">
-                                            <?php if($this->permission->method('price', 'update')->access()): ?>
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_detail/$value->id") ?>" class="btn btn-xs btn-primary">Detail</a> 
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_report/$value->id") ?>" class="btn btn-xs btn-info">Report</a> 
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_update/$value->id") ?>" class="btn btn-xs btn-success">Edit</a> 
-                                            <?php endif; ?>
-
-
-                                            <?php if($this->permission->method('price', 'delete')->access()): ?>
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_delete/$value->id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Delete
-                                            </a> 
-                                            <?php if ($value->status == 1) { ?>
-                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_close/$value->id") ?>" class="btn btn-xs btn-warning" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Close
-                                            <?php } ?>
-                                            </a> 
-                                            <?php endif; ?>
+                                        <td>
+                                            <?php echo $value->pickup_trip_location; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $value->drop_trip_location; ?>
+                                        </td>
+                                        <td>
+                                            -
                                         </td>
                                     </tr>
-                                    <?php $sl++; ?>
+                                    <?php 
+                                        $sl++; 
+                                        if ($value->action == 'spend') {
+                                            $summary = $summary - $value->nominal;
+                                        } else {
+                                            $summary = $summary + $value->nominal;
+                                        }
+                                    ?>
                                 <?php } ?>
                             <?php } ?>
                     </tbody>
