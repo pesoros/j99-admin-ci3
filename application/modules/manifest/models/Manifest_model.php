@@ -12,11 +12,13 @@ class Manifest_model extends CI_Model
                 mn.email_assign,
                 mn.trip_date,
                 mn.trip_assign,
-                tr.trip_title
+                tr.trip_title,
+                fr.reg_no
             ")
             ->from("manifest mn")
             ->join('trip_assign tras', 'mn.trip_assign = tras.id', 'left')
             ->join('trip tr', 'tras.trip = tr.trip_id', 'left')
+            ->join('fleet_registration fr', 'fr.id = tras.fleet_registration_id', 'left')
             ->order_by('mn.id', 'desc')
             ->get()
             ->result();
@@ -171,9 +173,10 @@ class Manifest_model extends CI_Model
 
     public function tripAssignDropdown()
     {
-        $data = $this->db->select("a.*, b.trip_title")
+        $data = $this->db->select("a.*, b.trip_title, c.reg_no")
             ->from('trip_assign a')
             ->join('trip b', 'b.trip_id = a.trip', 'left')
+            ->join('fleet_registration c', 'c.id = a.fleet_registration_id', 'left')
             ->where('a.status', 1)
             ->order_by('a.id', 'asc')
             ->get()
@@ -182,7 +185,7 @@ class Manifest_model extends CI_Model
         $list[''] = display('select_option');
         if (!empty($data)) {
             foreach ($data as $value) {
-                $list[$value->id] = $value->trip_title;
+                $list[$value->id] = $value->trip_title.' - '.$value->reg_no;
             }
 
             return $list;

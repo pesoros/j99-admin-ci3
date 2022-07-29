@@ -56,7 +56,7 @@
                                             <?php echo $value->trip_assign; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_title; ?>
+                                            <?php echo $value->trip_title.' - '.$value->reg_no; ?>
                                         </td>
                                         <td>
                                             <?php echo $value->trip_date; ?>
