@@ -42,7 +42,7 @@
                                 Titik Akhir
                             </th>
                             <th>
-                                Bagasi
+                                Kelas
                             </th>
 
                         </tr>
@@ -77,7 +77,7 @@
                                             <?php echo $value->drop_trip_location.' / '.$value->arr_time; ?>
                                         </td>
                                         <td>
-                                            -
+                                            <?php echo $value->class; ?>
                                         </td>
                                     </tr>
                                     <?php 
