@@ -24,6 +24,9 @@
                                 Nama
                             </th>
                             <th>
+                                Kode Booking
+                            </th>
+                            <th>
                                 Nomor tiket
                             </th>
                             <th>
@@ -41,9 +44,6 @@
                             <th>
                                 Titik Akhir
                             </th>
-                            <th>
-                                Kelas
-                            </th>
 
                         </tr>
                     </thead>
@@ -59,13 +59,16 @@
                                             <?php echo $value->name; ?>
                                         </td>
                                         <td>
+                                            <?php echo $value->booking_code; ?>
+                                        </td>
+                                        <td>
                                             <?php echo $value->ticket_number; ?>
                                         </td>
                                         <td>
                                             <?php echo $value->phone; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->seat_number; ?>
+                                            <?php echo $value->seat_number.' | '.$value->class; ?>
                                         </td>
                                         <td>
                                             <?php echo $value->food_name; ?>
@@ -75,9 +78,6 @@
                                         </td>
                                         <td>
                                             <?php echo $value->drop_trip_location.' / '.$value->arr_time; ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $value->class; ?>
                                         </td>
                                     </tr>
                                     <?php 

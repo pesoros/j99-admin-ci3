@@ -210,6 +210,7 @@ class Manifest_model extends CI_Model
     {
         $query = $this->db->select("
                 tps.name,
+                tbh.booking_code,
                 tps.ticket_number,
                 tps.seat_number,
                 tps.phone,
