@@ -71,10 +71,10 @@
                                             <?php echo $value->food_name; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->pickup_trip_location; ?>
+                                            <?php echo $value->pickup_trip_location.' / '.$value->dep_time; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->drop_trip_location; ?>
+                                            <?php echo $value->drop_trip_location.' / '.$value->arr_time; ?>
                                         </td>
                                         <td>
                                             -
