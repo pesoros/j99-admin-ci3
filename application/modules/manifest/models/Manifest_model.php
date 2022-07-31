@@ -18,7 +18,7 @@ class Manifest_model extends CI_Model
             ->from("manifest mn")
             ->join('trip_assign tras', 'mn.trip_assign = tras.id', 'left')
             ->join('trip tr', 'tras.trip = tr.trip_id', 'left')
-            ->join('fleet_registration fr', 'fr.id = tras.fleet_registration_id', 'left')
+            ->join('fleet_registration fr', 'fr.id = mn.fleet', 'left')
             ->order_by('mn.id', 'desc')
             ->get()
             ->result();
@@ -185,7 +185,28 @@ class Manifest_model extends CI_Model
         $list[''] = display('select_option');
         if (!empty($data)) {
             foreach ($data as $value) {
-                $list[$value->id] = $value->trip_title.' - '.$value->reg_no;
+                $list[$value->id] = $value->trip_title;
+            }
+
+            return $list;
+        } else {
+            return false;
+        }
+    }
+
+    public function fleetDropdown()
+    {
+        $data = $this->db->select("id, reg_no")
+            ->from('fleet_registration')
+            ->where('status', 1)
+            ->order_by('reg_no', 'asc')
+            ->get()
+            ->result();
+
+        $list[''] = display('select_option');
+        if (!empty($data)) {
+            foreach ($data as $value) {
+                $list[$value->id] = $value->reg_no;
             }
 
             return $list;

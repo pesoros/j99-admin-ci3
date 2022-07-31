@@ -30,6 +30,9 @@
                                 trip title
                             </th>
                             <th>
+                                Armada
+                            </th>
+                            <th>
                                 date
                             </th>
                             <th>
@@ -56,7 +59,10 @@
                                             <?php echo $value->trip_assign; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_title.' - '.$value->reg_no; ?>
+                                            <?php echo $value->trip_title; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $value->reg_no; ?>
                                         </td>
                                         <td>
                                             <?php echo $value->trip_date; ?>
