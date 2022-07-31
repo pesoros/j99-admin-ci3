@@ -256,6 +256,7 @@ class Manifest_model extends CI_Model
             ->where('tras.id', $trip_id_no)
             ->where('tbh.payment_status', 1)
             ->where('DATE(tb.booking_date)', $booking_date)
+            ->order_by('tps.seat_number','ASC')
             ->get()
             ->result();
 
