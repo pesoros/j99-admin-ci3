@@ -2,7 +2,9 @@
     <!-- <button type="button" class="btn btn-primary btn-md" data-target="#add0" data-toggle="modal">
         Assign
     </button> -->
-    <a href="<?php echo base_url('manifest/manifest_controller/addmanifest') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> <?php echo display('add') ?></a>  
+    <?php if ($this->session->userdata('isAdmin') == true) { ?>
+        <a href="<?php echo base_url('manifest/manifest_controller/addmanifest') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> <?php echo display('add') ?></a>  
+    <?php } ?>
 
 </div>
 
