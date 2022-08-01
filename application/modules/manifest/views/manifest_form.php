@@ -80,7 +80,6 @@
                                         <td class="center">
                                             <a href="<?php echo base_url("manifest/manifest_controller/manifest_detail/$value->id") ?>" class="btn btn-xs btn-primary">Detail</a> 
                                             
-                                            <?php if ($this->session->userdata('isAdmin') == true) { ?>
                                                 <?php if($this->permission->method('price', 'update')->access()): ?>
                                                 <a href="<?php echo base_url("manifest/manifest_controller/manifest_report/$value->id") ?>" class="btn btn-xs btn-info">Report</a> 
                                                 <a href="<?php echo base_url("manifest/manifest_controller/manifest_update/$value->id") ?>" class="btn btn-xs btn-success">Edit</a> 
@@ -94,7 +93,6 @@
                                                 <?php } ?>
                                                 </a> 
                                                 <?php endif; ?>
-                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php $sl++; ?>
