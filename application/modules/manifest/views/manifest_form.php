@@ -1,10 +1,9 @@
 <div class="form-group text-right">
-    <?php if($this->permission->method('price', 'create')->access()): ?>
     <!-- <button type="button" class="btn btn-primary btn-md" data-target="#add0" data-toggle="modal">
         Assign
     </button> -->
     <a href="<?php echo base_url('manifest/manifest_controller/addmanifest') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> <?php echo display('add') ?></a>  
-    <?php endif; ?> 
+
 </div>
 
 <div class="row">
@@ -28,6 +27,9 @@
                             </th>
                             <th>
                                 trip title
+                            </th>
+                            <th>
+                                Armada
                             </th>
                             <th>
                                 date
@@ -56,7 +58,10 @@
                                             <?php echo $value->trip_assign; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_title.' - '.$value->reg_no; ?>
+                                            <?php echo $value->trip_title; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $value->reg_no; ?>
                                         </td>
                                         <td>
                                             <?php echo $value->trip_date; ?>
@@ -72,21 +77,21 @@
                                         </td>
                                        
                                         <td class="center">
-                                            <?php if($this->permission->method('price', 'update')->access()): ?>
                                             <a href="<?php echo base_url("manifest/manifest_controller/manifest_detail/$value->id") ?>" class="btn btn-xs btn-primary">Detail</a> 
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_report/$value->id") ?>" class="btn btn-xs btn-info">Report</a> 
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_update/$value->id") ?>" class="btn btn-xs btn-success">Edit</a> 
-                                            <?php endif; ?>
+                                            
+                                                <?php if($this->permission->method('price', 'update')->access()): ?>
+                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_report/$value->id") ?>" class="btn btn-xs btn-info">Report</a> 
+                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_update/$value->id") ?>" class="btn btn-xs btn-success">Edit</a> 
+                                                <?php endif; ?>
 
-
-                                            <?php if($this->permission->method('price', 'delete')->access()): ?>
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_delete/$value->id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Delete
-                                            </a> 
-                                            <?php if ($value->status == 1) { ?>
-                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_close/$value->id") ?>" class="btn btn-xs btn-warning" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Close
-                                            <?php } ?>
-                                            </a> 
-                                            <?php endif; ?>
+                                                <?php if($this->permission->method('price', 'delete')->access()): ?>
+                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_delete/$value->id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Delete
+                                                </a> 
+                                                <?php if ($value->status == 1) { ?>
+                                                    <a href="<?php echo base_url("manifest/manifest_controller/manifest_close/$value->id") ?>" class="btn btn-xs btn-warning" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Close
+                                                <?php } ?>
+                                                </a> 
+                                                <?php endif; ?>
                                         </td>
                                     </tr>
                                     <?php $sl++; ?>
