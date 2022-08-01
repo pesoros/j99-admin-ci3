@@ -77,7 +77,14 @@
                                         </td>
                                        
                                         <td class="center">
-                                            s
+                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_detail/$value->id") ?>" class="btn btn-xs btn-primary">Detail</a> 
+                                            
+                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_report/$value->id") ?>" class="btn btn-xs btn-info">Report</a> 
+                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_update/$value->id") ?>" class="btn btn-xs btn-success">Edit</a> 
+                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_delete/$value->id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Delete </a> 
+                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_close/$value->id") ?>" class="btn btn-xs btn-warning" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Close</a> 
+                                                
+                                        </td>
                                     </tr>
                                     <?php $sl++; ?>
                                 <?php } ?>
