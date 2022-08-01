@@ -89,6 +89,7 @@ class Auth extends MX_Controller {
 				$sData = array(
 					'isLogIn' 	  => true,
 					'isAdmin' 	  => (($user->row()->is_admin == 1)?true:false),
+					'cashpay' 	  => $user->row()->cashpay,
 					'user_type'   => $user->row()->is_admin,
 					'id' 		  => $user->row()->id,
 					'client_id'   => @$row->client_id,

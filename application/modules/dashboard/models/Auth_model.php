@@ -15,14 +15,15 @@ class Auth_model extends CI_Model {
 				user.ip_address, 
 				user.status, 
 				user.is_admin, 
+				agent_info.cashpay, 
 				IF (user.is_admin=1, 'Admin', 'User') as user_level
 			")
 			->from('user')
+			->join('agent_info', 'agent_info.agent_email = user.email', 'left')
 			->where('email', $data['email'])
 			->where('password', md5($data['password']))
 			->get();
 	}
-
 
 	public function userPermission1($id = null)
 	{

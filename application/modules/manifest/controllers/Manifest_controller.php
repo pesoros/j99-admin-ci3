@@ -14,7 +14,6 @@ class Manifest_controller extends MX_Controller {
 
     public function create_manifest()
     { 
-        $this->permission->method('price', 'read')->redirect();
         #-------------------------------#
         $this->form_validation->set_rules('emailassign',display('emailassign ')  ,'required');
         $this->form_validation->set_rules('dateassign',display('dateassign ')  ,'required');
