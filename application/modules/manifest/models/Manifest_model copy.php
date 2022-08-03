@@ -219,7 +219,8 @@ class Manifest_model extends CI_Model
     {
         return $this->db->select("
                 a.trip_assign,
-                a.trip_date
+                a.trip_date,
+                a.fleet
             ")
             ->from("manifest a")
             ->where('a.id',$id)
@@ -227,7 +228,7 @@ class Manifest_model extends CI_Model
             ->row();
     }
 
-    public function manifest_detail($trip_id_no,$booking_date)
+    public function manifest_detail($trip_id_no,$booking_date,$id)
     {
         $query = $this->db->select("
                 tps.name,
@@ -248,21 +249,24 @@ class Manifest_model extends CI_Model
                 ftp.type as class,
                 tbh.created_at,
             ")
-            ->from('tkt_passenger_pcs AS tps')
-            ->join('tkt_booking AS tb', 'tps.booking_id = tb.id_no')
+            ->from('manifest AS mn')
+            ->join('trip_assign AS tras', 'tras.id = mn.trip_assign')
+            ->join('tkt_booking AS tb', 'tb.trip_id_no = tras.trip')
+            ->join('tkt_passenger_pcs AS tps','tps.booking_id = tb.id_no')
             ->join('tkt_booking_head AS tbh', 'tb.booking_code = tbh.booking_code')
-            ->join('trip_assign AS tras', 'tb.trip_id_no = tras.trip')
             ->join('fleet_type AS ftp', 'ftp.id = tps.fleet_type')
+            ->join('fleet_registration_type AS ftrt', 'ftrt.type = ftp.id')
+            ->join('fleet_registration AS ftr', 'ftr.reg_no = ftrt.registration')
             ->join('trip_point AS tpoint', 'tpoint.trip_assign_id = tras.id AND tpoint.dep_point = tb.pickup_trip_location AND tpoint.arr_point = tb.drop_trip_location')
             ->join('checkin AS cn', 'tps.ticket_number = cn.ticket_number','left')
             ->join('resto_menu AS rmen', 'tps.food = rmen.id','left')
             ->join('checkin_status AS cst', 'cn.status = cst.id','left')
+            ->where('mn.id', $id)
             ->where('tras.id', $trip_id_no)
             ->where('tbh.payment_status', 1)
             ->where('DATE(tb.booking_date)', $booking_date)
             ->order_by('ftp.id','ASC')
             ->order_by('tps.seat_number','ASC')
-            ->group_by('tps.ticket_number')
             ->get()
             ->result();
 
