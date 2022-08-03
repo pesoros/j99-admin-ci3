@@ -37,6 +37,9 @@
                                 Titik Akhir
                             </th>
                             <th>
+                                Keberangkatan
+                            </th>
+                            <th>
                                 Terbit
                             </th>
                             <th>
@@ -75,6 +78,12 @@
                                         </td>
                                         <td>
                                             <?php echo $value->drop_trip_location.' / '.$value->arr_time; ?>
+                                        </td>
+                                        <td>
+                                            <?php 
+                                                $date=date_create($value->booking_date);
+                                                echo date_format($date,"Y-m-d");
+                                            ?>
                                         </td>
                                         <td>
                                             <?php echo $value->created_at; ?>
