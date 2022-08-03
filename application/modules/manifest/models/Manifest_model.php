@@ -232,6 +232,8 @@ class Manifest_model extends CI_Model
         $query = $this->db->select("
                 tps.name,
                 tbh.booking_code,
+                tb.price,
+                tb.adult,
                 tps.ticket_number,
                 tps.seat_number,
                 tps.phone,
@@ -243,6 +245,7 @@ class Manifest_model extends CI_Model
                 tpoint.dep_time,
                 tpoint.arr_time,
                 ftp.type as class,
+                tbh.created_at,
             ")
             ->from('tkt_passenger_pcs AS tps')
             ->join('tkt_booking AS tb', 'tps.booking_id = tb.id_no')

@@ -1,12 +1,3 @@
-<div class="form-group text-right">
-    <!-- <button type="button" class="btn btn-primary btn-md" data-target="#add0" data-toggle="modal">
-        Assign
-    </button> -->
-    <?php if ($this->session->userdata('isAdmin') == true) { ?>
-        <a href="<?php echo base_url('manifest/manifest_controller/addmanifest') ?>" class="btn btn-sm btn-info" title="Add"><i class="fa fa-plus"></i> <?php echo display('add') ?></a>  
-    <?php } ?>
-
-</div>
 
 <div class="row">
     <!--  table area -->
@@ -22,75 +13,84 @@
                                 <?php echo display('sl') ?>
                             </th>
                             <th>
-                                email assign
+                                Nama
                             </th>
                             <th>
-                                trip assign
+                                Kode Booking
                             </th>
                             <th>
-                                trip title
+                                Nomor tiket
                             </th>
                             <th>
-                                Armada
+                                Phone
                             </th>
                             <th>
-                                date
+                                Kursi
                             </th>
                             <th>
-                                status
+                                Makanan
                             </th>
                             <th>
-                                <?php echo display('action') ?>
+                                Titik Jemput
                             </th>
-
+                            <th>
+                                Titik Akhir
+                            </th>
+                            <th>
+                                Terbit
+                            </th>
+                            <th>
+                                Harga
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php if (!empty($manifest)) { ?>
+                        <?php if (!empty($data)) { ?>
                             <?php $sl = 1; ?>
-                                <?php foreach ($manifest as $value) { ?>
+                                <?php foreach ($data as $value) { ?>
                                     <tr class="<?php echo ($sl & 1)?" odd gradeX ":"even gradeC " ?>">
                                         <td>
                                             <?php echo $sl; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->email_assign; ?>
+                                            <?php echo $value->name; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_assign; ?>
+                                            <?php echo $value->booking_code; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_title; ?>
+                                            <?php echo $value->ticket_number; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->reg_no; ?>
+                                            <?php echo $value->phone; ?>
                                         </td>
                                         <td>
-                                            <?php echo $value->trip_date; ?>
+                                            <?php echo $value->seat_number.' | '.$value->class; ?>
                                         </td>
                                         <td>
-                                            <?php if ($value->status == 1) { ?>
-                                                Active
-                                            <?php } elseif($value->status == 2) {?>
-                                                Close
-                                            <?php } else {?>
-                                                Cancel
-                                            <?php } ?>
+                                            <?php echo $value->food_name; ?>
                                         </td>
-                                       
-                                        <td class="center">
-                                            <a href="<?php echo base_url("manifest/manifest_controller/manifest_detail/$value->id") ?>" class="btn btn-xs btn-primary">Detail</a> 
-                                            
-                                            <?php if ($this->session->userdata('isAdmin') == true) { ?>
-                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_detail_pr/$value->id") ?>" class="btn btn-xs btn-primary">Detail (Rp)</a> 
-                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_report/$value->id") ?>" class="btn btn-xs btn-info">Report</a> 
-                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_update/$value->id") ?>" class="btn btn-xs btn-success">Edit</a> 
-                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_delete/$value->id") ?>" class="btn btn-xs btn-danger" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Delete </a> 
-                                                <a href="<?php echo base_url("manifest/manifest_controller/manifest_close/$value->id") ?>" class="btn btn-xs btn-warning" onclick="return confirm('<?php echo display('are_you_sure') ?>') ">Close</a> 
-                                            <?php } ?>
+                                        <td>
+                                            <?php echo $value->pickup_trip_location.' / '.$value->dep_time; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $value->drop_trip_location.' / '.$value->arr_time; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $value->created_at; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo ($value->price / $value->adult); ?>
                                         </td>
                                     </tr>
-                                    <?php $sl++; ?>
+                                    <?php 
+                                        $sl++; 
+                                        if ($value->action == 'spend') {
+                                            $summary = $summary - $value->nominal;
+                                        } else {
+                                            $summary = $summary + $value->nominal;
+                                        }
+                                    ?>
                                 <?php } ?>
                             <?php } ?>
                     </tbody>

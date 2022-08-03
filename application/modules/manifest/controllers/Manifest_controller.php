@@ -160,6 +160,15 @@ class Manifest_controller extends MX_Controller {
         echo Modules::run('template/layout', $data);  
     }
 
+    public function manifest_detail_pr($id=null){
+        $getman = $this->manifest_model->manifest_check($id);
+        $data['title']     = 'Detail';
+        $data['data']      =$this->manifest_model->manifest_detail($getman->trip_assign,$getman->trip_date);
+        $data['module']    = "manifest";    
+        $data['page']      = "manifest_detail_price";   
+        echo Modules::run('template/layout', $data);  
+    }
+
     public function codeGenerate($head = 'J99', $length = 12)
     {
         $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
